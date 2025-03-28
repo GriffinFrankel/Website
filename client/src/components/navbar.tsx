@@ -34,9 +34,11 @@ export default function Navbar() {
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
             <a href="#" className="flex items-center gap-2">
-              <span className="text-2xl font-bold tracking-tight">
-                True<span className="text-[#38F902]">TIX</span>
-              </span>
+              <img 
+                src="/images/truetix-logo.png" 
+                alt="TrueTIX Logo" 
+                className="h-10 w-auto"
+              />
             </a>
           </div>
           

@@ -34,7 +34,7 @@ export default function BenefitsSection() {
   ];
 
   return (
-    <section id="benefits" className="py-20 bg-[#2A2A2A]">
+    <section id="benefits" className="py-20 bg-[#121212]">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
           className="text-center mb-16"
@@ -43,8 +43,8 @@ export default function BenefitsSection() {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeIn}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Partner <span className="bg-gradient-to-r from-[#00E676] to-[#00C853] bg-clip-text text-transparent">Benefits</span>
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Partner <span className="bg-gradient-to-r from-[#38F902] to-[#21c100] bg-clip-text text-transparent">Benefits</span>
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Join our 2025 MLB pilot program and transform your ticketing platform
@@ -61,20 +61,20 @@ export default function BenefitsSection() {
           {benefits.map((benefit, index) => (
             <motion.div 
               key={index}
-              className="bg-[#1A1A1A] rounded-xl p-8 border border-gray-800 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_10px_25px_-5px_rgba(0,200,83,0.1),0_8px_10px_-6px_rgba(0,200,83,0.1)]"
+              className="bg-[#1A1A1A] rounded-xl p-8 border border-gray-800 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_10px_25px_-5px_rgba(56,249,2,0.1),0_8px_10px_-6px_rgba(56,249,2,0.1)] hover:border-[#38F902]/20"
               variants={fadeInUp}
               custom={index * 0.15}
             >
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 rounded-full bg-[#00C853]/20 flex items-center justify-center text-[#00C853] mr-4">
-                  <i className={`${benefit.icon} text-2xl`}></i>
+                <div className="w-14 h-14 rounded-xl bg-[#38F902]/10 flex items-center justify-center text-[#38F902] mr-4 shadow-[0_0_15px_rgba(56,249,2,0.15)]">
+                  <i className={`${benefit.icon} text-3xl`}></i>
                 </div>
                 <h3 className="text-xl font-bold">{benefit.title}</h3>
               </div>
               <p className="text-gray-300 mb-6">
                 {benefit.description}
               </p>
-              <div className="flex items-center text-[#00C853]">
+              <div className="flex items-center text-[#38F902]">
                 <i className={`${benefit.secondaryIcon} text-2xl mr-2`}></i>
                 <span className="font-medium">{benefit.secondaryText}</span>
               </div>
@@ -83,7 +83,7 @@ export default function BenefitsSection() {
         </motion.div>
 
         <motion.div 
-          className="bg-gradient-to-br from-[#00C853]/10 to-[#1A1A1A] rounded-xl p-8 border border-gray-800"
+          className="bg-gradient-to-br from-[#38F902]/5 to-[#121212] rounded-xl p-8 border border-gray-800 shadow-xl"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
@@ -91,12 +91,17 @@ export default function BenefitsSection() {
         >
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="order-2 md:order-1">
-              <h3 className="text-2xl font-bold mb-4">Partner Success Story</h3>
-              <blockquote className="text-gray-300 mb-6 italic">
+              <div className="flex items-center mb-4">
+                <div className="w-10 h-10 rounded-lg bg-[#38F902]/10 flex items-center justify-center text-[#38F902] mr-3 shadow-[0_0_10px_rgba(56,249,2,0.2)]">
+                  <i className="ri-chat-quote-line text-xl"></i>
+                </div>
+                <h3 className="text-2xl font-bold">Partner Success Story</h3>
+              </div>
+              <blockquote className="text-gray-300 mb-6 pl-4 border-l-2 border-[#38F902]/50">
                 "Implementing TrueTIX Blowout Protection increased our average order value by 18% while dramatically improving customer satisfaction. The integration was seamless, and our platform now stands out from competitors."
               </blockquote>
               <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
+                <div className="w-12 h-12 rounded-full overflow-hidden mr-4 ring-2 ring-[#38F902]/30">
                   <img 
                     src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
                     alt="Partner testimonial" 
@@ -109,7 +114,7 @@ export default function BenefitsSection() {
                 </div>
               </div>
             </div>
-            <div className="order-1 md:order-2 rounded-lg overflow-hidden">
+            <div className="order-1 md:order-2 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(56,249,2,0.1)]">
               <img 
                 src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80" 
                 alt="Business partners handshake" 
