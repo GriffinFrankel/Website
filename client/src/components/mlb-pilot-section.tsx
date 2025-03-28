@@ -34,7 +34,7 @@ export default function MLBPilotSection() {
               variants={fadeInUp}
             >
               <h3 className="text-3xl font-bold mb-4">
-                Join Our 2025 <span className="bg-gradient-to-r from-[#00E676] to-[#00C853] bg-clip-text text-transparent">MLB Pilot Program</span>
+                Join Our 2025 <span className="bg-gradient-to-r from-[#38F902] to-[#21c100] bg-clip-text text-transparent">MLB Pilot Program</span>
               </h3>
               <p className="text-gray-300 mb-6">
                 We're selecting a limited number of ticketing platforms to participate in our 2025 MLB season pilot. Partners will receive:
@@ -42,13 +42,13 @@ export default function MLBPilotSection() {
               <ul className="space-y-4 mb-8">
                 {benefits.map((benefit, index) => (
                   <li key={index} className="flex items-start">
-                    <i className="ri-check-line text-[#00C853] text-xl mt-1 mr-3"></i>
+                    <i className="ri-check-line text-[#38F902] text-xl mt-1 mr-3"></i>
                     <span>{benefit}</span>
                   </li>
                 ))}
               </ul>
               <Button 
-                className="bg-[#00C853] hover:bg-[#009624] text-black font-semibold py-3 px-8 rounded-md transition-all duration-300 text-lg w-full sm:w-auto"
+                className="bg-[#38F902] hover:bg-[#21c100] text-black font-semibold py-3 px-8 rounded-md transition-all duration-300 text-lg w-full sm:w-auto shadow-[0_0_15px_rgba(56,249,2,0.3)] hover:shadow-[0_0_20px_rgba(56,249,2,0.5)]"
               >
                 <a href="#contact">Apply for the Pilot Program</a>
               </Button>

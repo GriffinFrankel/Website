@@ -5,43 +5,52 @@ import { fadeIn, fadeInUp, scaleIn } from "@/lib/animations";
 export default function HeroSection() {
   return (
     <section className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background with overlay */}
-      <div className="absolute inset-0 bg-black">
-        <img 
-          src="https://images.unsplash.com/photo-1556484687-30636164638b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" 
-          alt="Baseball stadium packed with fans" 
-          className="object-cover w-full h-full opacity-30" 
-        />
-      </div>
+      {/* Dark background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]"></div>
       
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[rgba(0,0,0,0.9)] to-[rgba(18,18,18,0.9)]"></div>
+      {/* Green accent glow */}
+      <div className="absolute inset-0 bg-[#38F902]/5"></div>
       
       {/* Animated geometric shapes for modern tech aesthetic */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          className="absolute -top-20 -right-20 w-96 h-96 rounded-full bg-[#38F902]/10 blur-3xl"
+          className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#38F902]/10 blur-[100px]"
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2] 
+            opacity: [0.2, 0.3, 0.2],
+            y: [0, -20, 0] 
           }}
           transition={{ 
-            duration: 8,
+            duration: 10,
             repeat: Infinity,
             ease: "easeInOut" 
           }}
         />
         <motion.div 
-          className="absolute bottom-20 -left-20 w-80 h-80 rounded-full bg-[#38F902]/5 blur-3xl"
+          className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#38F902]/5 blur-[100px]"
           animate={{ 
             scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.15, 0.2] 
+            opacity: [0.2, 0.15, 0.2],
+            x: [0, 20, 0]
           }}
           transition={{ 
-            duration: 7,
+            duration: 8,
             repeat: Infinity,
             ease: "easeInOut",
             delay: 2
+          }}
+        />
+        <motion.div 
+          className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-[#38F902]/5 blur-[80px]"
+          animate={{ 
+            scale: [1, 1.3, 1],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{ 
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
           }}
         />
       </div>
@@ -54,16 +63,26 @@ export default function HeroSection() {
         variants={fadeIn}
       >
         <div className="max-w-5xl mx-auto">
-          <div className="flex flex-col items-center mb-10">
-            <motion.img 
-              src="/images/truetix-logo.png" 
-              alt="TrueTIX Logo"
-              className="h-20 mb-6" 
-              variants={scaleIn}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8 }}
-            />
+          <div className="flex flex-col items-center mb-12">
+            <motion.div
+              className="relative w-48 h-48 mb-8 flex items-center justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              {/* Glow effect behind logo */}
+              <div className="absolute inset-0 bg-[#38F902]/20 rounded-full blur-[40px] transform scale-75"></div>
+              
+              <motion.img 
+                src="/images/truetix-logo.png" 
+                alt="TrueTIX Logo"
+                className="w-full h-full object-contain relative z-10" 
+                variants={scaleIn}
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8 }}
+              />
+            </motion.div>
           </div>
           
           <div className="text-center">

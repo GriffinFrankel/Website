@@ -37,7 +37,7 @@ export default function HowItWorksSection() {
           variants={fadeIn}
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            How <span className="bg-gradient-to-r from-[#00E676] to-[#00C853] bg-clip-text text-transparent">Blowout Protection</span> Works
+            How <span className="bg-gradient-to-r from-[#38F902] to-[#21c100] bg-clip-text text-transparent">Blowout Protection</span> Works
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             A seamless integration that creates value for fans and platforms alike
@@ -54,16 +54,16 @@ export default function HowItWorksSection() {
           {steps.map((step, index) => (
             <motion.div 
               key={step.number}
-              className="bg-[#2A2A2A] rounded-xl p-8 border border-gray-800 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_10px_25px_-5px_rgba(0,200,83,0.1),0_8px_10px_-6px_rgba(0,200,83,0.1)]"
+              className="bg-[#2A2A2A] rounded-xl p-8 border border-gray-800 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_10px_25px_-5px_rgba(56,249,2,0.1),0_8px_10px_-6px_rgba(56,249,2,0.1)]"
               variants={fadeInUp}
               custom={index * 0.2}
             >
-              <div className="w-12 h-12 rounded-full bg-[#00C853] flex items-center justify-center text-black font-bold text-xl mb-6">{step.number}</div>
+              <div className="w-12 h-12 rounded-full bg-[#38F902] flex items-center justify-center text-black font-bold text-xl mb-6 shadow-[0_0_15px_rgba(56,249,2,0.3)]">{step.number}</div>
               <h3 className="text-xl font-bold mb-4">{step.title}</h3>
               <p className="text-gray-300 mb-4">
                 {step.description}
               </p>
-              <div className="flex items-center text-[#00C853]">
+              <div className="flex items-center text-[#38F902]">
                 <i className={`${step.icon} text-2xl mr-2`}></i>
                 <span className="font-medium">{step.text}</span>
               </div>
@@ -87,15 +87,15 @@ export default function HowItWorksSection() {
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start">
-                  <i className="ri-check-line text-[#00C853] text-xl mt-1 mr-3"></i>
+                  <i className="ri-check-line text-[#38F902] text-xl mt-1 mr-3"></i>
                   <span>Instant rebate notifications</span>
                 </li>
                 <li className="flex items-start">
-                  <i className="ri-check-line text-[#00C853] text-xl mt-1 mr-3"></i>
+                  <i className="ri-check-line text-[#38F902] text-xl mt-1 mr-3"></i>
                   <span>Automatic processing</span>
                 </li>
                 <li className="flex items-start">
-                  <i className="ri-check-line text-[#00C853] text-xl mt-1 mr-3"></i>
+                  <i className="ri-check-line text-[#38F902] text-xl mt-1 mr-3"></i>
                   <span>No integration maintenance required</span>
                 </li>
               </ul>

@@ -14,7 +14,7 @@ export default function WhatIsSection() {
             variants={fadeIn}
           >
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              What is <span className="bg-gradient-to-r from-[#00E676] to-[#00C853] bg-clip-text text-transparent">Blowout Protection</span>?
+              What is <span className="bg-gradient-to-r from-[#38F902] to-[#21c100] bg-clip-text text-transparent">Blowout Protection</span>?
             </h2>
             <p className="text-xl text-gray-300">A revolutionary add-on that transforms the fan experience and drives ticket sales</p>
           </motion.div>
@@ -35,11 +35,11 @@ export default function WhatIsSection() {
                 </p>
                 <h3 className="text-2xl font-bold mb-4">Our Solution</h3>
                 <p className="text-gray-300 mb-6">
-                  TrueTIX Blowout Protection offers fans a <span className="text-[#00C853] font-semibold">50% rebate</span> if the game they attend is a blowout
+                  TrueTIX Blowout Protection offers fans a <span className="text-[#38F902] font-semibold">50% rebate</span> if the game they attend is a blowout
                   (defined as a 5+ run difference in MLB games).
                 </p>
                 <div className="flex gap-4 items-center">
-                  <i className="ri-shield-check-line text-3xl text-[#00C853]"></i>
+                  <i className="ri-shield-check-line text-3xl text-[#38F902]"></i>
                   <p className="font-semibold">Fans get value even when the game disappoints</p>
                 </div>
               </div>
