@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { fadeIn, fadeInUp, scaleIn } from "@/lib/animations";
+import truetixLogo from "../assets/truetix-logo.png";
 
 export default function HeroSection() {
   return (
@@ -74,7 +75,7 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-[#38F902]/20 rounded-full blur-[40px] transform scale-75"></div>
               
               <motion.img 
-                src="/images/truetix-logo.png" 
+                src={truetixLogo} 
                 alt="TrueTIX Logo"
                 className="w-full h-full object-contain relative z-10" 
                 variants={scaleIn}

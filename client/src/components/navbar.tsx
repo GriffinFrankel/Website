@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
+import truetixLogo from "../assets/truetix-logo.png";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -35,7 +36,7 @@ export default function Navbar() {
           <div className="flex items-center">
             <a href="#" className="flex items-center gap-2">
               <img 
-                src="/images/truetix-logo.png" 
+                src={truetixLogo} 
                 alt="TrueTIX Logo" 
                 className="h-10 w-auto"
               />
