@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, fadeInUp } from "@/lib/animations";
+import { Check, Plug, UserRound, DollarSign } from "lucide-react";
 
 export default function HowItWorksSection() {
   const steps = [
@@ -7,28 +8,65 @@ export default function HowItWorksSection() {
       number: 1,
       title: "Easy Integration",
       description: "Our API connects seamlessly with your ticketing platform, offering Blowout Protection as a premium add-on during checkout.",
-      icon: "ri-plug-line",
+      icon: Plug,
       text: "Simple API implementation"
     },
     {
       number: 2,
       title: "Fan Experience",
       description: "Fans pay a small premium for Blowout Protection. If their game ends with a 5+ run difference, they receive a 50% rebate automatically.",
-      icon: "ri-user-smile-line",
+      icon: UserRound,
       text: "Automatic fan rebates"
     },
     {
       number: 3,
       title: "Revenue Share",
       description: "Platforms earn a percentage of every Blowout Protection add-on sold, creating a new revenue stream with zero financial risk.",
-      icon: "ri-money-dollar-circle-line",
+      icon: DollarSign,
       text: "New profit center"
     }
   ];
 
   return (
-    <section id="how-it-works" className="py-20 bg-[#1A1A1A]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="how-it-works" className="relative py-20 overflow-hidden">
+      {/* Dark background like hero section */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]"></div>
+      
+      {/* Green accent glow */}
+      <div className="absolute inset-0 bg-[#38F902]/5"></div>
+      
+      {/* Animated geometric shapes for modern tech aesthetic */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div 
+          className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#38F902]/10 blur-[100px]"
+          animate={{ 
+            scale: [1, 1.2, 1],
+            opacity: [0.2, 0.3, 0.2],
+            y: [0, -20, 0] 
+          }}
+          transition={{ 
+            duration: 10,
+            repeat: Infinity,
+            ease: "easeInOut" 
+          }}
+        />
+        <motion.div 
+          className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#38F902]/5 blur-[100px]"
+          animate={{ 
+            scale: [1.2, 1, 1.2],
+            opacity: [0.2, 0.15, 0.2],
+            x: [0, 20, 0]
+          }}
+          transition={{ 
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+      </div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="text-center mb-16"
           initial="hidden"
@@ -54,7 +92,7 @@ export default function HowItWorksSection() {
           {steps.map((step, index) => (
             <motion.div 
               key={step.number}
-              className="bg-[#2A2A2A] rounded-xl p-8 border border-gray-800 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_10px_25px_-5px_rgba(56,249,2,0.1),0_8px_10px_-6px_rgba(56,249,2,0.1)]"
+              className="bg-black/30 backdrop-blur-sm rounded-xl p-8 border border-gray-800 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:border-[#38F902]/30 hover:shadow-[0_10px_25px_-5px_rgba(56,249,2,0.15),0_8px_10px_-6px_rgba(56,249,2,0.15)]"
               variants={fadeInUp}
               custom={index * 0.2}
             >
@@ -64,7 +102,11 @@ export default function HowItWorksSection() {
                 {step.description}
               </p>
               <div className="flex items-center text-[#38F902]">
-                <i className={`${step.icon} text-2xl mr-2`}></i>
+                <div className="mr-2">
+                  {step.number === 1 && <Plug size={20} className="text-[#38F902]" />}
+                  {step.number === 2 && <UserRound size={20} className="text-[#38F902]" />}
+                  {step.number === 3 && <DollarSign size={20} className="text-[#38F902]" />}
+                </div>
                 <span className="font-medium">{step.text}</span>
               </div>
             </motion.div>
@@ -72,40 +114,43 @@ export default function HowItWorksSection() {
         </motion.div>
 
         <motion.div 
-          className="mt-16 bg-gradient-to-r from-[#2A2A2A] to-[#1A1A1A] p-8 rounded-xl border border-gray-800"
+          className="mt-16 bg-black/40 backdrop-blur-md p-8 rounded-xl border border-gray-800"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
           custom={0.6}
         >
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">Game Day Experience</h3>
-              <p className="text-gray-300 mb-6">
-                After the game, our system automatically processes eligible rebates and delivers them directly to fans. No manual claims or paperwork needed.
-              </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <i className="ri-check-line text-[#38F902] text-xl mt-1 mr-3"></i>
-                  <span>Instant rebate notifications</span>
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-[#38F902] text-xl mt-1 mr-3"></i>
-                  <span>Automatic processing</span>
-                </li>
-                <li className="flex items-start">
-                  <i className="ri-check-line text-[#38F902] text-xl mt-1 mr-3"></i>
-                  <span>No integration maintenance required</span>
-                </li>
-              </ul>
-            </div>
-            <div className="relative h-64 md:h-auto rounded-lg overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1562077772-3bd90403f7f0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
-                alt="Baseball game in action" 
-                className="w-full h-full object-cover"
-              />
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-4">Game Day Experience</h3>
+            <p className="text-gray-300 mb-8 max-w-3xl mx-auto">
+              After the game, our system automatically processes eligible rebates and delivers them directly to fans. No manual claims or paperwork needed.
+            </p>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#38F902]/30 transition-all duration-300 flex flex-col items-center">
+                <div className="w-12 h-12 bg-[#38F902]/10 rounded-full flex items-center justify-center mb-4">
+                  <Check className="text-[#38F902] w-6 h-6" />
+                </div>
+                <h4 className="font-medium mb-2">Instant Notifications</h4>
+                <p className="text-gray-400 text-sm text-center">Fans receive immediate alerts about their rebates after the game</p>
+              </div>
+              
+              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#38F902]/30 transition-all duration-300 flex flex-col items-center">
+                <div className="w-12 h-12 bg-[#38F902]/10 rounded-full flex items-center justify-center mb-4">
+                  <Check className="text-[#38F902] w-6 h-6" />
+                </div>
+                <h4 className="font-medium mb-2">Automatic Processing</h4>
+                <p className="text-gray-400 text-sm text-center">No manual claims needed - our system handles everything</p>
+              </div>
+              
+              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#38F902]/30 transition-all duration-300 flex flex-col items-center">
+                <div className="w-12 h-12 bg-[#38F902]/10 rounded-full flex items-center justify-center mb-4">
+                  <Check className="text-[#38F902] w-6 h-6" />
+                </div>
+                <h4 className="font-medium mb-2">Zero Maintenance</h4>
+                <p className="text-gray-400 text-sm text-center">No ongoing integration maintenance required for partners</p>
+              </div>
             </div>
           </div>
         </motion.div>
