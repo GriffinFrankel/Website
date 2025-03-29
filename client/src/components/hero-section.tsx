@@ -5,7 +5,7 @@ import truetixLogo from "../assets/truetix-logo.png";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative h-screen flex items-center justify-center overflow-hidden pt-24">
       {/* Dark background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]"></div>
       
@@ -66,7 +66,7 @@ export default function HeroSection() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center mb-12">
             <motion.div
-              className="relative w-48 h-48 mb-8 flex items-center justify-center"
+              className="relative w-48 h-48 mb-8 mt-4 flex items-center justify-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
