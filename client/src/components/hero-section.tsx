@@ -5,7 +5,7 @@ import truetixLogo from "../assets/truetix-logo.png";
 
 export default function HeroSection() {
   return (
-    <section className="relative h-screen flex items-center justify-center overflow-hidden pt-24">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-32">
       {/* Dark background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]"></div>
       
@@ -126,7 +126,7 @@ export default function HeroSection() {
       </motion.div>
       
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 animate-bounce">
         <a href="#what-is" className="text-[#38F902] opacity-80 hover:opacity-100 transition-opacity">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
