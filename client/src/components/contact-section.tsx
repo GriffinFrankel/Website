@@ -64,15 +64,15 @@ export default function ContactSection() {
 
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
-      {/* Purple gradient background */}
+      {/* Green gradient background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]">
-        <div className="absolute inset-0 bg-[#8A2BE2]/10"></div>
+        <div className="absolute inset-0 bg-[#38F902]/10"></div>
       </div>
       
       {/* Animated shapes */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden">
         <motion.div 
-          className="absolute top-[-200px] right-[-100px] w-[500px] h-[500px] rounded-full bg-[#8A2BE2]/5 blur-[100px]"
+          className="absolute top-[-200px] right-[-100px] w-[500px] h-[500px] rounded-full bg-[#38F902]/5 blur-[100px]"
           animate={{ 
             y: [0, 50, 0],
             opacity: [0.5, 0.3, 0.5]
@@ -84,7 +84,7 @@ export default function ContactSection() {
           }}
         />
         <motion.div 
-          className="absolute bottom-[-200px] left-[-100px] w-[400px] h-[400px] rounded-full bg-[#8A2BE2]/5 blur-[100px]"
+          className="absolute bottom-[-200px] left-[-100px] w-[400px] h-[400px] rounded-full bg-[#38F902]/5 blur-[100px]"
           animate={{ 
             y: [0, -30, 0],
             opacity: [0.3, 0.2, 0.3]
@@ -107,7 +107,7 @@ export default function ContactSection() {
             viewport={{ once: true, amount: 0.3 }}
             variants={fadeIn}
           >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to <span className="bg-gradient-to-r from-[#8A2BE2] to-[#7B68EE] bg-clip-text text-transparent">Transform</span> Your Platform?</h2>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to <span className="bg-gradient-to-r from-[#38F902] to-[#21c100] bg-clip-text text-transparent">Transform</span> Your Platform?</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Schedule a call with our team to learn more about TrueTIX Blowout Protection and how it can benefit your ticketing platform.
             </p>
@@ -126,13 +126,13 @@ export default function ContactSection() {
                 <div className="space-y-8 text-gray-300">
                   {contactInfo.map((item, index) => (
                     <div key={index} className="flex items-start group">
-                      <div className="w-10 h-10 rounded-lg bg-[#8A2BE2]/10 flex items-center justify-center mr-4 text-[#8A2BE2] shadow-[0_0_10px_rgba(138,43,226,0.15)] group-hover:bg-[#8A2BE2]/20 transition-colors">
+                      <div className="w-10 h-10 rounded-lg bg-[#38F902]/10 flex items-center justify-center mr-4 text-[#38F902] shadow-[0_0_10px_rgba(56,249,2,0.15)] group-hover:bg-[#38F902]/20 transition-colors">
                         <i className={`${item.icon} text-xl`}></i>
                       </div>
                       <div>
                         <p className="font-semibold mb-1">{item.title}</p>
                         {item.link ? (
-                          <a href={item.link} className="hover:text-[#8A2BE2] transition-colors">
+                          <a href={item.link} className="hover:text-[#38F902] transition-colors">
                             {item.content}
                           </a>
                         ) : (
@@ -146,10 +146,10 @@ export default function ContactSection() {
                 <div className="mt-12">
                   <h4 className="font-semibold mb-4">Connect With Us</h4>
                   <div className="flex space-x-4">
-                    <a href="#" className="w-10 h-10 rounded-full bg-[#1A1A1A] flex items-center justify-center hover:bg-[#8A2BE2] hover:text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.2)]">
+                    <a href="#" className="w-10 h-10 rounded-full bg-[#1A1A1A] flex items-center justify-center hover:bg-[#38F902] hover:text-black transition-all shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                       <i className="ri-linkedin-fill text-xl"></i>
                     </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-[#1A1A1A] flex items-center justify-center hover:bg-[#8A2BE2] hover:text-white transition-all shadow-[0_0_15px_rgba(0,0,0,0.2)]">
+                    <a href="#" className="w-10 h-10 rounded-full bg-[#1A1A1A] flex items-center justify-center hover:bg-[#38F902] hover:text-black transition-all shadow-[0_0_15px_rgba(0,0,0,0.2)]">
                       <i className="ri-twitter-x-fill text-xl"></i>
                     </a>
                   </div>
@@ -169,7 +169,7 @@ export default function ContactSection() {
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2BE2] focus:border-transparent text-white" 
+                                className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38F902] focus:border-transparent text-white" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -185,7 +185,7 @@ export default function ContactSection() {
                             <FormControl>
                               <Input 
                                 {...field} 
-                                className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2BE2] focus:border-transparent text-white" 
+                                className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38F902] focus:border-transparent text-white" 
                               />
                             </FormControl>
                             <FormMessage />
@@ -203,7 +203,7 @@ export default function ContactSection() {
                           <FormControl>
                             <Input 
                               {...field} 
-                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2BE2] focus:border-transparent text-white" 
+                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38F902] focus:border-transparent text-white" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -221,7 +221,7 @@ export default function ContactSection() {
                             <Input 
                               {...field} 
                               type="email"
-                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2BE2] focus:border-transparent text-white" 
+                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38F902] focus:border-transparent text-white" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -239,7 +239,7 @@ export default function ContactSection() {
                             <Input 
                               {...field} 
                               type="tel"
-                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2BE2] focus:border-transparent text-white" 
+                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38F902] focus:border-transparent text-white" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -257,7 +257,7 @@ export default function ContactSection() {
                             <Textarea 
                               {...field} 
                               rows={4}
-                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#8A2BE2] focus:border-transparent text-white" 
+                              className="w-full px-4 py-2 bg-gray-900/50 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-[#38F902] focus:border-transparent text-white" 
                             />
                           </FormControl>
                           <FormMessage />
@@ -267,7 +267,7 @@ export default function ContactSection() {
                     
                     <Button 
                       type="submit" 
-                      className="w-full bg-[#8A2BE2] hover:bg-[#7B68EE] text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 shadow-[0_0_15px_rgba(138,43,226,0.3)] hover:shadow-[0_0_20px_rgba(138,43,226,0.5)] transform hover:translate-y-[-2px]"
+                      className="w-full bg-[#38F902] hover:bg-[#21c100] text-black font-semibold py-3 px-6 rounded-md transition-all duration-300 shadow-[0_0_15px_rgba(56,249,2,0.3)] hover:shadow-[0_0_20px_rgba(56,249,2,0.5)] transform hover:translate-y-[-2px]"
                       disabled={form.formState.isSubmitting}
                     >
                       {form.formState.isSubmitting ? "Submitting..." : "Schedule a Call"}

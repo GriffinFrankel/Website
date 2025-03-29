@@ -9,13 +9,13 @@ export default function HeroSection() {
       {/* Dark background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]"></div>
       
-      {/* Purple accent glow */}
-      <div className="absolute inset-0 bg-[#8A2BE2]/5"></div>
+      {/* Green accent glow */}
+      <div className="absolute inset-0 bg-[#38F902]/5"></div>
       
       {/* Animated geometric shapes for modern tech aesthetic */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#8A2BE2]/10 blur-[100px]"
+          className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#38F902]/10 blur-[100px]"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.3, 0.2],
@@ -28,7 +28,7 @@ export default function HeroSection() {
           }}
         />
         <motion.div 
-          className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#8A2BE2]/5 blur-[100px]"
+          className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#38F902]/5 blur-[100px]"
           animate={{ 
             scale: [1.2, 1, 1.2],
             opacity: [0.2, 0.15, 0.2],
@@ -42,7 +42,7 @@ export default function HeroSection() {
           }}
         />
         <motion.div 
-          className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-[#8A2BE2]/5 blur-[80px]"
+          className="absolute top-1/3 left-1/4 w-[300px] h-[300px] rounded-full bg-[#38F902]/5 blur-[80px]"
           animate={{ 
             scale: [1, 1.3, 1],
             opacity: [0.1, 0.2, 0.1]
@@ -72,7 +72,7 @@ export default function HeroSection() {
               transition={{ duration: 1 }}
             >
               {/* Glow effect behind logo */}
-              <div className="absolute inset-0 bg-[#8A2BE2]/20 rounded-full blur-[40px] transform scale-75"></div>
+              <div className="absolute inset-0 bg-[#38F902]/20 rounded-full blur-[40px] transform scale-75"></div>
               
               <motion.img 
                 src={truetixLogo} 
@@ -91,7 +91,7 @@ export default function HeroSection() {
               className="text-4xl md:text-5xl lg:text-7xl font-bold leading-tight mb-6 tracking-tight"
               variants={fadeInUp}
             >
-              The Future of <span className="bg-gradient-to-r from-[#8A2BE2] to-[#7B68EE] bg-clip-text text-transparent">Fan Engagement</span> Is Here
+              The Future of <span className="bg-gradient-to-r from-[#38F902] to-[#21c100] bg-clip-text text-transparent">Fan Engagement</span> Is Here
             </motion.h1>
             
             <motion.p 
@@ -109,14 +109,14 @@ export default function HeroSection() {
             >
               <Button 
                 asChild
-                className="bg-[#8A2BE2] hover:bg-[#7B68EE] text-white font-semibold py-3 px-8 text-lg h-auto shadow-[0_0_15px_rgba(138,43,226,0.5)] transition-all duration-300 rounded-md"
+                className="bg-[#38F902] hover:bg-[#21c100] text-black font-semibold py-3 px-8 text-lg h-auto shadow-[0_0_15px_rgba(56,249,2,0.5)] transition-all duration-300 rounded-md"
               >
                 <a href="#contact">Join Our MLB Pilot</a>
               </Button>
               <Button 
                 variant="outline" 
                 asChild
-                className="border-white hover:border-[#8A2BE2] hover:text-[#8A2BE2] py-3 px-8 text-lg h-auto transition-all duration-300 rounded-md"
+                className="border-white hover:border-[#38F902] hover:text-[#38F902] py-3 px-8 text-lg h-auto transition-all duration-300 rounded-md"
               >
                 <a href="#how-it-works">Learn More</a>
               </Button>
@@ -127,7 +127,7 @@ export default function HeroSection() {
       
       {/* Scroll indicator */}
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <a href="#what-is" className="text-[#8A2BE2] opacity-80 hover:opacity-100 transition-opacity">
+        <a href="#what-is" className="text-[#38F902] opacity-80 hover:opacity-100 transition-opacity">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <line x1="12" y1="5" x2="12" y2="19"></line>
             <polyline points="19 12 12 19 5 12"></polyline>
