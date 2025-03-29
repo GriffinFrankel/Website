@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import truetixLogo from "../assets/truetix-logo.png";
+import { Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed w-full z-50 bg-[#121212]/90 backdrop-blur-md transition-all duration-300 ${isScrolled ? 'border-b border-gray-800' : ''}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#121212]/70 backdrop-blur-md border-b border-gray-800/50' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
@@ -66,10 +67,10 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <button 
-              className="text-gray-300 hover:text-white focus:outline-none"
+              className="text-gray-300 hover:text-[#38F902] focus:outline-none transition-colors"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
-              <i className={`ri-${isMenuOpen ? 'close' : 'menu'}-line text-2xl`}></i>
+              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -77,12 +78,12 @@ export default function Navbar() {
         {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-4 space-y-1">
+            <div className="px-2 pt-2 pb-4 space-y-1 bg-black/80 backdrop-blur-md rounded-lg mt-2 border border-gray-800/30">
               {navItems.map((item, index) => (
                 <a 
                   key={index}
                   href={item.href} 
-                  className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-[#2A2A2A] rounded-md"
+                  className="block px-3 py-2 text-gray-300 hover:text-[#38F902] hover:bg-[#2A2A2A]/50 rounded-md transition-colors"
                   onClick={handleNavClick}
                 >
                   {item.name}
@@ -90,7 +91,7 @@ export default function Navbar() {
               ))}
               <a 
                 href="#contact" 
-                className="block px-3 py-2 bg-[#38F902] hover:bg-[#21c100] text-black font-medium rounded-md mt-4 shadow-[0_0_10px_rgba(56,249,2,0.4)]"
+                className="block px-3 py-2 bg-[#38F902] hover:bg-[#21c100] text-black font-medium rounded-md mt-4 shadow-[0_0_10px_rgba(56,249,2,0.4)] transition-all duration-300"
                 onClick={handleNavClick}
               >
                 Book a Call
