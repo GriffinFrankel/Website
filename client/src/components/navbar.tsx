@@ -11,7 +11,8 @@ export default function Navbar() {
 
   const navItems = [
     { name: "How It Works", href: "#how-it-works" },
-    { name: "Partner Benefits", href: "#benefits" }
+    { name: "Partner Benefits", href: "#benefits" },
+    { name: "FAQ", href: "#faq" }
   ];
 
   useEffect(() => {

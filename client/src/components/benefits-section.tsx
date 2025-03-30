@@ -82,47 +82,7 @@ export default function BenefitsSection() {
           ))}
         </motion.div>
 
-        <motion.div 
-          className="bg-gradient-to-br from-[#38F902]/5 to-[#121212] rounded-xl p-8 border border-gray-800 shadow-xl"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeInUp}
-        >
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div className="order-2 md:order-1">
-              <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-lg bg-[#38F902]/10 flex items-center justify-center text-[#38F902] mr-3 shadow-[0_0_10px_rgba(56,249,2,0.2)]">
-                  <i className="ri-chat-quote-line text-xl"></i>
-                </div>
-                <h3 className="text-2xl font-bold">Partner Success Story</h3>
-              </div>
-              <blockquote className="text-gray-300 mb-6 pl-4 border-l-2 border-[#38F902]/50">
-                "Implementing TrueTIX Blowout Protection increased our average order value by 18% while dramatically improving customer satisfaction. The integration was seamless, and our platform now stands out from competitors."
-              </blockquote>
-              <div className="flex items-center">
-                <div className="w-12 h-12 rounded-full overflow-hidden mr-4 ring-2 ring-[#38F902]/30">
-                  <img 
-                    src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80" 
-                    alt="Partner testimonial" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div>
-                  <p className="font-bold">Sarah Chen</p>
-                  <p className="text-sm text-gray-400">VP of Product, Major Ticketing Platform</p>
-                </div>
-              </div>
-            </div>
-            <div className="order-1 md:order-2 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(56,249,2,0.1)]">
-              <img 
-                src="https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1738&q=80" 
-                alt="Business partners handshake" 
-                className="w-full h-64 md:h-full object-cover"
-              />
-            </div>
-          </div>
-        </motion.div>
+
       </div>
     </section>
   );

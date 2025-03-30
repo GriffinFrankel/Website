@@ -4,6 +4,7 @@ import WhatIsSection from "@/components/what-is-section";
 import HowItWorksSection from "@/components/how-it-works-section";
 import BenefitsSection from "@/components/benefits-section";
 import MLBPilotSection from "@/components/mlb-pilot-section";
+import FAQSection from "@/components/faq-section";
 import ContactSection from "@/components/contact-section";
 import Footer from "@/components/footer";
 import { useEffect } from "react";
@@ -22,8 +23,10 @@ export default function Home() {
         if (targetId && targetId !== '#') {
           const targetElement = document.querySelector(targetId);
           if (targetElement) {
+            const yOffset = -80; // Adjust for header height
+            const y = targetElement.getBoundingClientRect().top + window.scrollY + yOffset;
             window.scrollTo({
-              top: targetElement.offsetTop - 80, // Adjust for header height
+              top: y,
               behavior: 'smooth'
             });
           }
@@ -47,6 +50,7 @@ export default function Home() {
         <HowItWorksSection />
         <BenefitsSection />
         <MLBPilotSection />
+        <FAQSection />
         <ContactSection />
       </main>
       <Footer />
