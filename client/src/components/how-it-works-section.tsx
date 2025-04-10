@@ -14,7 +14,7 @@ export default function HowItWorksSection() {
     {
       number: 2,
       title: "Fan Experience",
-      description: "Fans pay a small premium for Blowout Protection. If their game ends with a 5+ run difference, they receive a 50% rebate automatically.",
+      description: "Fans pay a small premium for Blowout Protection. If their game ends in a blowout by our pre-defined criteria, they receive a 50% rebate.",
       icon: UserRound,
       text: "Automatic fan rebates"
     },
