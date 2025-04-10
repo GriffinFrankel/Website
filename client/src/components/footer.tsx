@@ -21,7 +21,7 @@ export default function Footer() {
           <div className="md:col-span-2">
             <a href="#" className="flex items-center gap-2 mb-4">
               <span className="text-2xl font-bold tracking-tight">
-                True<span className="text-[#00C853]">TIX</span>
+                True<span className="text-[#38F902]">TIX</span>
               </span>
             </a>
             <p className="text-gray-400 mb-6 max-w-md">
