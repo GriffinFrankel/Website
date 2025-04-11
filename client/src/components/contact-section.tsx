@@ -65,7 +65,7 @@ export default function ContactSection() {
   return (
     <section id="contact" className="py-20 relative overflow-hidden">
       {/* Green gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]" style={{backgroundImage: 'url("/attached_assets/sports-fans-at-live-event-seo.jpg")', backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.2}}>
         <div className="absolute inset-0 bg-[#38F902]/10"></div>
       </div>
       
