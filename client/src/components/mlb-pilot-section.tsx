@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 export default function MLBPilotSection() {
   const benefits = [
     "Priority integration support",
-    "Enhanced revenue share (first 6 months)",
+    "Enhanced revenue share",
     "Co-marketing opportunities",
     "Early access to future sport expansions"
   ];
