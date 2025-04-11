@@ -23,7 +23,7 @@ export default function MLBPilotSection() {
           <div className="grid md:grid-cols-2">
             <div className="relative h-64 md:h-auto">
               <img 
-                src="/images/sports-fans-at-live-event-seo.jpg" 
+                src="./images/sports-fans-at-live-event-seo.jpg" 
                 alt="Excited sports fans cheering with red rally towels" 
                 className="absolute inset-0 w-full h-full object-cover"
               />
