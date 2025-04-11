@@ -6,14 +6,14 @@ export default function BenefitsSection() {
     {
       icon: "ri-line-chart-line",
       title: "Increased Sales Volume",
-      description: "Partners report 15-25% higher conversion rates when Blowout Protection is offered during checkout, leading to more primary ticket sales.",
+      description: "Partners see higher conversion rates when Blowout Protection is offered during checkout, leading to more primary ticket sales.",
       secondaryIcon: "ri-arrow-up-circle-line",
       secondaryText: "Drive more primary ticket sales"
     },
     {
       icon: "ri-money-dollar-circle-line",
       title: "New Revenue Stream",
-      description: "Earn up to 40% revenue share on each Blowout Protection add-on sold through your platform — with zero financial risk or liability.",
+      description: "Earn a share of each Blowout Protection add-on sold through your platform — with zero financial risk or liability.",
       secondaryIcon: "ri-funds-line",
       secondaryText: "Zero-risk additional revenue"
     },

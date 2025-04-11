@@ -16,7 +16,7 @@ export default function HowItWorksSection() {
       title: "Fan Experience",
       description: "Fans pay a small premium for Blowout Protection. If their game ends in a blowout by our pre-defined criteria, they receive a 50% rebate.",
       icon: UserRound,
-      text: "Automatic fan rebates"
+      text: "Seamless fan rebates"
     },
     {
       number: 3,
@@ -124,7 +124,7 @@ export default function HowItWorksSection() {
           <div className="text-center">
             <h3 className="text-2xl font-bold mb-4">Game Day Experience</h3>
             <p className="text-gray-300 mb-8 max-w-3xl mx-auto">
-              After the game, our system automatically processes eligible rebates and delivers them directly to fans. No manual claims or paperwork needed.
+              After the game, our system automatically processes eligible rebates and delivers them directly to fans.
             </p>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
@@ -140,8 +140,8 @@ export default function HowItWorksSection() {
                 <div className="w-12 h-12 bg-[#38F902]/10 rounded-full flex items-center justify-center mb-4">
                   <Check className="text-[#38F902] w-6 h-6" />
                 </div>
-                <h4 className="font-medium mb-2">Automatic Processing</h4>
-                <p className="text-gray-400 text-sm text-center">No manual claims needed - our system handles everything</p>
+                <h4 className="font-medium mb-2">Effortless Rebates</h4>
+                <p className="text-gray-400 text-sm text-center">Fans receive an email link to quickly collect their rebate</p>
               </div>
               
               <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#38F902]/30 transition-all duration-300 flex flex-col items-center">

@@ -30,13 +30,13 @@ export default function WhatIsSection() {
               <div className="p-8 md:p-12 flex flex-col justify-center">
                 <h3 className="text-2xl font-bold mb-4">The Fan Frustration Problem</h3>
                 <p className="text-gray-300 mb-6">
-                  Nothing's worse than paying full price for a ticket only to watch your team lose by 10+ runs. 
+                  Nothing's worse than paying full price for a ticket only to watch your team get blown out.
                   Fans leave disappointed, and they're less likely to return.
                 </p>
                 <h3 className="text-2xl font-bold mb-4">Our Solution</h3>
                 <p className="text-gray-300 mb-6">
                   TrueTIX Blowout Protection offers fans a <span className="text-[#38F902] font-semibold">50% rebate</span> if the game they attend is a blowout
-                  (defined as a 5+ run difference in MLB games).
+                  (defined as a 5+ run difference for our MLB pilot program).
                 </p>
                 <div className="flex gap-4 items-center">
                   <i className="ri-shield-check-line text-3xl text-[#38F902]"></i>
