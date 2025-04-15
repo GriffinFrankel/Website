@@ -1,8 +1,24 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { fadeIn, staggerContainer, fadeInUp } from "@/lib/animations";
 import { Check, Plug, UserRound, DollarSign, Cpu, BrainCircuit, Code, Zap, Server, ArrowDownToLine } from "lucide-react";
+import { useRef } from "react";
 
 export default function HowItWorksSection() {
+  // References for scroll-linked animations
+  const sectionRef = useRef<HTMLElement>(null);
+  const visualContainerRef = useRef<HTMLDivElement>(null);
+  
+  // Get scroll progress within the section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+  
+  // Transform values for parallax effects
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100]); // Slower scroll for background elements
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100]); // Opposite direction scroll
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  
   const steps = [
     {
       number: 1,
@@ -28,21 +44,24 @@ export default function HowItWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="relative py-20 overflow-hidden">
-      {/* Tech-inspired background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0D1117] to-[#111827]"></div>
+    <section id="how-it-works" ref={sectionRef} className="relative py-20 overflow-hidden min-h-screen">
+      {/* Tech-inspired background with parallax effect */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0D1117] to-[#111827] z-0"></div>
       
-      {/* Digital circuit pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydi0yaC0ydjJoLTJ2LTJoLTJ2Mmgtdi0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+      {/* Digital circuit pattern overlay with parallax effect */}
+      <motion.div 
+        style={{ y: y1 }}
+        className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydi0yaC0ydjJoLTJ2LTJoLTJ2Mmh0di0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10 z-0"
+      ></motion.div>
       
-      {/* Accent glows */}
-      <div className="absolute inset-0 overflow-hidden">
+      {/* Accent glows with opposite parallax effect */}
+      <div className="absolute inset-0 overflow-hidden z-0">
         <motion.div 
+          style={{ y: y2 }}
           className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[100px]"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.3, 0.2],
-            y: [0, -20, 0] 
           }}
           transition={{ 
             duration: 10,
@@ -51,11 +70,11 @@ export default function HowItWorksSection() {
           }}
         />
         <motion.div 
+          style={{ y: y1 }}
           className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px]"
           animate={{ 
             scale: [1.2, 1, 1.2],
             opacity: [0.2, 0.15, 0.2],
-            x: [0, 20, 0]
           }}
           transition={{ 
             duration: 8,
@@ -86,66 +105,97 @@ export default function HowItWorksSection() {
           </p>
         </motion.div>
 
-        {/* Step cards with tech styling */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8"
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-        >
-          {steps.map((step, index) => (
+        {/* Fixed visual container with sticky positioning and scroll animations */}
+        <div className="relative min-h-[1500px]">
+          {/* This container will be fixed while scrolling */}
+          <div 
+            ref={visualContainerRef} 
+            className="sticky top-32 h-[600px] flex items-center justify-center z-10"
+          >
+            {/* Tech diagram that animates as you scroll */}
             <motion.div 
-              key={step.number}
-              className="relative bg-[#0a101f]/80 backdrop-blur-sm rounded-xl p-8 border border-cyan-500/10 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:border-cyan-500/30 hover:shadow-[0_10px_25px_-5px_rgba(8,145,178,0.15),0_8px_10px_-6px_rgba(8,145,178,0.15)]"
-              variants={fadeInUp}
-              custom={index * 0.2}
+              style={{ opacity }}
+              className="w-full max-w-5xl mx-auto h-full relative"
             >
-              {/* Tech corner accents */}
-              <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
-              <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
-              <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
-              <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
-              
-              {/* Step number with tech styling */}
-              <div className="flex items-center justify-center mb-6 relative">
-                <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                  {step.number}
+              {/* The 3D visual terminal-like container */}
+              <div className="absolute inset-0 bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden">
+                {/* Terminal top bar */}
+                <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
+                  <div className="flex gap-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                  </div>
+                  <div className="text-xs text-cyan-500/70 ml-4 font-mono">truetix_protocol.ts</div>
                 </div>
-                {/* Connecting lines for tech feel */}
-                <div className="absolute left-[8%] top-1/2 w-[10%] h-[1px] bg-cyan-500/20"></div>
-                <div className="absolute right-[8%] top-1/2 w-[10%] h-[1px] bg-cyan-500/20"></div>
-              </div>
+                
+                {/* Step cards that move through the terminal window */}
+                <div className="p-8 h-[calc(100%-2rem)] overflow-hidden">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-full">
+                    {steps.map((step, index) => (
+                      <motion.div 
+                        key={step.number}
+                        className="relative bg-[#0D1117]/80 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/10 shadow-lg h-full flex flex-col"
+                        initial={{ opacity: 0, y: 50 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        transition={{ 
+                          duration: 0.5, 
+                          delay: index * 0.15,
+                          ease: "easeOut" 
+                        }}
+                        viewport={{ once: true, amount: 0.3 }}
+                      >
+                        {/* Tech corner accents */}
+                        <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                        <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                        <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                        <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                        
+                        {/* Step number with tech styling */}
+                        <div className="flex items-center justify-center mb-6 relative">
+                          <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)]">
+                            {step.number}
+                          </div>
+                        </div>
 
-              {/* Step content */}
-              <h3 className="text-xl font-bold mb-4 text-center">{step.title}</h3>
-              <p className="text-gray-300 mb-6 text-center">
-                {step.description}
-              </p>
-              
-              {/* Divider */}
-              <div className="w-16 h-[1px] bg-gradient-to-r from-cyan-500/50 to-transparent mx-auto mb-6"></div>
-              
-              {/* Tech icon footer */}
-              <div className="flex items-center justify-center text-cyan-400 bg-cyan-500/5 py-2 px-4 rounded-full border border-cyan-500/20">
-                <div className="mr-2">
-                  {step.number === 1 && <Code size={18} />}
-                  {step.number === 2 && <BrainCircuit size={18} />}
-                  {step.number === 3 && <Server size={18} />}
+                        {/* Step content */}
+                        <h3 className="text-xl font-bold mb-4 text-center">{step.title}</h3>
+                        <p className="text-gray-300 mb-6 text-center flex-grow">
+                          {step.description}
+                        </p>
+                        
+                        {/* Tech icon footer */}
+                        <div className="mt-auto flex items-center justify-center text-cyan-400 bg-cyan-500/5 py-2 px-4 rounded-full border border-cyan-500/20">
+                          <div className="mr-2">
+                            {step.number === 1 && <Code size={18} />}
+                            {step.number === 2 && <BrainCircuit size={18} />}
+                            {step.number === 3 && <Server size={18} />}
+                          </div>
+                          <span className="font-medium text-sm">{step.text}</span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-                <span className="font-medium text-sm">{step.text}</span>
               </div>
             </motion.div>
-          ))}
-        </motion.div>
+          </div>
+          
+          {/* Empty space content that triggers different scroll animations at different points */}
+          <div className="absolute top-0 left-0 w-full opacity-0 pointer-events-none">
+            <div className="h-[400px]"></div>
+            <div className="h-[400px]"></div>
+            <div className="h-[700px]"></div>
+          </div>
+        </div>
 
-        {/* Process flow diagram */}
+        {/* Process flow diagram that slides in from the side */}
         <motion.div 
-          className="mt-24 mb-16 relative"
-          initial="hidden"
-          whileInView="visible"
+          className="mt-8 mb-16 relative"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          variants={fadeInUp}
+          transition={{ duration: 0.6 }}
         >
           <div className="absolute inset-x-0 top-1/2 h-[1px] bg-cyan-500/20 -translate-y-1/2 z-0"></div>
           
@@ -187,11 +237,10 @@ export default function HowItWorksSection() {
         {/* Features grid */}
         <motion.div 
           className="mt-16 bg-[#0a101f]/80 backdrop-blur-sm p-8 rounded-xl border border-cyan-500/10 shadow-[0_8px_30px_rgba(8,145,178,0.1)]"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeInUp}
-          custom={0.6}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6 }}
         >
           <div className="text-center mb-10">
             <h3 className="text-2xl font-bold mb-4">Advanced Features</h3>
