@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useRef, useState } from "react";
@@ -33,40 +34,27 @@ export default function HowItWorksSection() {
   ];
 
   const [activeStep, setActiveStep] = useState(1);
-  const stepRefs = useRef<(HTMLElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to top on refresh
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      window.scrollTo(0, 0);
+    const handleScroll = () => {
+      if (!containerRef.current) return;
+      const container = containerRef.current;
+      const scrollPosition = container.scrollTop;
+      const stepHeight = container.clientHeight * 0.8;
+      const currentStep = Math.floor(scrollPosition / stepHeight) + 1;
+      setActiveStep(Math.min(currentStep, steps.length));
+    };
+
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+      return () => container.removeEventListener('scroll', handleScroll);
     }
   }, []);
 
-  // Track which step is currently in view
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-
-    stepRefs.current.forEach((ref, i) => {
-      if (!ref) return;
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveStep(i + 1);
-          }
-        },
-        { threshold: 0.5 }
-      );
-      observer.observe(ref);
-      observers.push(observer);
-    });
-
-    return () => {
-      observers.forEach((observer) => observer.disconnect());
-    };
-  }, []);
-
   return (
-    <section className="bg-[#0D1117] py-24">
+    <section id="how-it-works" className="bg-[#0D1117] py-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-12">
         {/* Sticky Left Column */}
         <div className="md:col-span-5">
@@ -74,20 +62,23 @@ export default function HowItWorksSection() {
             <div className="text-cyan-400 text-sm font-semibold uppercase mb-2">
               Technology Ecosystem
             </div>
-            <h2 className="text-white text-4xl font-bold mb-4">
+            <h2 className="text-4xl font-bold mb-4">
               How{" "}
-              <span className="text-cyan-400">Blowout Protection</span> Works
+              <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                Blowout Protection
+              </span>{" "}
+              Works
             </h2>
             <p className="text-gray-400 text-lg mb-8">
               A seamless integration powered by machine learning and advanced algorithms
             </p>
 
             {/* Step Indicators */}
-            <div className="space-y-6 border-l-2 border-cyan-500/20 pl-6">
+            <div className="space-y-4 border-l-2 border-cyan-500/20 pl-6">
               {steps.map((step) => (
                 <div key={step.number} className="flex items-start">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border text-lg font-bold ${
+                    className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold ${
                       activeStep === step.number
                         ? "bg-cyan-500 text-black border-cyan-400"
                         : "bg-cyan-500/20 text-cyan-400 border-cyan-500/40"
@@ -96,7 +87,7 @@ export default function HowItWorksSection() {
                     {step.number}
                   </div>
                   <p
-                    className={`font-semibold ${
+                    className={`font-semibold transition-colors duration-300 ${
                       activeStep === step.number ? "text-white" : "text-gray-400"
                     }`}
                   >
@@ -108,13 +99,15 @@ export default function HowItWorksSection() {
           </div>
         </div>
 
-        {/* Scrollable Right Column with Snap */}
-        <div className="md:col-span-7 h-[200vh] overflow-y-scroll snap-y snap-mandatory space-y-0 flex flex-col gap-0">
+        {/* Scrollable Right Column */}
+        <div 
+          ref={containerRef}
+          className="md:col-span-7 h-[80vh] overflow-y-scroll snap-y snap-mandatory space-y-0 flex flex-col gap-0 pr-4 hide-scrollbar"
+        >
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              ref={(el) => (stepRefs.current[i] = el)}
-              className="snap-center min-h-[90vh] flex items-center justify-center"
+              className="snap-start min-h-[80vh] flex items-center justify-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
@@ -125,7 +118,9 @@ export default function HowItWorksSection() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
                     {step.number}
                   </div>
-                  <h3 className="text-white text-2xl font-semibold">{step.title}</h3>
+                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    {step.title}
+                  </h3>
                 </div>
                 <p className="text-gray-300 mb-6 pl-[3.5rem]">{step.description}</p>
                 <div className="ml-[3.5rem] flex items-center gap-2 bg-cyan-500/5 border border-cyan-500/20 rounded-lg px-4 py-2 w-fit text-cyan-400 text-sm">
