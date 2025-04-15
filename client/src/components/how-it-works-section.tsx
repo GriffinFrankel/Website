@@ -1,34 +1,48 @@
-import { motion } from "framer-motion";
-import { fadeIn, staggerContainer, fadeInUp } from "@/lib/animations";
-import { Check, Plug, UserRound, DollarSign, Cpu, BrainCircuit, Code, Zap, Server, ArrowDownToLine } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { fadeIn } from "@/lib/animations";
+import { Check, Plug, UserRound, DollarSign, Cpu, BrainCircuit, Code, Zap, Server, ArrowDownToLine, ChevronDown } from "lucide-react";
+import { useRef } from "react";
 
 export default function HowItWorksSection() {
+  // Set up refs for scroll-triggered animations
+  const sectionRef = useRef<HTMLElement>(null);
+  const stepsRef = useRef<HTMLDivElement>(null);
+  
+  // Get scroll progress for this section
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end end"]
+  });
+  
   const steps = [
     {
       number: 1,
       title: "AI-Powered Integration",
       description: "Our smart API connects seamlessly with your ticketing platform, offering Blowout Protection as a premium add-on during checkout.",
       icon: Plug,
-      text: "Intelligent API implementation"
+      text: "Intelligent API implementation",
+      highlight: <Code size={22} />
     },
     {
       number: 2,
       title: "Fan Experience",
       description: "Fans pay a small premium for Blowout Protection. If their game ends in a blowout by our pre-defined criteria, they receive a 50% rebate.",
       icon: UserRound,
-      text: "Automated fan rebates"
+      text: "Automated fan rebates",
+      highlight: <BrainCircuit size={22} />
     },
     {
       number: 3,
       title: "Revenue Analytics",
       description: "Platforms earn a percentage of every Blowout Protection add-on sold, with real-time analytics to maximize your revenue stream.",
       icon: DollarSign,
-      text: "Data-driven profit center"
+      text: "Data-driven profit center",
+      highlight: <Server size={22} />
     }
   ];
 
   return (
-    <section id="how-it-works" className="relative py-20 overflow-hidden">
+    <section id="how-it-works" ref={sectionRef} className="relative py-24 overflow-hidden min-h-screen">
       {/* Tech-inspired background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0D1117] to-[#111827]"></div>
       
@@ -41,8 +55,7 @@ export default function HowItWorksSection() {
           className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[100px]"
           animate={{ 
             scale: [1, 1.2, 1],
-            opacity: [0.2, 0.3, 0.2],
-            y: [0, -20, 0] 
+            opacity: [0.2, 0.3, 0.2]
           }}
           transition={{ 
             duration: 10,
@@ -54,8 +67,7 @@ export default function HowItWorksSection() {
           className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px]"
           animate={{ 
             scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.15, 0.2],
-            x: [0, 20, 0]
+            opacity: [0.2, 0.15, 0.2]
           }}
           transition={{ 
             duration: 8,
@@ -66,138 +78,301 @@ export default function HowItWorksSection() {
         />
       </div>
       
-      {/* Content area */}
+      {/* Main content area with split layout */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
-          className="text-center mb-16"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={fadeIn}
-        >
-          <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
-            <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
-          </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A seamless integration powered by machine learning and advanced algorithms
-          </p>
-        </motion.div>
-        
-        {/* Terminal-style container */}
-        <div className="mb-20 max-w-5xl mx-auto">
-          <div className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden">
-            {/* Terminal top bar */}
-            <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
-              <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 min-h-[800px]">
+          {/* Left side - Fixed title section */}
+          <div className="hidden md:block">
+            <div className="sticky top-32">
+              <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+                <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
               </div>
-              <div className="text-xs text-cyan-500/70 ml-4 font-mono">truetix_protocol.ts</div>
+              
+              <h2 className="text-3xl md:text-5xl font-bold mb-6">
+                How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
+              </h2>
+              
+              <p className="text-xl text-gray-300 mb-10">
+                A seamless integration powered by machine learning and advanced algorithms
+              </p>
+              
+              {/* Tech decorative elements */}
+              <div className="relative mt-12 h-40">
+                <div className="absolute left-0 top-0 w-1/2 h-[1px] bg-gradient-to-r from-cyan-500/80 to-cyan-500/0"></div>
+                <div className="absolute left-0 top-0 w-[1px] h-40 bg-gradient-to-b from-cyan-500/80 to-cyan-500/0"></div>
+                
+                <div className="absolute left-8 top-8 w-16 h-16 rounded-full bg-cyan-500/5 border border-cyan-500/20 flex items-center justify-center">
+                  <Code className="w-7 h-7 text-cyan-400" />
+                </div>
+                
+                <motion.div 
+                  className="absolute left-10 top-10 w-12 h-12 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center"
+                  animate={{
+                    y: [0, 4, 0],
+                    opacity: [0.7, 1, 0.7]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <BrainCircuit className="w-6 h-6 text-cyan-400/70" />
+                </motion.div>
+                
+                <motion.div
+                  className="absolute left-32 top-16 h-10 w-10 rounded-full bg-cyan-500/5 border border-cyan-500/20 flex items-center justify-center"
+                  animate={{
+                    y: [0, -4, 0],
+                    opacity: [0.5, 0.8, 0.5]
+                  }}
+                  transition={{
+                    duration: 2.5,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5
+                  }}
+                >
+                  <Server className="w-5 h-5 text-cyan-400/60" />
+                </motion.div>
+              </div>
+              
+              {/* Scroll indicator */}
+              <div className="hidden md:flex flex-col items-center mt-12">
+                <p className="text-cyan-400/70 text-sm mb-2">Scroll to explore</p>
+                <motion.div
+                  animate={{
+                    y: [0, 5, 0]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <ChevronDown className="text-cyan-400/70 w-5 h-5" />
+                </motion.div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right side - Scrolling steps */}
+          <div ref={stepsRef} className="space-y-32 pt-12 pb-32">
+            {/* Mobile title (visible only on mobile) */}
+            <div className="md:hidden text-center mb-20">
+              <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+                <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
+              </div>
+              
+              <h2 className="text-3xl font-bold mb-6">
+                How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
+              </h2>
+              
+              <p className="text-lg text-gray-300">
+                A seamless integration powered by machine learning and advanced algorithms
+              </p>
             </div>
             
-            {/* Step cards */}
-            <div className="p-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {steps.map((step, index) => (
-                  <motion.div 
-                    key={step.number}
-                    className="relative bg-[#0D1117]/80 backdrop-blur-sm rounded-xl p-6 border border-cyan-500/10 shadow-lg flex flex-col"
-                    initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ 
-                      duration: 0.5, 
-                      delay: index * 0.15,
-                      ease: "easeOut" 
-                    }}
-                    viewport={{ once: true, amount: 0.3 }}
-                  >
-                    {/* Tech corner accents */}
-                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    
-                    {/* Step number with tech styling */}
-                    <div className="flex items-center justify-center mb-6 relative">
-                      <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                        {step.number}
-                      </div>
-                    </div>
-
-                    {/* Step content */}
-                    <h3 className="text-xl font-bold mb-4 text-center">{step.title}</h3>
-                    <p className="text-gray-300 mb-6 text-center flex-grow">
-                      {step.description}
-                    </p>
-                    
-                    {/* Tech icon footer */}
-                    <div className="mt-auto flex items-center justify-center text-cyan-400 bg-cyan-500/5 py-2 px-4 rounded-full border border-cyan-500/20">
-                      <div className="mr-2">
-                        {step.number === 1 && <Code size={18} />}
-                        {step.number === 2 && <BrainCircuit size={18} />}
-                        {step.number === 3 && <Server size={18} />}
-                      </div>
-                      <span className="font-medium text-sm">{step.text}</span>
-                    </div>
-                  </motion.div>
-                ))}
+            {/* Step 1 */}
+            <motion.div 
+              className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Terminal top bar */}
+              <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                </div>
+                <div className="text-xs text-cyan-400/70 ml-4 font-mono">step01_integration.ts</div>
               </div>
-            </div>
+              <div className="p-8 relative">
+                {/* Tech corner accents */}
+                <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                
+                <div className="flex items-center mb-6">
+                  <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
+                    1
+                  </div>
+                  <h3 className="text-2xl font-bold">{steps[0].title}</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-8 pl-[4.5rem]">
+                  {steps[0].description}
+                </p>
+                
+                <div className="flex items-center text-cyan-400 bg-cyan-500/5 py-3 px-5 rounded-lg border border-cyan-500/20 w-fit ml-[4.5rem]">
+                  <span className="mr-2">{steps[0].highlight}</span>
+                  <span className="font-medium">{steps[0].text}</span>
+                </div>
+                
+                {/* Code snippet decoration */}
+                <div className="mt-10 bg-[#0D1117] rounded-md p-4 border border-cyan-500/10">
+                  <pre className="text-xs text-gray-400 font-mono">
+                    <span className="text-cyan-400">import</span> <span className="text-green-400">{'{ TrueTixAPI }'}</span> <span className="text-cyan-400">from</span> <span className="text-orange-300">'@truetix/sdk'</span>;<br/>
+                    <br/>
+                    <span className="text-purple-400">const</span> <span className="text-blue-300">api</span> = <span className="text-purple-400">new</span> <span className="text-yellow-300">TrueTixAPI</span>(<span className="text-orange-300">'{'{'}apiKey: process.env.TRUETIX_API_KEY{'}'}'</span>);<br/>
+                    <br/>
+                    <span className="text-green-400">// Register the checkout hook to offer Blowout Protection</span><br/>
+                    <span className="text-blue-300">api</span>.<span className="text-yellow-300">registerCheckoutHook</span>(<span className="text-orange-300">'ticketCheckout'</span>);
+                  </pre>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Step 2 */}
+            <motion.div 
+              className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Terminal top bar */}
+              <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                </div>
+                <div className="text-xs text-cyan-400/70 ml-4 font-mono">step02_fan_experience.ts</div>
+              </div>
+              <div className="p-8 relative">
+                {/* Tech corner accents */}
+                <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                
+                <div className="flex items-center mb-6">
+                  <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
+                    2
+                  </div>
+                  <h3 className="text-2xl font-bold">{steps[1].title}</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-8 pl-[4.5rem]">
+                  {steps[1].description}
+                </p>
+                
+                <div className="flex items-center text-cyan-400 bg-cyan-500/5 py-3 px-5 rounded-lg border border-cyan-500/20 w-fit ml-[4.5rem]">
+                  <span className="mr-2">{steps[1].highlight}</span>
+                  <span className="font-medium">{steps[1].text}</span>
+                </div>
+                
+                {/* ML diagram decoration */}
+                <div className="mt-10 bg-[#0D1117] rounded-md p-4 border border-cyan-500/10">
+                  <div className="flex items-center justify-between">
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-2">
+                        <BrainCircuit className="w-8 h-8 text-cyan-400/70" />
+                      </div>
+                      <p className="text-xs text-cyan-400/70">AI Model</p>
+                    </div>
+                    
+                    <div className="grow mx-4 flex flex-col items-center">
+                      <div className="w-full h-[1px] bg-cyan-500/20 mb-1"></div>
+                      <div className="text-xs text-cyan-400/60">Game data analysis</div>
+                      <div className="w-full h-[1px] bg-cyan-500/20 mt-1"></div>
+                    </div>
+                    
+                    <div className="text-center">
+                      <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-2">
+                        <Zap className="w-8 h-8 text-cyan-400/70" />
+                      </div>
+                      <p className="text-xs text-cyan-400/70">Automated Rebate</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Step 3 */}
+            <motion.div 
+              className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden"
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Terminal top bar */}
+              <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
+                <div className="flex gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
+                </div>
+                <div className="text-xs text-cyan-400/70 ml-4 font-mono">step03_analytics.ts</div>
+              </div>
+              <div className="p-8 relative">
+                {/* Tech corner accents */}
+                <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                
+                <div className="flex items-center mb-6">
+                  <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
+                    3
+                  </div>
+                  <h3 className="text-2xl font-bold">{steps[2].title}</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-8 pl-[4.5rem]">
+                  {steps[2].description}
+                </p>
+                
+                <div className="flex items-center text-cyan-400 bg-cyan-500/5 py-3 px-5 rounded-lg border border-cyan-500/20 w-fit ml-[4.5rem]">
+                  <span className="mr-2">{steps[2].highlight}</span>
+                  <span className="font-medium">{steps[2].text}</span>
+                </div>
+                
+                {/* Analytics dashboard decoration */}
+                <div className="mt-10 bg-[#0D1117] rounded-md p-4 border border-cyan-500/10">
+                  <div className="grid grid-cols-2 gap-4 mb-4">
+                    <div className="bg-black/30 rounded p-3 border border-cyan-500/10">
+                      <div className="text-xs text-gray-400 mb-1">Revenue Share</div>
+                      <div className="text-lg text-cyan-400 font-bold">$142,568</div>
+                      <div className="text-xs text-green-400">+14.2% vs prev.</div>
+                    </div>
+                    <div className="bg-black/30 rounded p-3 border border-cyan-500/10">
+                      <div className="text-xs text-gray-400 mb-1">Conversion Rate</div>
+                      <div className="text-lg text-cyan-400 font-bold">23.5%</div>
+                      <div className="text-xs text-green-400">+3.8% vs prev.</div>
+                    </div>
+                  </div>
+                  <div className="flex items-end h-20 gap-1">
+                    {[40, 65, 45, 80, 60, 90, 75, 85].map((h, i) => (
+                      <div key={i} className="flex-1 flex items-end">
+                        <div 
+                          className="w-full bg-gradient-to-t from-cyan-500/50 to-blue-500/50 rounded-sm" 
+                          style={{ height: `${h}%` }}
+                        ></div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex justify-between mt-2">
+                    <div className="text-xs text-gray-400">Apr</div>
+                    <div className="text-xs text-gray-400">May</div>
+                    <div className="text-xs text-gray-400">Jun</div>
+                    <div className="text-xs text-gray-400">Jul</div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
-
-        {/* Process flow diagram */}
-        <motion.div 
-          className="mb-20 relative"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="absolute inset-x-0 top-1/2 h-[1px] bg-cyan-500/20 -translate-y-1/2 z-0"></div>
-          
-          <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="w-full md:w-1/4 flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                <Cpu className="w-7 h-7 text-cyan-400" />
-              </div>
-              <h4 className="font-bold text-center mb-2">Data Processing</h4>
-              <p className="text-gray-400 text-sm text-center">Game data analyzed in real-time</p>
-            </div>
-            
-            <div className="hidden md:block">
-              <ArrowDownToLine className="w-8 h-8 text-cyan-500/40 rotate-[-90deg]" />
-            </div>
-            
-            <div className="w-full md:w-1/4 flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                <BrainCircuit className="w-7 h-7 text-cyan-400" />
-              </div>
-              <h4 className="font-bold text-center mb-2">AI Analysis</h4>
-              <p className="text-gray-400 text-sm text-center">Algorithms detect blowout criteria</p>
-            </div>
-            
-            <div className="hidden md:block">
-              <ArrowDownToLine className="w-8 h-8 text-cyan-500/40 rotate-[-90deg]" />
-            </div>
-            
-            <div className="w-full md:w-1/4 flex flex-col items-center">
-              <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                <Zap className="w-7 h-7 text-cyan-400" />
-              </div>
-              <h4 className="font-bold text-center mb-2">Automated Rebates</h4>
-              <p className="text-gray-400 text-sm text-center">Secure and instant payouts to fans</p>
-            </div>
-          </div>
-        </motion.div>
-
+        
         {/* Features grid */}
         <motion.div 
-          className="mb-10 bg-[#0a101f]/80 backdrop-blur-sm p-8 rounded-xl border border-cyan-500/10 shadow-[0_8px_30px_rgba(8,145,178,0.1)]"
+          className="mt-16 mb-10 bg-[#0a101f]/80 backdrop-blur-sm p-8 rounded-xl border border-cyan-500/10 shadow-[0_8px_30px_rgba(8,145,178,0.1)]"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
