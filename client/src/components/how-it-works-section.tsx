@@ -107,7 +107,7 @@ export default function HowItWorksSection() {
           {steps.map((step, i) => (
             <motion.div
               key={step.number}
-              className="snap-start min-h-[80vh] flex items-center justify-center"
+              className="snap-start min-h-[80vh] flex items-start justify-center pt-32"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
