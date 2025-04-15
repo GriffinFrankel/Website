@@ -47,7 +47,7 @@ export default function WhatIsSection() {
                 <img 
                   src="https://images.unsplash.com/photo-1471295253337-3ceaaedca402?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1736&q=80" 
                   alt="Disappointed baseball fans at a blowout game" 
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover grayscale opacity-80"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-[#1A1A1A]/90 to-transparent md:hidden"></div>
               </div>

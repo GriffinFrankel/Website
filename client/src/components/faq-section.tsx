@@ -19,19 +19,19 @@ export default function FAQSection() {
     },
     {
       question: "How are rebates processed and funded?",
-      answer: "TrueTIX handles all aspects of rebate processing. When a game qualifies as a blowout, our system automatically processes rebates and distributes them to eligible fans within 24 hours. Rebates are entirely funded by TrueTIX - partners have zero financial liability."
+      answer: "TrueTIX handles all aspects of rebate processing. When a game qualifies as a blowout, our system automatically processes rebates and distributes redemption links to eligible fans. Rebates are entirely funded by TrueTIX - ticketing partners have zero financial liability."
     },
     {
       question: "What percentage of MLB games end in blowouts?",
-      answer: "Based on historical data from 2015-2023, approximately 26% of MLB games end with a run differential of 5 or more. Our pricing model accounts for this frequency to ensure sustainable operations while providing valuable protection to fans."
+      answer: "Based on historical data from 2015-2023, approximately 16% of MLB games meet our 2025 MLB Pilot criteria for a blowout. Our pricing model accounts for this frequency to ensure sustainable operations while providing valuable protection to fans."
     },
     {
       question: "Can we customize the implementation for our platform?",
-      answer: "Absolutely. We work with each partner to design an integration that fits their unique platform and user experience. This includes customizable pricing models, branding options, and flexible implementation approaches."
+      answer: "Absolutely. We work with each partner to design an integration that fits their unique platform and user experience. This includes customizable branding and flexible implementation approaches."
     },
     {
       question: "How does the revenue share model work?",
-      answer: "Partners earn up to 40% of each Blowout Protection premium sold through their platform. Revenue is shared on a monthly basis, creating a new income stream with no associated costs or risks. Pilot program partners may qualify for enhanced revenue share terms."
+      answer: "Partners earn up to 10% of each Blowout Protection add-on sold through their platform. Revenue is shared on a monthly basis, creating a new income stream with no associated costs or risks. Pilot program partners may qualify for enhanced revenue share terms."
     }
   ];
 

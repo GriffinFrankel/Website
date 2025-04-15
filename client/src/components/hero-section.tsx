@@ -8,7 +8,6 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-32">
       {/* Dark background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]"></div>
-      
       {/* Green accent glow */}
       <div className="absolute inset-0 bg-[#38F902]/5"></div>
       
@@ -116,7 +115,7 @@ export default function HeroSection() {
               <Button 
                 variant="outline" 
                 asChild
-                className="border-white hover:border-[#38F902] hover:text-[#38F902] py-3 px-8 text-lg h-auto transition-all duration-300 rounded-md"
+                className="border-white text-black hover:bg-[#38F902] text-white font-semibold py-3 px-8 text-lg h-auto shadow-[0_0_15px_rgba(56,249,2,0.5)] transition-all duration-300 rounded-md"
               >
                 <a href="#how-it-works">Learn More</a>
               </Button>
