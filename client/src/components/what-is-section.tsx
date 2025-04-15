@@ -26,7 +26,7 @@ export default function WhatIsSection() {
           </motion.div>
 
           <motion.div 
-            className="bg-[#0D2B45] bg-gradient-to-br from-[#0D2B45] to-[#164B77] rounded-2xl overflow-hidden shadow-xl border border-cyan-500/20"
+            className="bg-[#111827]/70 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-cyan-500/20"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
