@@ -1,44 +1,44 @@
 import { motion } from "framer-motion";
 import { fadeIn, staggerContainer, fadeInUp } from "@/lib/animations";
-import { Check, Plug, UserRound, DollarSign } from "lucide-react";
+import { Check, Plug, UserRound, DollarSign, Cpu, BrainCircuit, Code, Zap, Server, ArrowDownToLine } from "lucide-react";
 
 export default function HowItWorksSection() {
   const steps = [
     {
       number: 1,
-      title: "Easy Integration",
-      description: "Our API connects seamlessly with your ticketing platform, offering Blowout Protection as a premium add-on during checkout.",
+      title: "AI-Powered Integration",
+      description: "Our smart API connects seamlessly with your ticketing platform, offering Blowout Protection as a premium add-on during checkout.",
       icon: Plug,
-      text: "Simple API implementation"
+      text: "Intelligent API implementation"
     },
     {
       number: 2,
       title: "Fan Experience",
       description: "Fans pay a small premium for Blowout Protection. If their game ends in a blowout by our pre-defined criteria, they receive a 50% rebate.",
       icon: UserRound,
-      text: "Seamless fan rebates"
+      text: "Automated fan rebates"
     },
     {
       number: 3,
-      title: "Revenue Share",
-      description: "Platforms earn a percentage of every Blowout Protection add-on sold, creating a new revenue stream with zero financial risk.",
+      title: "Revenue Analytics",
+      description: "Platforms earn a percentage of every Blowout Protection add-on sold, with real-time analytics to maximize your revenue stream.",
       icon: DollarSign,
-      text: "New profit center"
+      text: "Data-driven profit center"
     }
   ];
 
   return (
     <section id="how-it-works" className="relative py-20 overflow-hidden">
-      {/* Dark background like hero section */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#121212] to-[#0a0a0a]"></div>
+      {/* Tech-inspired background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0D1117] to-[#111827]"></div>
       
-      {/* Green accent glow */}
-      <div className="absolute inset-0 bg-[#38F902]/5"></div>
+      {/* Digital circuit pattern overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydi0yaC0ydjJoLTJ2LTJoLTJ2Mmgtdi0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
       
-      {/* Animated geometric shapes for modern tech aesthetic */}
+      {/* Accent glows */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
-          className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-[#38F902]/10 blur-[100px]"
+          className="absolute -top-20 -right-20 w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-[100px]"
           animate={{ 
             scale: [1, 1.2, 1],
             opacity: [0.2, 0.3, 0.2],
@@ -51,7 +51,7 @@ export default function HowItWorksSection() {
           }}
         />
         <motion.div 
-          className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-[#38F902]/5 blur-[100px]"
+          className="absolute bottom-20 -left-20 w-[400px] h-[400px] rounded-full bg-blue-500/10 blur-[100px]"
           animate={{ 
             scale: [1.2, 1, 1.2],
             opacity: [0.2, 0.15, 0.2],
@@ -66,6 +66,7 @@ export default function HowItWorksSection() {
         />
       </div>
       
+      {/* Content area */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
           className="text-center mb-16"
@@ -74,14 +75,18 @@ export default function HowItWorksSection() {
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeIn}
         >
+          <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+            <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            How <span className="bg-gradient-to-r from-[#38F902] to-[#21c100] bg-clip-text text-transparent">Blowout Protection</span> Works
+            How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
           </h2>
           <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-            A seamless integration that creates value for fans and platforms alike
+            A seamless integration powered by machine learning and advanced algorithms
           </p>
         </motion.div>
 
+        {/* Step cards with tech styling */}
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
           variants={staggerContainer}
@@ -92,66 +97,139 @@ export default function HowItWorksSection() {
           {steps.map((step, index) => (
             <motion.div 
               key={step.number}
-              className="bg-black/30 backdrop-blur-sm rounded-xl p-8 border border-gray-800 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:border-[#38F902]/30 hover:shadow-[0_10px_25px_-5px_rgba(56,249,2,0.15),0_8px_10px_-6px_rgba(56,249,2,0.15)]"
+              className="relative bg-[#0a101f]/80 backdrop-blur-sm rounded-xl p-8 border border-cyan-500/10 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:border-cyan-500/30 hover:shadow-[0_10px_25px_-5px_rgba(8,145,178,0.15),0_8px_10px_-6px_rgba(8,145,178,0.15)]"
               variants={fadeInUp}
               custom={index * 0.2}
             >
-              <div className="w-12 h-12 rounded-full bg-[#38F902] flex items-center justify-center text-black font-bold text-xl mb-6 shadow-[0_0_15px_rgba(56,249,2,0.3)]">{step.number}</div>
-              <h3 className="text-xl font-bold mb-4">{step.title}</h3>
-              <p className="text-gray-300 mb-4">
+              {/* Tech corner accents */}
+              <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+              <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+              <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+              <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+              
+              {/* Step number with tech styling */}
+              <div className="flex items-center justify-center mb-6 relative">
+                <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)]">
+                  {step.number}
+                </div>
+                {/* Connecting lines for tech feel */}
+                <div className="absolute left-[8%] top-1/2 w-[10%] h-[1px] bg-cyan-500/20"></div>
+                <div className="absolute right-[8%] top-1/2 w-[10%] h-[1px] bg-cyan-500/20"></div>
+              </div>
+
+              {/* Step content */}
+              <h3 className="text-xl font-bold mb-4 text-center">{step.title}</h3>
+              <p className="text-gray-300 mb-6 text-center">
                 {step.description}
               </p>
-              <div className="flex items-center text-[#38F902]">
+              
+              {/* Divider */}
+              <div className="w-16 h-[1px] bg-gradient-to-r from-cyan-500/50 to-transparent mx-auto mb-6"></div>
+              
+              {/* Tech icon footer */}
+              <div className="flex items-center justify-center text-cyan-400 bg-cyan-500/5 py-2 px-4 rounded-full border border-cyan-500/20">
                 <div className="mr-2">
-                  {step.number === 1 && <Plug size={20} className="text-[#38F902]" />}
-                  {step.number === 2 && <UserRound size={20} className="text-[#38F902]" />}
-                  {step.number === 3 && <DollarSign size={20} className="text-[#38F902]" />}
+                  {step.number === 1 && <Code size={18} />}
+                  {step.number === 2 && <BrainCircuit size={18} />}
+                  {step.number === 3 && <Server size={18} />}
                 </div>
-                <span className="font-medium">{step.text}</span>
+                <span className="font-medium text-sm">{step.text}</span>
               </div>
             </motion.div>
           ))}
         </motion.div>
 
+        {/* Process flow diagram */}
         <motion.div 
-          className="mt-16 bg-black/40 backdrop-blur-md p-8 rounded-xl border border-gray-800"
+          className="mt-24 mb-16 relative"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+        >
+          <div className="absolute inset-x-0 top-1/2 h-[1px] bg-cyan-500/20 -translate-y-1/2 z-0"></div>
+          
+          <div className="relative z-10 flex flex-col md:flex-row justify-between items-center gap-8">
+            <div className="w-full md:w-1/4 flex flex-col items-center">
+              <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(8,145,178,0.2)]">
+                <Cpu className="w-7 h-7 text-cyan-400" />
+              </div>
+              <h4 className="font-bold text-center mb-2">Data Processing</h4>
+              <p className="text-gray-400 text-sm text-center">Game data analyzed in real-time</p>
+            </div>
+            
+            <div className="hidden md:block">
+              <ArrowDownToLine className="w-8 h-8 text-cyan-500/40 rotate-[-90deg]" />
+            </div>
+            
+            <div className="w-full md:w-1/4 flex flex-col items-center">
+              <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(8,145,178,0.2)]">
+                <BrainCircuit className="w-7 h-7 text-cyan-400" />
+              </div>
+              <h4 className="font-bold text-center mb-2">AI Analysis</h4>
+              <p className="text-gray-400 text-sm text-center">Algorithms detect blowout criteria</p>
+            </div>
+            
+            <div className="hidden md:block">
+              <ArrowDownToLine className="w-8 h-8 text-cyan-500/40 rotate-[-90deg]" />
+            </div>
+            
+            <div className="w-full md:w-1/4 flex flex-col items-center">
+              <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(8,145,178,0.2)]">
+                <Zap className="w-7 h-7 text-cyan-400" />
+              </div>
+              <h4 className="font-bold text-center mb-2">Automated Rebates</h4>
+              <p className="text-gray-400 text-sm text-center">Secure and instant payouts to fans</p>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Features grid */}
+        <motion.div 
+          className="mt-16 bg-[#0a101f]/80 backdrop-blur-sm p-8 rounded-xl border border-cyan-500/10 shadow-[0_8px_30px_rgba(8,145,178,0.1)]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
           custom={0.6}
         >
-          <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4">Game Day Experience</h3>
-            <p className="text-gray-300 mb-8 max-w-3xl mx-auto">
-              After the game, our system automatically processes eligible rebates and delivers them directly to fans.
-            </p>
+          <div className="text-center mb-10">
+            <h3 className="text-2xl font-bold mb-4">Advanced Features</h3>
+            <div className="w-20 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto"></div>
+          </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#38F902]/30 transition-all duration-300 flex flex-col items-center">
-                <div className="w-12 h-12 bg-[#38F902]/10 rounded-full flex items-center justify-center mb-4">
-                  <Check className="text-[#38F902] w-6 h-6" />
-                </div>
-                <h4 className="font-medium mb-2">Instant Notifications</h4>
-                <p className="text-gray-400 text-sm text-center">Fans receive immediate alerts about their rebates after the game</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            <div className="bg-black/20 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300 group">
+              <div className="w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors">
+                <Check className="text-cyan-400 w-6 h-6" />
               </div>
-              
-              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#38F902]/30 transition-all duration-300 flex flex-col items-center">
-                <div className="w-12 h-12 bg-[#38F902]/10 rounded-full flex items-center justify-center mb-4">
-                  <Check className="text-[#38F902] w-6 h-6" />
-                </div>
-                <h4 className="font-medium mb-2">Effortless Rebates</h4>
-                <p className="text-gray-400 text-sm text-center">Fans receive an email link to quickly collect their rebate</p>
-              </div>
-              
-              <div className="bg-black/30 backdrop-blur-sm p-6 rounded-xl border border-gray-800 hover:border-[#38F902]/30 transition-all duration-300 flex flex-col items-center">
-                <div className="w-12 h-12 bg-[#38F902]/10 rounded-full flex items-center justify-center mb-4">
-                  <Check className="text-[#38F902] w-6 h-6" />
-                </div>
-                <h4 className="font-medium mb-2">Zero Maintenance</h4>
-                <p className="text-gray-400 text-sm text-center">No ongoing integration maintenance required for partners</p>
-              </div>
+              <h4 className="font-medium mb-2">Real-Time Notifications</h4>
+              <p className="text-gray-400 text-sm">Fans receive immediate alerts via our mobile-optimized system</p>
             </div>
+            
+            <div className="bg-black/20 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300 group">
+              <div className="w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors">
+                <Check className="text-cyan-400 w-6 h-6" />
+              </div>
+              <h4 className="font-medium mb-2">Blockchain-Secured Rebates</h4>
+              <p className="text-gray-400 text-sm">Transparent and immutable transaction records for all payouts</p>
+            </div>
+            
+            <div className="bg-black/20 backdrop-blur-sm p-6 rounded-xl border border-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300 group">
+              <div className="w-12 h-12 bg-cyan-500/10 rounded-full flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors">
+                <Check className="text-cyan-400 w-6 h-6" />
+              </div>
+              <h4 className="font-medium mb-2">Serverless Architecture</h4>
+              <p className="text-gray-400 text-sm">Cloud-native infrastructure that scales automatically with demand</p>
+            </div>
+          </div>
+          
+          {/* Tech spec footer */}
+          <div className="mt-10 pt-6 border-t border-cyan-500/10 flex flex-wrap justify-center gap-4">
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">256-bit Encryption</span>
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">RESTful API</span>
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">99.9% Uptime</span>
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">ML-Powered</span>
           </div>
         </motion.div>
       </div>
