@@ -70,51 +70,15 @@ export default function HeroSection() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center mb-12">
             <motion.div
-              className="relative w-48 h-48 mb-8 mt-4 flex items-center justify-center"
+              className="w-48 h-48 mb-8 mt-4 flex items-center justify-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
-              {/* Futuristic glow effect behind logo */}
-              <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-[40px] transform scale-75"></div>
-              
-              {/* Tech ring around logo */}
-              <div className="absolute inset-0 rounded-full border border-cyan-500/30">
-                {/* Animated lights along the border */}
-                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
-                  <circle
-                    cx="50"
-                    cy="50"
-                    r="48"
-                    fill="none"
-                    stroke="rgba(6, 182, 212, 0.1)"
-                    strokeWidth="1"
-                    strokeDasharray="1,6"
-                    strokeLinecap="round"
-                  />
-                  <motion.circle
-                    cx="50"
-                    cy="50"
-                    r="48"
-                    fill="none"
-                    stroke="rgba(6, 182, 212, 0.6)"
-                    strokeWidth="1"
-                    strokeDasharray="1,40"
-                    strokeLinecap="round"
-                    animate={{ rotate: [0, 360] }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      ease: "linear"
-                    }}
-                  />
-                </svg>
-              </div>
-              
               <motion.img 
                 src={truetixLogo} 
                 alt="TrueTIX Logo"
-                className="w-full h-full object-contain relative z-10" 
+                className="w-full h-full object-contain" 
                 variants={scaleIn}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -165,25 +129,24 @@ export default function HeroSection() {
         </div>
       </motion.div>
       
-      {/* Tech-inspired scroll indicator */}
+      {/* Down arrow scroll indicator */}
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2">
         <a href="#what-is" className="group flex flex-col items-center">
-          <div className="w-7 h-12 rounded-full border-2 border-cyan-500/30 flex justify-center p-1 mb-2">
-            <motion.div 
-              className="w-1 h-3 bg-cyan-400 rounded-full"
-              animate={{ 
-                y: [0, 15, 0]
-              }}
-              transition={{ 
-                duration: 1.5, 
-                repeat: Infinity, 
-                ease: "easeInOut" 
-              }}
-            />
-          </div>
-          <span className="text-xs text-cyan-500/70 group-hover:text-cyan-400 transition-colors">
-            SCROLL
-          </span>
+          <motion.div
+            animate={{ 
+              y: [0, 10, 0]
+            }}
+            transition={{ 
+              duration: 1.5, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="text-cyan-400 group-hover:text-cyan-300 transition-colors"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+          </motion.div>
         </a>
       </div>
     </section>
