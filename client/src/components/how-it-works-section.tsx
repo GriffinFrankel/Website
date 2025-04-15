@@ -59,8 +59,8 @@ export default function HowItWorksSection() {
         {/* Sticky Left Column */}
         <div className="md:col-span-5">
           <div className="sticky top-32">
-            <div className="text-cyan-400 text-sm font-semibold uppercase mb-2">
-              Technology Ecosystem
+            <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+              <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
             </div>
             <h2 className="text-4xl font-bold mb-4">
               How{" "}
