@@ -77,10 +77,9 @@ export default function HowItWorksSection() {
         
         {/* Desktop view */}
         <div className="hidden md:block">
-          {/* Absolutely positioned fixed content */}
-          <div className="absolute top-32 left-0 right-0 mx-auto px-4 sm:px-6 lg:px-8 z-20 pointer-events-none">
-            <div className="grid grid-cols-12 gap-8">
-              <div className="col-span-5 pointer-events-auto">
+          <div className="grid grid-cols-12 gap-8">
+            <div className="col-span-5">
+              <div className="sticky top-32">
                 <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
                   <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
                 </div>
@@ -112,14 +111,6 @@ export default function HowItWorksSection() {
                   <div className="w-full h-1 bg-gradient-to-r from-cyan-500/30 to-blue-500/0"></div>
                 </div>
               </div>
-            </div>
-          </div>
-          
-          {/* Scrollable content offset to the right */}
-          <div className="grid grid-cols-12 gap-8">
-            <div className="col-span-5">
-              {/* Empty space to match fixed content height */}
-              <div className="h-[500px]"></div>
             </div>
             <div className="col-span-7 pl-10">
               <div className="space-y-[60vh] py-16">
