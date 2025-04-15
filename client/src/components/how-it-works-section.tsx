@@ -125,7 +125,7 @@ export default function HowItWorksSection() {
           {/* Desktop layout with fixed left column */}
           <div className="hidden md:grid md:grid-cols-2 gap-8">
             {/* Left column - Fixed position title and indicators */}
-            <div className="h-[800px] relative">
+            <div className="relative z-20">
               <div ref={titleRef} className="sticky top-32">
                 <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
                   <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
@@ -250,22 +250,13 @@ export default function HowItWorksSection() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {/* Terminal top bar */}
-                  <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-                    </div>
-                    <div className="text-xs text-cyan-400/70 ml-4 font-mono">step01_integration.ts</div>
-                  </div>
-                  <div className="p-8 relative">
-                    {/* Tech corner accents */}
-                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    
+                  {/* Tech corner accents */}
+                  <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                  <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                  <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                  <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                  
+                  <div className="p-8 relative">                    
                     <div className="flex items-center mb-6">
                       <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
                         1
@@ -281,18 +272,6 @@ export default function HowItWorksSection() {
                       <span className="mr-2">{steps[0].highlight}</span>
                       <span className="font-medium">{steps[0].text}</span>
                     </div>
-                    
-                    {/* Code snippet decoration */}
-                    <div className="mt-10 bg-[#0D1117] rounded-md p-4 border border-cyan-500/10">
-                      <pre className="text-xs text-gray-400 font-mono">
-                        <span className="text-cyan-400">import</span> <span className="text-green-400">{'{ TrueTixAPI }'}</span> <span className="text-cyan-400">from</span> <span className="text-orange-300">'@truetix/sdk'</span>;<br/>
-                        <br/>
-                        <span className="text-purple-400">const</span> <span className="text-blue-300">api</span> = <span className="text-purple-400">new</span> <span className="text-yellow-300">TrueTixAPI</span>(<span className="text-orange-300">'{'{'}apiKey: process.env.TRUETIX_API_KEY{'}'}'</span>);<br/>
-                        <br/>
-                        <span className="text-green-400">// Register the checkout hook to offer Blowout Protection</span><br/>
-                        <span className="text-blue-300">api</span>.<span className="text-yellow-300">registerCheckoutHook</span>(<span className="text-orange-300">'ticketCheckout'</span>);
-                      </pre>
-                    </div>
                   </div>
                 </motion.div>
               </div>
@@ -306,22 +285,13 @@ export default function HowItWorksSection() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {/* Terminal top bar */}
-                  <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-                    </div>
-                    <div className="text-xs text-cyan-400/70 ml-4 font-mono">step02_fan_experience.ts</div>
-                  </div>
-                  <div className="p-8 relative">
-                    {/* Tech corner accents */}
-                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    
+                  {/* Tech corner accents */}
+                  <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                  <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                  <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                  <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                  
+                  <div className="p-8 relative">                    
                     <div className="flex items-center mb-6">
                       <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
                         2
@@ -337,31 +307,6 @@ export default function HowItWorksSection() {
                       <span className="mr-2">{steps[1].highlight}</span>
                       <span className="font-medium">{steps[1].text}</span>
                     </div>
-                    
-                    {/* ML diagram decoration */}
-                    <div className="mt-10 bg-[#0D1117] rounded-md p-4 border border-cyan-500/10">
-                      <div className="flex items-center justify-between">
-                        <div className="text-center">
-                          <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-2">
-                            <BrainCircuit className="w-8 h-8 text-cyan-400/70" />
-                          </div>
-                          <p className="text-xs text-cyan-400/70">AI Model</p>
-                        </div>
-                        
-                        <div className="grow mx-4 flex flex-col items-center">
-                          <div className="w-full h-[1px] bg-cyan-500/20 mb-1"></div>
-                          <div className="text-xs text-cyan-400/60">Game data analysis</div>
-                          <div className="w-full h-[1px] bg-cyan-500/20 mt-1"></div>
-                        </div>
-                        
-                        <div className="text-center">
-                          <div className="w-16 h-16 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center mx-auto mb-2">
-                            <Zap className="w-8 h-8 text-cyan-400/70" />
-                          </div>
-                          <p className="text-xs text-cyan-400/70">Automated Rebate</p>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </motion.div>
               </div>
@@ -375,22 +320,13 @@ export default function HowItWorksSection() {
                   viewport={{ once: true, amount: 0.3 }}
                   transition={{ duration: 0.5 }}
                 >
-                  {/* Terminal top bar */}
-                  <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
-                    <div className="flex gap-1.5">
-                      <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-                    </div>
-                    <div className="text-xs text-cyan-400/70 ml-4 font-mono">step03_analytics.ts</div>
-                  </div>
-                  <div className="p-8 relative">
-                    {/* Tech corner accents */}
-                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    
+                  {/* Tech corner accents */}
+                  <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                  <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                  <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                  <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                  
+                  <div className="p-8 relative">                    
                     <div className="flex items-center mb-6">
                       <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
                         3
@@ -405,38 +341,6 @@ export default function HowItWorksSection() {
                     <div className="flex items-center text-cyan-400 bg-cyan-500/5 py-3 px-5 rounded-lg border border-cyan-500/20 w-fit ml-[4.5rem]">
                       <span className="mr-2">{steps[2].highlight}</span>
                       <span className="font-medium">{steps[2].text}</span>
-                    </div>
-                    
-                    {/* Analytics dashboard decoration */}
-                    <div className="mt-10 bg-[#0D1117] rounded-md p-4 border border-cyan-500/10">
-                      <div className="grid grid-cols-2 gap-4 mb-4">
-                        <div className="bg-black/30 rounded p-3 border border-cyan-500/10">
-                          <div className="text-xs text-gray-400 mb-1">Revenue Share</div>
-                          <div className="text-lg text-cyan-400 font-bold">$142,568</div>
-                          <div className="text-xs text-green-400">+14.2% vs prev.</div>
-                        </div>
-                        <div className="bg-black/30 rounded p-3 border border-cyan-500/10">
-                          <div className="text-xs text-gray-400 mb-1">Conversion Rate</div>
-                          <div className="text-lg text-cyan-400 font-bold">23.5%</div>
-                          <div className="text-xs text-green-400">+3.8% vs prev.</div>
-                        </div>
-                      </div>
-                      <div className="flex items-end h-20 gap-1">
-                        {[40, 65, 45, 80, 60, 90, 75, 85].map((h, i) => (
-                          <div key={i} className="flex-1 flex items-end">
-                            <div 
-                              className="w-full bg-gradient-to-t from-cyan-500/50 to-blue-500/50 rounded-sm" 
-                              style={{ height: `${h}%` }}
-                            ></div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="flex justify-between mt-2">
-                        <div className="text-xs text-gray-400">Apr</div>
-                        <div className="text-xs text-gray-400">May</div>
-                        <div className="text-xs text-gray-400">Jun</div>
-                        <div className="text-xs text-gray-400">Jul</div>
-                      </div>
                     </div>
                   </div>
                 </motion.div>
@@ -455,15 +359,6 @@ export default function HowItWorksSection() {
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ duration: 0.5 }}
               >
-                {/* Terminal top bar */}
-                <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
-                  <div className="flex gap-1.5">
-                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-                  </div>
-                  <div className="text-xs text-cyan-400/70 ml-4 font-mono">step0{step.number}.ts</div>
-                </div>
                 <div className="p-6 relative">
                   <div className="flex items-center mb-4">
                     <div className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-3">
