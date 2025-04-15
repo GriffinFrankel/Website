@@ -64,7 +64,6 @@ export default function HowItWorksSection() {
         />
       </div>
       
-      {/* Main content with simpler fixed layout */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Mobile title (shown only on mobile) */}
         <div className="md:hidden text-center mb-16">
@@ -76,85 +75,132 @@ export default function HowItWorksSection() {
           </p>
         </div>
         
-        {/* Fixed layout with 2 columns */}
-        <div className="md:flex">
-          {/* Left column - Fixed title */}
-          <div className="hidden md:block md:w-5/12 md:pr-10 md:sticky md:top-20 md:self-start">
-            <div>
-              <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
-                <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
-              </div>
-              
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">
-                How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
-              </h2>
-              
-              <p className="text-xl text-gray-300 mb-10">
-                A seamless integration powered by machine learning and advanced algorithms
-              </p>
-              
-              {/* Step indicators */}
-              <div className="mt-12 space-y-8 border-l-2 border-l-cyan-500/20 pl-6">
-                {steps.map((step, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center mr-4 -ml-11 border border-cyan-500/40">
-                      <span className="text-lg font-bold text-cyan-400">{step.number}</span>
+        {/* Desktop view */}
+        <div className="hidden md:block">
+          {/* Absolutely positioned fixed content */}
+          <div className="absolute top-32 left-0 right-0 mx-auto px-4 sm:px-6 lg:px-8 z-20 pointer-events-none">
+            <div className="grid grid-cols-12 gap-8">
+              <div className="col-span-5 pointer-events-auto">
+                <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+                  <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">Technology Ecosystem</span>
+                </div>
+                
+                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                  How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
+                </h2>
+                
+                <p className="text-xl text-gray-300 mb-10">
+                  A seamless integration powered by machine learning and advanced algorithms
+                </p>
+                
+                {/* Step indicators */}
+                <div className="mt-12 space-y-8 border-l-2 border-l-cyan-500/20 pl-6">
+                  {steps.map((step, index) => (
+                    <div key={index} className="flex items-start">
+                      <div className="w-10 h-10 rounded-full bg-cyan-500/20 flex items-center justify-center mr-4 -ml-11 border border-cyan-500/40">
+                        <span className="text-lg font-bold text-cyan-400">{step.number}</span>
+                      </div>
+                      <div>
+                        <p className="font-bold text-white">{step.title}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-bold text-white">{step.title}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              
-              {/* Decorative elements */}
-              <div className="mt-16">
-                <div className="w-full h-1 bg-gradient-to-r from-cyan-500/30 to-blue-500/0"></div>
+                  ))}
+                </div>
+                
+                {/* Decorative elements */}
+                <div className="mt-16">
+                  <div className="w-full h-1 bg-gradient-to-r from-cyan-500/30 to-blue-500/0"></div>
+                </div>
               </div>
             </div>
           </div>
           
-          {/* Right column - Step content */}
-          <div className="md:w-7/12 md:pl-10">
-            <div className="space-y-32 py-4 md:py-0">
-              {/* Step cards */}
-              {steps.map((step, index) => (
-                <motion.div 
-                  key={step.number}
-                  id={`step-${step.number}`}
-                  className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden relative"
-                  initial={{ opacity: 0, y: 50 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  {/* Corner accents */}
-                  <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                  <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                  <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                  <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                  
-                  <div className="p-8">
-                    <div className="flex items-center mb-6">
-                      <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
-                        {step.number}
+          {/* Scrollable content offset to the right */}
+          <div className="grid grid-cols-12 gap-8">
+            <div className="col-span-5">
+              {/* Empty space to match fixed content height */}
+              <div className="h-[500px]"></div>
+            </div>
+            <div className="col-span-7 pl-10">
+              <div className="space-y-[60vh] py-16">
+                {/* Step cards */}
+                {steps.map((step, index) => (
+                  <motion.div 
+                    key={step.number}
+                    id={`step-${step.number}`}
+                    className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden relative"
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    {/* Corner accents */}
+                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                    <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                    <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
+                    <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                    
+                    <div className="p-8">
+                      <div className="flex items-center mb-6">
+                        <div className="w-14 h-14 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold text-xl shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-4">
+                          {step.number}
+                        </div>
+                        <h3 className="text-2xl font-bold">{step.title}</h3>
                       </div>
-                      <h3 className="text-2xl font-bold">{step.title}</h3>
+                      
+                      <p className="text-gray-300 mb-8 pl-[4.5rem]">
+                        {step.description}
+                      </p>
+                      
+                      <div className="flex items-center text-cyan-400 bg-cyan-500/5 py-3 px-5 rounded-lg border border-cyan-500/20 w-fit ml-[4.5rem]">
+                        <span className="mr-2">{step.icon}</span>
+                        <span className="font-medium">{step.text}</span>
+                      </div>
                     </div>
-                    
-                    <p className="text-gray-300 mb-8 pl-[4.5rem]">
-                      {step.description}
-                    </p>
-                    
-                    <div className="flex items-center text-cyan-400 bg-cyan-500/5 py-3 px-5 rounded-lg border border-cyan-500/20 w-fit ml-[4.5rem]">
-                      <span className="mr-2">{step.icon}</span>
-                      <span className="font-medium">{step.text}</span>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
+        </div>
+        
+        {/* Mobile steps */}
+        <div className="md:hidden space-y-16">
+          {steps.map((step, index) => (
+            <motion.div 
+              key={step.number}
+              id={`step-${step.number}-mobile`}
+              className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden relative"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.5 }}
+            >
+              {/* Corner accents */}
+              <div className="absolute top-0 left-0 w-6 h-[1px] bg-cyan-500/30"></div>
+              <div className="absolute top-0 left-0 w-[1px] h-6 bg-cyan-500/30"></div>
+              <div className="absolute bottom-0 right-0 w-6 h-[1px] bg-cyan-500/30"></div>
+              <div className="absolute bottom-0 right-0 w-[1px] h-6 bg-cyan-500/30"></div>
+              
+              <div className="p-6">
+                <div className="flex items-center mb-4">
+                  <div className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 font-bold shadow-[0_0_15px_rgba(8,145,178,0.2)] mr-3">
+                    {step.number}
+                  </div>
+                  <h3 className="text-xl font-bold">{step.title}</h3>
+                </div>
+                
+                <p className="text-gray-300 mb-4">
+                  {step.description}
+                </p>
+                
+                <div className="flex items-center text-cyan-400 bg-cyan-500/5 py-2 px-4 rounded-lg border border-cyan-500/20 w-fit">
+                  <span className="mr-2">{step.icon}</span>
+                  <span className="font-medium text-sm">{step.text}</span>
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
         
         {/* Features grid */}
