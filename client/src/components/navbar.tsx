@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import truetixLogo from "../assets/truetix-logo.png";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Code, Cpu, ShieldCheck, BarChart3 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,9 +11,9 @@ export default function Navbar() {
   const isMobile = useIsMobile();
 
   const navItems = [
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "Partner Benefits", href: "#benefits" },
-    { name: "FAQ", href: "#faq" }
+    { name: "How It Works", href: "#how-it-works", icon: <Cpu className="w-4 h-4" /> },
+    { name: "Partner Benefits", href: "#benefits", icon: <BarChart3 className="w-4 h-4" /> },
+    { name: "FAQ", href: "#faq", icon: <Code className="w-4 h-4" /> }
   ];
 
   useEffect(() => {
@@ -32,74 +33,110 @@ export default function Navbar() {
   };
 
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#121212]/70 backdrop-blur-md border-b border-gray-800/50' : 'bg-transparent'}`}>
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#0D1117]/80 backdrop-blur-xl border-b border-cyan-500/10' : 'bg-transparent'}`}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center">
-            <a href="#" className="flex items-center gap-2">
-              <img 
-                src={truetixLogo} 
-                alt="TrueTIX Logo" 
-                className="h-10 w-auto"
-              />
+            <a href="#" className="flex items-center gap-2 group">
+              <div className="relative">
+                <div className={`absolute inset-0 bg-cyan-500/20 rounded-full blur-md transition-opacity ${isScrolled ? 'opacity-50' : 'opacity-30'} group-hover:opacity-70`}></div>
+                <img 
+                  src={truetixLogo} 
+                  alt="TrueTIX Logo" 
+                  className="h-10 w-auto relative z-10"
+                />
+              </div>
+              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 ml-1">TrueTIX</span>
             </a>
           </div>
           
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          {/* Desktop Navigation - with tech-inspired design */}
+          <nav className="hidden md:flex items-center space-x-6">
             {navItems.map((item, index) => (
               <a 
                 key={index}
                 href={item.href} 
-                className="text-gray-300 hover:text-[#38F902] transition-colors"
+                className="text-gray-300 hover:text-cyan-400 transition-colors flex items-center gap-2 group"
                 onClick={handleNavClick}
               >
-                {item.name}
+                <span className="text-cyan-500/70 group-hover:text-cyan-400 transition-colors">{item.icon}</span>
+                <span>{item.name}</span>
+                <span className="block h-[1px] w-0 bg-cyan-400 group-hover:w-full transition-all duration-300 absolute bottom-0 left-0"></span>
               </a>
             ))}
             <Button 
               asChild
-              className="bg-[#38F902] hover:bg-[#21c100] text-black font-medium shadow-[0_0_10px_rgba(56,249,2,0.4)]"
+              className="bg-cyan-600/30 hover:bg-cyan-500/40 text-white font-medium border border-cyan-500/30 shadow-[0_0_10px_rgba(8,145,178,0.2)] backdrop-blur-sm"
             >
-              <a href="#contact" onClick={handleNavClick}>Book a Call</a>
+              <a href="#contact" onClick={handleNavClick} className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4" />
+                <span>Book a Call</span>
+              </a>
             </Button>
           </nav>
           
-          {/* Mobile Menu Button */}
+          {/* Mobile Menu Button - upgraded with tech aesthetic */}
           <div className="md:hidden">
             <button 
-              className="text-gray-300 hover:text-[#38F902] focus:outline-none transition-colors"
+              className="relative text-cyan-400 focus:outline-none transition-colors p-2 rounded-md bg-black/20 backdrop-blur-sm border border-cyan-500/20"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <AnimatePresence initial={false} mode="wait">
+                <motion.div
+                  key={isMenuOpen ? "close" : "open"}
+                  initial={{ opacity: 0, rotate: -90 }}
+                  animate={{ opacity: 1, rotate: 0 }}
+                  exit={{ opacity: 0, rotate: 90 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                </motion.div>
+              </AnimatePresence>
             </button>
           </div>
         </div>
         
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden">
-            <div className="px-2 pt-2 pb-4 space-y-1 bg-black/80 backdrop-blur-md rounded-lg mt-2 border border-gray-800/30">
-              {navItems.map((item, index) => (
-                <a 
-                  key={index}
-                  href={item.href} 
-                  className="block px-3 py-2 text-gray-300 hover:text-[#38F902] hover:bg-[#2A2A2A]/50 rounded-md transition-colors"
+        {/* Mobile Navigation - with futuristic dropdown */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              className="md:hidden"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="px-2 pt-2 pb-4 space-y-1 bg-[#0D1117]/90 backdrop-blur-xl rounded-lg mt-2 border border-cyan-500/10 shadow-[0_5px_15px_rgba(8,145,178,0.1)]">
+                {navItems.map((item, index) => (
+                  <motion.a 
+                    key={index}
+                    href={item.href} 
+                    className="flex items-center gap-3 px-3 py-3 text-gray-300 hover:text-cyan-400 hover:bg-cyan-500/5 rounded-md transition-colors border-l border-transparent hover:border-cyan-500/20"
+                    onClick={handleNavClick}
+                    initial={{ x: -10, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: index * 0.05 }}
+                  >
+                    <span className="text-cyan-500">{item.icon}</span>
+                    <span>{item.name}</span>
+                  </motion.a>
+                ))}
+                <motion.a 
+                  href="#contact" 
+                  className="flex items-center justify-center gap-2 px-3 py-3 bg-cyan-600/30 hover:bg-cyan-500/40 text-white font-medium rounded-md mt-4 border border-cyan-500/20 shadow-[0_0_10px_rgba(8,145,178,0.2)] backdrop-blur-sm transition-all duration-300"
                   onClick={handleNavClick}
+                  initial={{ y: 10, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: navItems.length * 0.05 }}
                 >
-                  {item.name}
-                </a>
-              ))}
-              <a 
-                href="#contact" 
-                className="block px-3 py-2 bg-[#38F902] hover:bg-[#21c100] text-black font-medium rounded-md mt-4 shadow-[0_0_10px_rgba(56,249,2,0.4)] transition-all duration-300"
-                onClick={handleNavClick}
-              >
-                Book a Call
-              </a>
-            </div>
-          </div>
-        )}
+                  <ShieldCheck className="w-4 h-4" />
+                  <span>Book a Call</span>
+                </motion.a>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );
