@@ -124,11 +124,11 @@ export default function HowItWorksSection() {
                     </h3>
                     <p className="text-gray-300 mb-6 mt-2">{step.description}</p>
                     <div className="flex items-center gap-2 bg-cyan-500/5 border border-cyan-500/20 rounded-lg px-4 py-2 w-fit text-cyan-400 text-sm">
-                  {step.icon}
+                      {step.icon}
                       {step.text}
                     </div>
                   </div>
-              </div>
+                </div>
             </motion.div>
           ))}
         </div>
