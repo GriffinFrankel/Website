@@ -80,7 +80,7 @@ export default function HowItWorksSection() {
   }, []);
 
   return (
-    <section id="how-it-works" className="bg-[#0D1117] py-24">
+    <section id="how-it-works" className="bg-[#0D1117] pt-24">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 grid grid-cols-1 md:grid-cols-12 gap-12">
         {/* Sticky Left Column */}
         <div className="md:col-span-5">
