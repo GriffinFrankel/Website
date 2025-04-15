@@ -11,10 +11,16 @@ export default function MLBPilotSection() {
   ];
 
   return (
-    <section className="py-20 bg-[#1A1A1A]">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-20 relative">
+      {/* Tech-inspired background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#111827] to-[#0D1117]"></div>
+      
+      {/* Digital circuit pattern overlay */}
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydi0yaC0ydjJoLTJ2LTJoLTJ2Mmh0di0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+      
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div 
-          className="bg-[#2A2A2A] rounded-2xl overflow-hidden shadow-xl border border-gray-800"
+          className="bg-[#111827]/70 backdrop-blur-sm rounded-2xl overflow-hidden shadow-xl border border-cyan-500/20"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
