@@ -118,15 +118,16 @@ export default function HowItWorksSection() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
                     {step.number}
                   </div>
-                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
-                    {step.title}
-                  </h3>
-                </div>
-                <p className="text-gray-300 mb-6 pl-[3.5rem]">{step.description}</p>
-                <div className="ml-[3.5rem] flex items-center gap-2 bg-cyan-500/5 border border-cyan-500/20 rounded-lg px-4 py-2 w-fit text-cyan-400 text-sm">
+                  <div className="flex-1">
+                    <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                      {step.title}
+                    </h3>
+                    <p className="text-gray-300 mb-6 mt-2">{step.description}</p>
+                    <div className="flex items-center gap-2 bg-cyan-500/5 border border-cyan-500/20 rounded-lg px-4 py-2 w-fit text-cyan-400 text-sm">
                   {step.icon}
-                  {step.text}
-                </div>
+                      {step.text}
+                    </div>
+                  </div>
               </div>
             </motion.div>
           ))}
