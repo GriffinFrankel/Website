@@ -70,15 +70,18 @@ export default function HeroSection() {
         <div className="max-w-5xl mx-auto">
           <div className="flex flex-col items-center mb-12">
             <motion.div
-              className="w-48 h-48 mb-8 mt-4 flex items-center justify-center"
+              className="relative w-48 h-48 mb-8 mt-4 flex items-center justify-center"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 1 }}
             >
+              {/* Static glow effect behind logo */}
+              <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-[40px] transform scale-75"></div>
+              
               <motion.img 
                 src={truetixLogo} 
                 alt="TrueTIX Logo"
-                className="w-full h-full object-contain" 
+                className="w-full h-full object-contain relative z-10" 
                 variants={scaleIn}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
