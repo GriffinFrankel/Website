@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { fadeIn, fadeInUp, scaleIn } from "@/lib/animations";
 import truetixLogo from "../assets/truetix-logo.png";
-import { BarChart3, LineChart, ShieldCheck, Zap } from "lucide-react";
+import { Zap } from "lucide-react";
 
 export default function HeroSection() {
   return (
@@ -14,7 +14,7 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-radial from-cyan-500/5 to-transparent"></div>
       
       {/* Digital circuit pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydi0yaC0ydjJoLTJ2LTJoLTJ2Mmgtdi0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydi0yaC0ydjJoLTJ2LTJoLTJ2Mmh0di0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
       
       {/* Animated geometric shapes for modern tech aesthetic */}
       <div className="absolute inset-0 overflow-hidden">
@@ -59,56 +59,6 @@ export default function HeroSection() {
           }}
         />
       </div>
-
-      {/* Floating tech elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <motion.div 
-          className="absolute top-1/4 right-[15%] p-2 bg-black/30 backdrop-blur-md border border-white/10 rounded-lg"
-          animate={{ 
-            y: [0, -10, 0],
-            rotate: [0, 5, 0]
-          }}
-          transition={{ 
-            duration: 6, 
-            repeat: Infinity,
-            ease: "easeInOut" 
-          }}
-        >
-          <BarChart3 className="w-5 h-5 text-cyan-400" />
-        </motion.div>
-        
-        <motion.div 
-          className="absolute top-2/3 left-[20%] p-2 bg-black/30 backdrop-blur-md border border-white/10 rounded-lg"
-          animate={{ 
-            y: [0, 10, 0],
-            rotate: [0, -3, 0]
-          }}
-          transition={{ 
-            duration: 5, 
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        >
-          <LineChart className="w-5 h-5 text-cyan-400" />
-        </motion.div>
-        
-        <motion.div 
-          className="absolute bottom-1/3 right-[25%] p-2 bg-black/30 backdrop-blur-md border border-white/10 rounded-lg"
-          animate={{ 
-            y: [0, -15, 0],
-            rotate: [0, 2, 0]
-          }}
-          transition={{ 
-            duration: 7, 
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5
-          }}
-        >
-          <ShieldCheck className="w-5 h-5 text-cyan-400" />
-        </motion.div>
-      </div>
       
       {/* Content */}
       <motion.div 
@@ -128,33 +78,37 @@ export default function HeroSection() {
               {/* Futuristic glow effect behind logo */}
               <div className="absolute inset-0 bg-cyan-500/20 rounded-full blur-[40px] transform scale-75"></div>
               
-              {/* Electric circuit lines around logo */}
-              <div className="absolute inset-0 rounded-full border border-cyan-500/30 overflow-hidden">
-                <motion.div 
-                  className="absolute h-1 w-10 bg-cyan-400/70 top-[15%] right-[10%]"
-                  animate={{
-                    x: [0, 100, 0],
-                    opacity: [0.7, 0.9, 0.7]
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "linear"
-                  }}
-                />
-                <motion.div 
-                  className="absolute h-1 w-8 bg-cyan-400/70 bottom-[25%] left-[15%]"
-                  animate={{
-                    x: [0, 80, 0],
-                    opacity: [0.7, 0.9, 0.7]
-                  }}
-                  transition={{
-                    duration: 2.5,
-                    repeat: Infinity,
-                    ease: "linear",
-                    delay: 0.5
-                  }}
-                />
+              {/* Tech ring around logo */}
+              <div className="absolute inset-0 rounded-full border border-cyan-500/30">
+                {/* Animated lights along the border */}
+                <svg className="absolute inset-0 w-full h-full" viewBox="0 0 100 100">
+                  <circle
+                    cx="50"
+                    cy="50"
+                    r="48"
+                    fill="none"
+                    stroke="rgba(6, 182, 212, 0.1)"
+                    strokeWidth="1"
+                    strokeDasharray="1,6"
+                    strokeLinecap="round"
+                  />
+                  <motion.circle
+                    cx="50"
+                    cy="50"
+                    r="48"
+                    fill="none"
+                    stroke="rgba(6, 182, 212, 0.6)"
+                    strokeWidth="1"
+                    strokeDasharray="1,40"
+                    strokeLinecap="round"
+                    animate={{ rotate: [0, 360] }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      ease: "linear"
+                    }}
+                  />
+                </svg>
               </div>
               
               <motion.img 
