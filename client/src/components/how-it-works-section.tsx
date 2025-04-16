@@ -71,10 +71,10 @@ export default function HowItWorksSection() {
     <section id="how-it-works" className="bg-[#0D1117] relative h-screen overflow-hidden">
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full z-10 pointer-events-none hidden md:block">
-        <div className="container mx-auto h-full px-4 sm:px-6 lg:px-32"> {/* Modification Here */}
+        <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8"> {/* Aligned with navbar */}
           <div className="grid grid-cols-12 h-full">
             <div className="col-span-5 flex items-center">
-              <div className="pointer-events-auto pl-6 md:pl-12 lg:pl-16">
+              <div className="pointer-events-auto">
                 <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
                   <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
                 </div>
@@ -131,7 +131,7 @@ export default function HowItWorksSection() {
             id={`step-${step.number}`}
             className="h-screen w-full snap-start flex flex-col justify-center"
           >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-32"> {/* Modification Here */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Aligned with navbar */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Mobile-only left side content */}
                 <div className="md:hidden mb-8">
@@ -154,7 +154,7 @@ export default function HowItWorksSection() {
                 {/* Right Column - Step Content */}
                 <div className="col-span-1 md:col-span-7">
                   <motion.div
-                    className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl mx-auto"
+                    className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.3 }}
