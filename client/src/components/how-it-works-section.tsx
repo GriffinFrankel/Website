@@ -68,7 +68,62 @@ export default function HowItWorksSection() {
   }, [steps]);
 
   return (
-    <section id="how-it-works" className="bg-[#0D1117] h-screen overflow-hidden">
+    <section id="how-it-works" className="bg-[#0D1117] relative h-screen overflow-hidden">
+      {/* Fixed left side content */}
+      <div className="absolute top-0 left-0 h-full z-10 pointer-events-none hidden md:block">
+        <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-12 h-full">
+            <div className="col-span-5 flex items-center">
+              <div className="pointer-events-auto">
+                <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+                  <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
+                </div>
+
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                  How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
+                </h2>
+
+                <p className="text-gray-400 text-lg mb-8">
+                  A seamless integration powered by machine learning and advanced algorithms
+                </p>
+
+                {/* Step Indicators */}
+                <div className="space-y-6 border-l-2 border-cyan-500/20 pl-6">
+                  {steps.map((navStep) => (
+                    <div 
+                      key={navStep.number}
+                      onClick={() => scrollToStep(navStep.number)}
+                      className="flex items-center cursor-pointer group"
+                    >
+                      <div
+                        className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
+                          activeStep === navStep.number
+                            ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-black border-cyan-400"
+                            : "bg-cyan-500/20 text-cyan-400 border-cyan-500/40 group-hover:bg-cyan-500/30"
+                        }`}
+                      >
+                        {navStep.number}
+                        {activeStep === navStep.number && (
+                          <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-[15px] -z-10"></div>
+                        )}
+                      </div>
+                      <div
+                        className={`font-semibold transition-colors duration-300 ${
+                          activeStep === navStep.number ? "text-white" : "text-gray-400 group-hover:text-gray-300"
+                        }`}
+                      >
+                        {navStep.title}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {/* Scrollable content */}
       <div id="steps-container" className="h-screen w-full snap-y snap-mandatory overflow-y-auto scroll-smooth">
         {steps.map((step) => (
           <div 
@@ -78,56 +133,26 @@ export default function HowItWorksSection() {
           >
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-                {/* Left Column - Fixed Content */}
-                <div className="md:col-span-5">
-                  <div className="md:sticky md:top-32">
-                    <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
-                      <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
-                    </div>
-
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                      How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
-                    </h2>
-
-                    <p className="text-gray-400 text-lg mb-8">
-                      A seamless integration powered by machine learning and advanced algorithms
-                    </p>
-
-                    {/* Step Indicators */}
-                    <div className="space-y-6 border-l-2 border-cyan-500/20 pl-6">
-                      {steps.map((navStep) => (
-                        <div 
-                          key={navStep.number}
-                          onClick={() => scrollToStep(navStep.number)}
-                          className="flex items-center cursor-pointer group"
-                        >
-                          <div
-                            className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
-                              activeStep === navStep.number
-                                ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-black border-cyan-400"
-                                : "bg-cyan-500/20 text-cyan-400 border-cyan-500/40 group-hover:bg-cyan-500/30"
-                            }`}
-                          >
-                            {navStep.number}
-                            {activeStep === navStep.number && (
-                              <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-[15px] -z-10"></div>
-                            )}
-                          </div>
-                          <div
-                            className={`font-semibold transition-colors duration-300 ${
-                              activeStep === navStep.number ? "text-white" : "text-gray-400 group-hover:text-gray-300"
-                            }`}
-                          >
-                            {navStep.title}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
+                {/* Mobile-only left side content */}
+                <div className="md:hidden mb-8">
+                  <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
+                    <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
                   </div>
+
+                  <h2 className="text-3xl font-bold mb-4">
+                    How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
+                  </h2>
+
+                  <p className="text-gray-400 text-base mb-6">
+                    A seamless integration powered by machine learning
+                  </p>
                 </div>
+                
+                {/* Empty space for desktop left column */}
+                <div className="hidden md:block md:col-span-5"></div>
 
                 {/* Right Column - Step Content */}
-                <div className="md:col-span-7">
+                <div className="col-span-1 md:col-span-7">
                   <motion.div
                     className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl mx-auto"
                     initial={{ opacity: 0, y: 50 }}
