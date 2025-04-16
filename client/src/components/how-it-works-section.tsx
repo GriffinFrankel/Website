@@ -145,9 +145,8 @@ export default function HowItWorksSection() {
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
                   {steps[0].number}
                 </div>
-                <h3 className="text-2xl font-semibold relative">
-                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent relative z-10">{steps[0].title}</span>
-                  <div className="absolute inset-0 bg-cyan-500/20 blur-[20px] scale-110 z-0"></div>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                  {steps[0].title}
                 </h3>
               </div>
               <p className="text-gray-300 mb-6 pl-[3.5rem]">{steps[0].description}</p>
@@ -173,9 +172,8 @@ export default function HowItWorksSection() {
                 <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
                   {steps[1].number}
                 </div>
-                <h3 className="text-2xl font-semibold relative">
-                  <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent relative z-10">{steps[1].title}</span>
-                  <div className="absolute inset-0 bg-cyan-500/20 blur-[20px] scale-110 z-0"></div>
+                <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                  {steps[1].title}
                 </h3>
               </div>
               <p className="text-gray-300 mb-6 pl-[3.5rem]">{steps[1].description}</p>
@@ -205,9 +203,8 @@ export default function HowItWorksSection() {
                   <div className="w-12 h-12 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
                     {steps[2].number}
                   </div>
-                  <h3 className="text-2xl font-semibold relative">
-                    <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent relative z-10">{steps[2].title}</span>
-                    <div className="absolute inset-0 bg-cyan-500/20 blur-[20px] scale-110 z-0"></div>
+                  <h3 className="text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    {steps[2].title}
                   </h3>
                 </div>
                 <p className="text-gray-300 mb-6 pl-[3.5rem]">{steps[2].description}</p>
