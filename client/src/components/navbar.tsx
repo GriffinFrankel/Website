@@ -46,7 +46,9 @@ export default function Navbar() {
                   className="h-10 w-auto relative z-10"
                 />
               </div>
-              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 ml-1">TrueTIX</span>
+              <span className="text-2xl font-bold tracking-tight relative">
+                True<span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">TIX</span>
+              </span>
             </a>
           </div>
           
