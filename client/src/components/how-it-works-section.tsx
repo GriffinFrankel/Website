@@ -88,7 +88,7 @@ export default function HowItWorksSection() {
                 <div 
                   key={step.number}
                   onClick={() => scrollToStep(step.number)}
-                  className="flex items-start cursor-pointer group"
+                  className="flex items-center cursor-pointer group"
                 >
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
