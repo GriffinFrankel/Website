@@ -74,7 +74,7 @@ export default function HowItWorksSection() {
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-32"> {/* Modification Here */}
           <div className="grid grid-cols-12 h-full">
             <div className="col-span-5 flex items-center">
-              <div className="pointer-events-auto">
+              <div className="pointer-events-auto pl-6 md:pl-12 lg:pl-16">
                 <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
                   <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
                 </div>
