@@ -113,11 +113,14 @@ export default function HowItWorksSection() {
                     {step.number}
                   </div>
                   <p
-                    className={`font-semibold transition-colors duration-300 ${
-                      activeStep === step.number ? "text-white" : "text-gray-400"
+                    className={`font-semibold transition-all duration-300 relative ${
+                      activeStep === step.number ? "text-transparent bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text" : "text-gray-400"
                     }`}
                   >
                     {step.title}
+                    {activeStep === step.number && (
+                      <div className="absolute inset-0 bg-cyan-500/20 blur-[20px] scale-110 -z-10"></div>
+                    )}
                   </p>
                 </div>
               ))}
