@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code, BrainCircuit, Server } from "lucide-react";
@@ -30,73 +29,83 @@ export default function HowItWorksSection() {
 
   const [activeStep, setActiveStep] = useState(1);
 
-  // Set up scroll tracking for the entire window
+  // Function to scroll to a specific step
+  const scrollToStep = (stepNumber: number) => {
+    const element = document.getElementById(`step-${stepNumber}`);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const section = document.getElementById("how-it-works");
-      
-      if (!section) return;
-      
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const windowHeight = window.innerHeight;
-      
-      // If we're not in the section, do nothing
-      if (scrollPosition < sectionTop - windowHeight/2 || 
-          scrollPosition > sectionTop + sectionHeight) {
-        return;
-      }
-      
-      // Determine which step to show based on scroll position
-      const relativePosition = scrollPosition - sectionTop;
-      const sectionProgress = relativePosition / (sectionHeight - windowHeight);
-      
-      if (sectionProgress < 0.33) {
-        setActiveStep(1);
-      } else if (sectionProgress < 0.66) {
-        setActiveStep(2);
-      } else {
-        setActiveStep(3);
-      }
+    // Create IntersectionObserver to track which step is visible
+    const observerOptions = {
+      root: null, // Use viewport as root
+      rootMargin: '0px',
+      threshold: 0.6 // Element is considered visible when 60% visible
     };
-    
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Extract step number from the element ID
+          const stepId = entry.target.id;
+          const stepNumber = parseInt(stepId.split('-')[1]);
+          setActiveStep(stepNumber);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all step elements
+    steps.forEach(step => {
+      const element = document.getElementById(`step-${step.number}`);
+      if (element) observer.observe(element);
+    });
+
+    // Cleanup observer on component unmount
+    return () => observer.disconnect();
+  }, [steps]);
 
   return (
-    <section id="how-it-works" className="bg-[#0D1117] py-20 md:py-32 min-h-screen">
+    <section id="how-it-works" className="bg-[#0D1117] relative">
+      {/* Title and navigation on the left (sticky) */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          {/* Left side fixed content */}
-          <div className="md:col-span-5 md:sticky md:top-32 h-fit">
+          <div className="md:col-span-5 md:sticky md:top-32 h-fit py-20">
             <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
               <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
             </div>
+            
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
             </h2>
-            <div className="text-gray-400 text-lg mb-8">
+            
+            <p className="text-gray-400 text-lg mb-8">
               A seamless integration powered by machine learning and advanced algorithms
-            </div>
-
-            {/* Step indicators */}
+            </p>
+            
+            {/* Step navigation */}
             <div className="space-y-6 border-l-2 border-cyan-500/20 pl-6">
               {steps.map((step) => (
-                <div key={step.number} className="flex items-start">
-                  <div 
+                <div 
+                  key={step.number}
+                  onClick={() => scrollToStep(step.number)}
+                  className="flex items-start cursor-pointer group"
+                >
+                  <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold ${
-                      activeStep === step.number 
-                        ? "bg-cyan-500 text-black border-cyan-400" 
-                        : "bg-cyan-500/20 text-cyan-400 border-cyan-500/40"
+                      activeStep === step.number
+                        ? "bg-cyan-500 text-black border-cyan-400"
+                        : "bg-cyan-500/20 text-cyan-400 border-cyan-500/40 group-hover:bg-cyan-500/30"
                     }`}
                   >
                     {step.number}
                   </div>
-                  <div 
-                    className={`font-semibold transition-all duration-300 ${
-                      activeStep === step.number ? "text-white" : "text-gray-400"
+                  <div
+                    className={`font-semibold transition-colors duration-300 ${
+                      activeStep === step.number ? "text-white" : "text-gray-400 group-hover:text-gray-300"
                     }`}
                   >
                     {step.title}
@@ -105,18 +114,17 @@ export default function HowItWorksSection() {
               ))}
             </div>
           </div>
-
-          {/* Right side scrolling content */}
-          <div className="md:col-span-7 space-y-36 md:space-y-[70vh]">
-            {/* Step cards */}
-            {steps.map((step, index) => (
-              <div 
-                key={step.number} 
+          
+          {/* Scrollable content on the right */}
+          <div className="md:col-span-7 space-y-[80vh] pb-40 pt-20">
+            {steps.map((step) => (
+              <div
+                key={step.number}
                 id={`step-${step.number}`}
-                className={`${index === 2 ? "md:pb-32 md:pt-[10vh]" : ""}`}
+                className="scroll-mt-32 h-[80vh] flex items-center"
               >
                 <motion.div
-                  className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg"
+                  className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl w-full"
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.3 }}
