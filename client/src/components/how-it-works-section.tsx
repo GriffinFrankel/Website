@@ -91,13 +91,16 @@ export default function HowItWorksSection() {
                   className="flex items-start cursor-pointer group"
                 >
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold ${
+                    className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
                       activeStep === step.number
-                        ? "bg-cyan-500 text-black border-cyan-400"
+                        ? "bg-gradient-to-r from-cyan-400 to-blue-500 text-black border-cyan-400"
                         : "bg-cyan-500/20 text-cyan-400 border-cyan-500/40 group-hover:bg-cyan-500/30"
                     }`}
                   >
                     {step.number}
+                    {activeStep === step.number && (
+                      <div className="absolute inset-0 bg-cyan-500/30 rounded-full blur-[15px] -z-10"></div>
+                    )}
                   </div>
                   <div
                     className={`font-semibold transition-colors duration-300 ${
