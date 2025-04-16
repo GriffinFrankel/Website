@@ -71,7 +71,7 @@ export default function HowItWorksSection() {
     <section id="how-it-works" className="bg-[#0D1117] relative h-screen overflow-hidden">
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full z-10 pointer-events-none hidden md:block">
-        <div className="container mx-auto h-full px-4 sm:px-6 lg:px-20"> {/* Modification Here */}
+        <div className="container mx-auto h-full px-4 sm:px-6 lg:px-32"> {/* Modification Here */}
           <div className="grid grid-cols-12 h-full">
             <div className="col-span-5 flex items-center">
               <div className="pointer-events-auto">
@@ -131,7 +131,7 @@ export default function HowItWorksSection() {
             id={`step-${step.number}`}
             className="h-screen w-full snap-start flex flex-col justify-center"
           >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-20"> {/* Modification Here */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-32"> {/* Modification Here */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Mobile-only left side content */}
                 <div className="md:hidden mb-8">
