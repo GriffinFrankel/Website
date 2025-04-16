@@ -102,7 +102,7 @@ export default function HowItWorksSection() {
             {/* Step Indicators */}
             <div className="space-y-4 border-l-2 border-cyan-500/20 pl-6">
               {steps.map((step) => (
-                <div key={step.number} className="flex items-start">
+                <div key={step.number} className="flex items-center">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold ${
                       activeStep === step.number
