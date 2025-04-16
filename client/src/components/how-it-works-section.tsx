@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useRef, useState } from "react";
@@ -43,35 +42,35 @@ export default function HowItWorksSection() {
       rootMargin: "0px",
       threshold: 0.6 // Higher threshold for more precise detection
     };
-    
+
     const step1Observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) setActiveStep(1);
       });
     }, options);
-    
+
     const step2Observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) setActiveStep(2);
       });
     }, options);
-    
+
     const step3Observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) setActiveStep(3);
       });
     }, options);
-    
+
     // Select the step containers
     const step1Element = document.querySelector("#step-1");
     const step2Element = document.querySelector("#step-2");
     const step3Element = document.querySelector("#step-3");
-    
+
     // Observe the steps
     if (step1Element) step1Observer.observe(step1Element);
     if (step2Element) step2Observer.observe(step2Element);
     if (step3Element) step3Observer.observe(step3Element);
-    
+
     return () => {
       step1Observer.disconnect();
       step2Observer.disconnect();
@@ -137,7 +136,7 @@ export default function HowItWorksSection() {
           <motion.div
             id="step-1"
             key={steps[0].number}
-            className="snap-start min-h-[80vh] flex items-center justify-center"
+            className="snap-start min-h-[80vh] flex items-start pt-[30vh] justify-center"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
@@ -159,12 +158,12 @@ export default function HowItWorksSection() {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Second step - normal position */}
           <motion.div
             id="step-2"
             key={steps[1].number}
-            className="snap-start min-h-[80vh] flex items-center justify-center"
+            className="snap-start min-h-[80vh] flex items-start pt-[30vh] justify-center"
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.4 }}
@@ -186,16 +185,16 @@ export default function HowItWorksSection() {
               </div>
             </div>
           </motion.div>
-          
+
           {/* Third step - special positioning to center it */}
           <div id="step-3" className="snap-start min-h-[80vh] flex flex-col">
             {/* Empty space at top to push content down */}
             <div className="h-[30vh]"></div>
-            
+
             {/* Actual content */}
             <motion.div
               key={steps[2].number}
-              className="flex items-center justify-center"
+              className="flex items-start pt-[30vh] justify-center"
               initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
@@ -217,7 +216,7 @@ export default function HowItWorksSection() {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* Empty space at bottom for proper spacing */}
             <div className="h-[30vh]"></div>
           </div>
