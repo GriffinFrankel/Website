@@ -69,7 +69,7 @@ export default function HowItWorksSection() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
           {/* Left Side: Sticky Navigation */}
-          <div className="md:col-span-5 md:sticky md:top-1/2 md:-translate-y-1/2 h-fit py-20">
+          <div className="md:col-span-5 md:sticky md:top-32 h-fit py-20">
             <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
               <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
             </div>
