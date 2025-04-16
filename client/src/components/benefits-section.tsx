@@ -95,7 +95,6 @@ export default function BenefitsSection() {
                 <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
                 <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
               </div>
-              <div className="text-xs text-cyan-500/70 ml-4 font-mono">partner_benefits.tsx</div>
             </div>
             
             {/* Benefits grid */}
