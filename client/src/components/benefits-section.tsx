@@ -88,15 +88,6 @@ export default function BenefitsSection() {
         {/* Benefits terminal-style container */}
         <div className="mb-20 max-w-5xl mx-auto">
           <div className="bg-[#0a101f]/90 backdrop-blur-sm rounded-xl border border-cyan-500/20 shadow-[0_0_30px_rgba(8,145,178,0.1)] overflow-hidden">
-            {/* Terminal top bar */}
-            <div className="h-8 w-full bg-[#111827]/90 flex items-center px-4 border-b border-cyan-500/10">
-              <div className="flex gap-1.5">
-                <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>
-                <div className="w-2.5 h-2.5 rounded-full bg-green-500/50"></div>
-              </div>
-            </div>
-            
             {/* Benefits grid */}
             <div className="p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
