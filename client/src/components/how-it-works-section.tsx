@@ -29,26 +29,28 @@ export default function HowItWorksSection() {
 
   const [activeStep, setActiveStep] = useState(1);
 
-  // Scroll to step on click
+  // Function to scroll to a specific step
   const scrollToStep = (stepNumber: number) => {
     const element = document.getElementById(`step-${stepNumber}`);
     if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "center" });
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   useEffect(() => {
+    // Create IntersectionObserver to track which step is visible
     const observerOptions = {
-      root: null,
-      rootMargin: "0px",
-      threshold: 0.6
+      root: null, // Use viewport as root
+      rootMargin: '0px',
+      threshold: 0.6 // Element is considered visible when 60% visible
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
+          // Extract step number from the element ID
           const stepId = entry.target.id;
-          const stepNumber = parseInt(stepId.split("-")[1]);
+          const stepNumber = parseInt(stepId.split('-')[1]);
           setActiveStep(stepNumber);
         }
       });
@@ -56,33 +58,35 @@ export default function HowItWorksSection() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
+    // Observe all step elements
     steps.forEach(step => {
       const element = document.getElementById(`step-${step.number}`);
       if (element) observer.observe(element);
     });
 
+    // Cleanup observer on component unmount
     return () => observer.disconnect();
   }, [steps]);
 
   return (
     <section id="how-it-works" className="bg-[#0D1117] relative">
+      {/* Title and navigation on the left (sticky) */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          {/* Left Side: Sticky Navigation */}
-          <div className="md:col-span-5 md:sticky md:top-[20%] h-fit py-16">
+          <div className="md:col-span-5 md:sticky md:top-32 h-fit py-20">
             <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
               <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
             </div>
-
+            
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
             </h2>
-
+            
             <p className="text-gray-400 text-lg mb-8">
               A seamless integration powered by machine learning and advanced algorithms
             </p>
-
-            {/* Step Indicators */}
+            
+            {/* Step navigation */}
             <div className="space-y-6 border-l-2 border-cyan-500/20 pl-6">
               {steps.map((step) => (
                 <div 
@@ -110,20 +114,14 @@ export default function HowItWorksSection() {
               ))}
             </div>
           </div>
-
-          {/* Right Side: Scroll-Snapping Cards */}
-          <div className="md:col-span-7 h-[100vh] overflow-y-auto snap-y snap-mandatory scroll-smooth hide-scrollbar">
-            <div className="pb-8">
-              {/* Hidden element for preventing scroll past the section */}
-              <div className="h-4"></div>
-            </div>
-            
-            {steps.map((step, index) => (
+          
+          {/* Scrollable content on the right */}
+          <div className="md:col-span-7 space-y-[80vh] pb-40 pt-20">
+            {steps.map((step) => (
               <div
                 key={step.number}
                 id={`step-${step.number}`}
-                className={`snap-center min-h-[75vh] flex items-center justify-center ${index === steps.length - 1 ? 'mb-[30vh]' : ''}`}
-                style={{ scrollSnapAlign: 'center', scrollSnapStop: 'always' }}
+                className="scroll-mt-32 h-[80vh] flex items-center"
               >
                 <motion.div
                   className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl w-full"
