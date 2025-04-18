@@ -91,11 +91,11 @@ export default function Footer() {
           </motion.div>
           
           <motion.div variants={fadeInUp}>
-            <h4 className="text-lg font-bold mb-4 relative">
+            <h4 className="text-lg font-bold mb-6 relative inline-block">
               <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Quick Links</span>
               <div className="absolute bottom-0 left-0 w-1/2 h-[2px] bg-gradient-to-r from-cyan-400 to-transparent"></div>
             </h4>
-            <ul className="space-y-3 pl-0">
+            <ul className="space-y-3">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a href={link.href} className="text-gray-400 hover:text-cyan-400 transition-colors flex items-center group">
