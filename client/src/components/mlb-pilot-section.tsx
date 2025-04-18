@@ -47,8 +47,8 @@ export default function MLBPilotSection() {
               </p>
               <ul className="space-y-4 mb-8">
                 {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-start">
-                    <i className="ri-check-line text-cyan-400 text-xl mt-1 mr-3"></i>
+                  <li key={index} className="flex items-center gap-3">
+                    <i className="ri-check-line text-cyan-400 text-xl"></i>
                     <span>{benefit}</span>
                   </li>
                 ))}
