@@ -54,7 +54,7 @@ export default function MLBPilotSection() {
                 ))}
               </ul>
               <Button 
-                className="bg-cyan-500/30 hover:bg-cyan-500/40 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 text-lg w-full sm:w-auto shadow-[0_0_15px_rgba(8,145,178,0.3)] hover:shadow-[0_0_20px_rgba(8,145,178,0.5)] border border-cyan-500/30"
+                className="whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_20px_rgba(6,182,212,0.5)]"
               >
                 <a href="#contact">Apply for the Pilot Program</a>
               </Button>
