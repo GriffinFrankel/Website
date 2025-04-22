@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Code, BrainCircuit, Server } from "lucide-react";
 
 export default function HowItWorksSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
   const steps = [
     {
       number: 1,
@@ -28,24 +30,31 @@ export default function HowItWorksSection() {
   ];
 
   const [activeStep, setActiveStep] = useState(1);
-  const [sectionInView, setSectionInView] = useState(false);
-  const [allStepsViewed, setAllStepsViewed] = useState(false);
-  const [viewedSteps, setViewedSteps] = useState<number[]>([]);
-  const [isScrollLocked, setIsScrollLocked] = useState(false);
+  const [hasLandedOnSection, setHasLandedOnSection] = useState(false);
+  const [stepsUnlocked, setStepsUnlocked] = useState(false);
 
-  // Track which steps have been viewed
+  // Handle section entrance - first phase of scroll control
   useEffect(() => {
-    if (!viewedSteps.includes(activeStep)) {
-      setViewedSteps(prev => [...prev, activeStep]);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setHasLandedOnSection(true);
+          // Delay enabling step scrolling to ensure user sees intro content
+          setTimeout(() => {
+            setStepsUnlocked(true);
+          }, 800);
+        }
+      });
+    }, { threshold: 0.6 });
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
     }
 
-    // Check if all steps have been viewed
-    if (viewedSteps.length === steps.length && !allStepsViewed) {
-      setAllStepsViewed(true);
-    }
-  }, [activeStep, viewedSteps, steps.length, allStepsViewed]);
+    return () => observer.disconnect();
+  }, []);
 
-  // Scroll to step on click
+  // Scroll to specific step 
   const scrollToStep = (stepNumber: number) => {
     const element = document.getElementById(`step-${stepNumber}`);
     if (element) {
@@ -53,60 +62,14 @@ export default function HowItWorksSection() {
     }
   };
 
-  // Use an effect to detect when the entire section is in view and centered
+  // Track which step is visible
   useEffect(() => {
-    const sectionObserverOptions = {
-      rootMargin: "-30% 0px -30% 0px", // Section must be centered in viewport
-      threshold: [0.4, 0.6, 0.8] // More thresholds for smoother detection
-    };
+    if (!stepsUnlocked) return;
 
-    const sectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setSectionInView(true);
-          
-          // When section comes into view, lock main page scrolling
-          document.body.style.overflow = 'hidden';
-          setIsScrollLocked(true);
-        } else if (!allStepsViewed) {
-          setSectionInView(false);
-        }
-      });
-    };
-
-    const sectionObserver = new IntersectionObserver(sectionObserverCallback, sectionObserverOptions);
-    
-    const section = document.getElementById('how-it-works');
-    if (section) sectionObserver.observe(section);
-
-    return () => {
-      sectionObserver.disconnect();
-    };
-  }, [allStepsViewed]);
-
-  // This effect manages the scrolling lock
-  useEffect(() => {
-    // Only unlock scrolling when all steps have been viewed
-    if (allStepsViewed && isScrollLocked) {
-      document.body.style.overflow = '';
-      setIsScrollLocked(false);
-    }
-
-    // Clean up when component unmounts
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [allStepsViewed, isScrollLocked]);
-
-  // This effect manages the step visibility and active state
-  useEffect(() => {
-    // Only set up step observers when section is in view
-    if (!sectionInView) return;
-    
     const observerOptions = {
       root: document.getElementById('steps-container'),
       rootMargin: "0px",
-      threshold: 0.7 // Higher threshold for more accurate detection
+      threshold: 0.6
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -121,45 +84,61 @@ export default function HowItWorksSection() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all the step elements
+    // Observe all step elements
     steps.forEach(step => {
       const element = document.getElementById(`step-${step.number}`);
       if (element) observer.observe(element);
     });
 
-    // Clean up the observer on component unmount
-    return () => observer.disconnect();
-  }, [steps, sectionInView]);
+    // Control wheel events to prevent skipping steps
+    const handleWheel = (e: WheelEvent) => {
+      if (!stepsContainerRef.current) return;
+      
+      const container = stepsContainerRef.current;
+      const currentScrollTop = container.scrollTop;
+      const containerHeight = container.clientHeight;
+      
+      // Determine target step based on scroll direction
+      let targetStep = activeStep;
+      if (e.deltaY > 0) {
+        // Scrolling down
+        targetStep = Math.min(activeStep + 1, steps.length);
+      } else if (e.deltaY < 0) {
+        // Scrolling up
+        targetStep = Math.max(activeStep - 1, 1);
+      }
+      
+      if (targetStep !== activeStep) {
+        e.preventDefault();
+        scrollToStep(targetStep);
+      }
+      
+      // Prevent scrolling past if not on the last step
+      if (activeStep < steps.length && 
+         (currentScrollTop + containerHeight >= container.scrollHeight - 10)) {
+        e.preventDefault();
+      }
+    };
+    
+    const stepsContainer = stepsContainerRef.current;
+    if (stepsContainer) {
+      stepsContainer.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      observer.disconnect();
+      if (stepsContainer) {
+        stepsContainer.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, [steps, activeStep, stepsUnlocked]);
 
   return (
     <section 
       id="how-it-works" 
-      className={`bg-[#0D1117] relative h-screen overflow-hidden ${sectionInView ? 'section-active' : ''} ${isScrollLocked ? 'scroll-locked' : ''}`}
+      ref={sectionRef}
+      className="bg-[#0D1117] relative h-screen overflow-hidden snap-center snap-always"
     >
-      {/* Progress indicator - only visible when section is locked */}
-      {sectionInView && (
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#111827]/80 backdrop-blur-md px-4 py-2 rounded-full border border-cyan-500/20 shadow-lg flex items-center gap-3">
-          <div className="flex gap-2">
-            {steps.map((step) => (
-              <div 
-                key={step.number}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  viewedSteps.includes(step.number) 
-                    ? activeStep === step.number 
-                      ? "bg-cyan-400 scale-110" 
-                      : "bg-cyan-400/50" 
-                    : "bg-gray-600"
-                }`}
-              />
-            ))}
-          </div>
-          <span className="text-sm text-gray-300 font-medium">
-            {allStepsViewed 
-              ? "All steps viewed - scroll to continue" 
-              : `Step ${activeStep} of ${steps.length}`}
-          </span>
-        </div>
-      )}
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full w-full z-10 pointer-events-none hidden md:block">
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
@@ -183,8 +162,8 @@ export default function HowItWorksSection() {
                   {steps.map((navStep) => (
                     <div 
                       key={navStep.number}
-                      onClick={() => scrollToStep(navStep.number)}
-                      className="flex items-center cursor-pointer group"
+                      onClick={() => stepsUnlocked && scrollToStep(navStep.number)}
+                      className={`flex items-center cursor-pointer group ${stepsUnlocked ? '' : 'pointer-events-none opacity-70'}`}
                     >
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
@@ -214,27 +193,12 @@ export default function HowItWorksSection() {
         </div>
       </div>
 
-      {/* Completion indicator that appears when all steps are viewed */}
-      {allStepsViewed && (
-        <motion.div 
-          className="absolute bottom-[25%] right-8 z-40 hidden md:flex items-center gap-2 px-4 py-3 rounded-lg bg-cyan-500/10 border border-cyan-500/40 shadow-lg"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5 text-white">
-              <polyline points="20 6 9 17 4 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </div>
-          <span className="text-white font-medium">All steps viewed! Scroll to continue</span>
-        </motion.div>
-      )}
-      
-      {/* Scrollable content - only enabled when section is in view */}
+      {/* Scrollable content */}
       <div 
         id="steps-container" 
-        className={`h-screen w-full ${sectionInView ? 'snap-y snap-mandatory overflow-y-auto' : 'overflow-hidden'} scroll-smooth transition-all duration-500`}
+        ref={stepsContainerRef}
+        className={`h-screen w-full snap-y snap-mandatory overflow-y-auto scroll-smooth 
+                   ${stepsUnlocked ? '' : 'pointer-events-none'}`}
       >
         {steps.map((step) => (
           <div 
@@ -242,7 +206,7 @@ export default function HowItWorksSection() {
             id={`step-${step.number}`}
             className="h-screen w-full snap-start flex flex-col justify-center"
           >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Aligned with navbar */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Mobile-only left side content */}
                 <div className="md:hidden mb-8">
@@ -267,8 +231,9 @@ export default function HowItWorksSection() {
                   <motion.div
                     className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl ml-0"
                     initial={{ opacity: 0, y: 50 }}
-                    animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.6 }}
                   >
                     <div className="flex items-start md:items-center mb-6">
                       <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">

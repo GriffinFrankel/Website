@@ -121,6 +121,14 @@ export default function FAQSection() {
               </div>
             </div>
           </div>
+          
+          {/* Tech tags */}
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">RESTful API</span>
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">Real-time Processing</span>
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">OAuth2</span>
+            <span className="px-3 py-1 bg-cyan-500/5 rounded-full text-xs text-cyan-400 border border-cyan-500/20">JSON Responses</span>
+          </div>
         </motion.div>
       </div>
     </section>
