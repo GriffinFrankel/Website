@@ -64,7 +64,7 @@ export default function HowItWorksSection() {
                     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
                       {step.number}
                     </div>
-                    <h3 className="text-xl md:text-2xl font-semibold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    <h3 className="text-xl md:text-2xl font-semibold text-white">
                       {step.title}
                     </h3>
                   </div>
