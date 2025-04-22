@@ -29,7 +29,7 @@ export default function MLBPilotSection() {
           <div className="grid md:grid-cols-2">
             <div className="relative h-64 md:h-auto">
               <img 
-                src="src/assets/sports-fans.png"
+                src="/images/sports-fans-at-live-event-seo.jpg"
                 className="absolute inset-0 w-full h-full object-cover grayscale opacity-80"  // Added opacity to blend image
                 alt="Excited sports fans cheering with red flags at a live event"
               />
