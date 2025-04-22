@@ -27,10 +27,31 @@ export default function MLBPilotSection() {
           variants={fadeIn}
         >
           <div className="grid md:grid-cols-2">
-            <div 
-              className="relative h-64 md:h-auto overflow-hidden bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1562766879-ce8c6f04f070?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80')] grayscale opacity-80"
-              aria-label="Excited baseball fans cheering at a stadium"
-            >
+            <div className="relative h-64 md:h-auto bg-gray-800 overflow-hidden">
+              {/* Abstract baseball stadium visualization */}
+              <div className="absolute inset-0 opacity-40">
+                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="w-full h-full">
+                  <path d="M0,50 Q50,0 100,50 Q50,100 0,50" fill="#1e40af" />
+                  <path d="M10,50 Q50,10 90,50 Q50,90 10,50" fill="#0284c7" />
+                  <path d="M20,50 Q50,20 80,50 Q50,80 20,50" fill="#22d3ee" />
+                  <circle cx="50" cy="50" r="10" fill="#fff" />
+                  <circle cx="50" cy="50" r="4" fill="#0ea5e9" />
+                </svg>
+              </div>
+              {/* Stadium crowd animation */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-full h-full flex flex-wrap gap-1 p-6 opacity-30">
+                  {Array.from({length: 40}).map((_, i) => (
+                    <div 
+                      key={i} 
+                      className="w-3 h-3 rounded-full bg-white opacity-60" 
+                      style={{
+                        animation: `pulse 1.5s infinite ${Math.random() * 2}s`
+                      }}
+                    />
+                  ))}
+                </div>
+              </div>
               <div className="absolute inset-0 bg-gradient-to-l from-[#1A1A1A]/90 to-transparent md:hidden"></div>
             </div>
             <motion.div 
