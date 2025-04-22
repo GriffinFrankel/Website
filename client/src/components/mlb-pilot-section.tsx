@@ -29,9 +29,9 @@ export default function MLBPilotSection() {
           <div className="grid md:grid-cols-2">
             <div className="relative h-64 md:h-auto">
               <img 
-                src="/images/sports-fans-at-live-event-seo.jpg"
+                src="https://images.unsplash.com/photo-1509027572446-af8401acfdc3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1536&q=80"
                 className="absolute inset-0 w-full h-full object-cover grayscale opacity-80"
-                alt="Excited sports fans cheering with red flags at a live event"
+                alt="Excited sports fans cheering at a live sporting event"
               />
               <div className="absolute inset-0 bg-gradient-to-l from-[#1A1A1A]/90 to-transparent md:hidden"></div>
             </div>
