@@ -27,9 +27,8 @@ export default function HowItWorksSection() {
     }
   ];
 
-  // Default to step 1 being active and section always being visible
+  // Track active step for navigation indicators
   const [activeStep, setActiveStep] = useState(1);
-  const [sectionInView, setSectionInView] = useState(true);
 
   // Scroll to step on click
   const scrollToStep = (stepNumber: number) => {
@@ -38,34 +37,6 @@ export default function HowItWorksSection() {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
-
-  // Initialize sectionInView as true so content is visible by default
-  useEffect(() => {
-    // Default to true to ensure content is always visible
-    setSectionInView(true);
-    
-    // Optional: add observer logic to enhance scroll behavior when the section comes into view
-    const sectionObserverOptions = {
-      rootMargin: "-20% 0px", 
-      threshold: 0.25 
-    };
-
-    const sectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
-      entries.forEach(entry => {
-        // Always keep content visible, just enhance scroll behavior
-        if (entry.isIntersecting) {
-          setSectionInView(true);
-        }
-      });
-    };
-
-    const sectionObserver = new IntersectionObserver(sectionObserverCallback, sectionObserverOptions);
-    
-    const section = document.getElementById('how-it-works');
-    if (section) sectionObserver.observe(section);
-
-    return () => sectionObserver.disconnect();
-  }, []);
 
   // This effect manages the step visibility and active state
   useEffect(() => {
