@@ -27,12 +27,10 @@ export default function MLBPilotSection() {
           variants={fadeIn}
         >
           <div className="grid md:grid-cols-2">
-            <div className="relative h-64 md:h-auto">
-              <img 
-                src="https://images.unsplash.com/photo-1562766879-ce8c6f04f070?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80"
-                className="absolute inset-0 w-full h-full object-cover grayscale opacity-80"
-                alt="Excited baseball fans cheering at a stadium"
-              />
+            <div 
+              className="relative h-64 md:h-auto overflow-hidden bg-cover bg-center bg-[url('https://images.unsplash.com/photo-1562766879-ce8c6f04f070?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80')] grayscale opacity-80"
+              aria-label="Excited baseball fans cheering at a stadium"
+            >
               <div className="absolute inset-0 bg-gradient-to-l from-[#1A1A1A]/90 to-transparent md:hidden"></div>
             </div>
             <motion.div 
