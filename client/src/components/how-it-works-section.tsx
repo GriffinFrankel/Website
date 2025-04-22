@@ -29,6 +29,21 @@ export default function HowItWorksSection() {
 
   const [activeStep, setActiveStep] = useState(1);
   const [sectionInView, setSectionInView] = useState(false);
+  const [allStepsViewed, setAllStepsViewed] = useState(false);
+  const [viewedSteps, setViewedSteps] = useState<number[]>([]);
+  const [isScrollLocked, setIsScrollLocked] = useState(false);
+
+  // Track which steps have been viewed
+  useEffect(() => {
+    if (!viewedSteps.includes(activeStep)) {
+      setViewedSteps(prev => [...prev, activeStep]);
+    }
+
+    // Check if all steps have been viewed
+    if (viewedSteps.length === steps.length && !allStepsViewed) {
+      setAllStepsViewed(true);
+    }
+  }, [activeStep, viewedSteps, steps.length, allStepsViewed]);
 
   // Scroll to step on click
   const scrollToStep = (stepNumber: number) => {
@@ -41,15 +56,19 @@ export default function HowItWorksSection() {
   // Use an effect to detect when the entire section is in view and centered
   useEffect(() => {
     const sectionObserverOptions = {
-      rootMargin: "-40% 0px", // Adjust this to trigger when the section is more centered
-      threshold: [0.25, 0.5, 0.75] // Multiple thresholds for smoother transition
+      rootMargin: "-30% 0px -30% 0px", // Section must be centered in viewport
+      threshold: [0.4, 0.6, 0.8] // More thresholds for smoother detection
     };
 
     const sectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           setSectionInView(true);
-        } else {
+          
+          // When section comes into view, lock main page scrolling
+          document.body.style.overflow = 'hidden';
+          setIsScrollLocked(true);
+        } else if (!allStepsViewed) {
           setSectionInView(false);
         }
       });
@@ -60,8 +79,24 @@ export default function HowItWorksSection() {
     const section = document.getElementById('how-it-works');
     if (section) sectionObserver.observe(section);
 
-    return () => sectionObserver.disconnect();
-  }, []);
+    return () => {
+      sectionObserver.disconnect();
+    };
+  }, [allStepsViewed]);
+
+  // This effect manages the scrolling lock
+  useEffect(() => {
+    // Only unlock scrolling when all steps have been viewed
+    if (allStepsViewed && isScrollLocked) {
+      document.body.style.overflow = '';
+      setIsScrollLocked(false);
+    }
+
+    // Clean up when component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [allStepsViewed, isScrollLocked]);
 
   // This effect manages the step visibility and active state
   useEffect(() => {
@@ -71,7 +106,7 @@ export default function HowItWorksSection() {
     const observerOptions = {
       root: document.getElementById('steps-container'),
       rootMargin: "0px",
-      threshold: 0.6
+      threshold: 0.7 // Higher threshold for more accurate detection
     };
 
     const observerCallback = (entries: IntersectionObserverEntry[]) => {
@@ -99,8 +134,32 @@ export default function HowItWorksSection() {
   return (
     <section 
       id="how-it-works" 
-      className={`bg-[#0D1117] relative h-screen overflow-hidden ${sectionInView ? 'section-active' : ''}`}
+      className={`bg-[#0D1117] relative h-screen overflow-hidden ${sectionInView ? 'section-active' : ''} ${isScrollLocked ? 'scroll-locked' : ''}`}
     >
+      {/* Progress indicator - only visible when section is locked */}
+      {sectionInView && (
+        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-[#111827]/80 backdrop-blur-md px-4 py-2 rounded-full border border-cyan-500/20 shadow-lg flex items-center gap-3">
+          <div className="flex gap-2">
+            {steps.map((step) => (
+              <div 
+                key={step.number}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  viewedSteps.includes(step.number) 
+                    ? activeStep === step.number 
+                      ? "bg-cyan-400 scale-110" 
+                      : "bg-cyan-400/50" 
+                    : "bg-gray-600"
+                }`}
+              />
+            ))}
+          </div>
+          <span className="text-sm text-gray-300 font-medium">
+            {allStepsViewed 
+              ? "All steps viewed - scroll to continue" 
+              : `Step ${activeStep} of ${steps.length}`}
+          </span>
+        </div>
+      )}
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full w-full z-10 pointer-events-none hidden md:block">
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
@@ -155,6 +214,23 @@ export default function HowItWorksSection() {
         </div>
       </div>
 
+      {/* Completion indicator that appears when all steps are viewed */}
+      {allStepsViewed && (
+        <motion.div 
+          className="absolute bottom-[25%] right-8 z-40 hidden md:flex items-center gap-2 px-4 py-3 rounded-lg bg-cyan-500/10 border border-cyan-500/40 shadow-lg"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" className="w-5 h-5 text-white">
+              <polyline points="20 6 9 17 4 12" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <span className="text-white font-medium">All steps viewed! Scroll to continue</span>
+        </motion.div>
+      )}
+      
       {/* Scrollable content - only enabled when section is in view */}
       <div 
         id="steps-container" 
