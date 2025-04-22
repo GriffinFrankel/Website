@@ -75,14 +75,7 @@ export default function Footer() {
               Revolutionizing the sports ticketing experience with innovative tech-powered protection for fans and data-driven revenue streams for platforms.
             </p>
             
-            <div className="flex gap-6 mb-8">
-              {technologies.map((tech, index) => (
-                <div key={index} className="flex items-center gap-2 text-xs text-cyan-400 bg-cyan-500/5 px-3 py-1.5 rounded-full border border-cyan-500/20">
-                  {tech.icon}
-                  <span>{tech.name}</span>
-                </div>
-              ))}
-            </div>
+            
             
             <div className="flex space-x-4">
               <a href="#" className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300">
