@@ -67,10 +67,10 @@ export default function ContactSection() {
     <section id="contact" className="py-20 relative overflow-hidden">
       {/* Tech-inspired background */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#0a101f] to-[#111827]"></div>
-
+      
       {/* Digital circuit pattern overlay */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydjJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
-
+      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiMyMjIiIGZpbGwtb3BhY2l0eT0iMC4wNCI+PHBhdGggZD0iTTM2IDM0djItSDI0djItMmgtMnYtMmgydi0yaC0ydi0yaDJ2LTJoLTJ2LTJoMnYtMmgtMnYtMmgydi0yaC0ydi0yaC0ydjJoLTJ2LTJoLTJ2Mmh0di0yaC0ydjJoLTJ2Mmgydi0yaC0ydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2MmgydjJoLTJ2Mmgydj0yaDJ2LTJoMnYyaDJ2LTJoMnYtaC0ydi0yaDJ2LTJoLTJ2LTJoMnpNMiAyaDJ2LTJoLTJ2MnoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-10"></div>
+      
       {/* Accent glows */}
       <div className="absolute inset-0 overflow-hidden">
         <motion.div 
@@ -112,7 +112,7 @@ export default function ContactSection() {
             <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
               <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">API Integration</span>
             </div>
-
+            
             <h2 className="text-3xl md:text-5xl font-bold mb-6">Ready to <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Transform</span> Your Platform?</h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Connect with our engineering team to learn about our SDK, API documentation, and implementation strategy.
@@ -133,11 +133,11 @@ export default function ContactSection() {
                 <div className="absolute top-0 left-0 w-[1px] h-12 bg-cyan-500/30"></div>
                 <div className="absolute bottom-0 left-0 w-12 h-[1px] bg-cyan-500/30"></div>
                 <div className="absolute bottom-0 left-0 w-[1px] h-12 bg-cyan-500/30"></div>
-
+                
                 <div className="relative">
                   <h3 className="text-2xl font-bold mb-2">Contact Information</h3>
                   <div className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mb-8"></div>
-
+                  
                   <div className="space-y-8 text-gray-300">
                     {contactInfo.map((item, index) => (
                       <div key={index} className="flex items-start group">
@@ -157,7 +157,7 @@ export default function ContactSection() {
                       </div>
                     ))}
                   </div>
-
+                  
                   <div className="mt-12 pt-6 border-t border-cyan-500/10">
                     <h4 className="font-semibold mb-4 flex items-center gap-2">
                       <Terminal className="w-4 h-4 text-cyan-400" />
@@ -175,7 +175,7 @@ export default function ContactSection() {
                       </a>
                     </div>
                   </div>
-
+                  
                   {/* Tech decorations */}
                   <div className="absolute bottom-4 right-4 opacity-10">
                     <svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -189,9 +189,20 @@ export default function ContactSection() {
                   </div>
                 </div>
               </div>
-
+              
               <div className="md:col-span-3 p-8 md:p-12 bg-[#111827]/90 backdrop-blur-sm border border-cyan-500/10 rounded-r-2xl">
-
+                <div className="mb-8">
+                  <div className="flex items-center gap-2 mb-1 text-cyan-400">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-red-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500/50"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+                    </div>
+                    <div className="text-xs opacity-70">contact_form.tsx</div>
+                  </div>
+                  <div className="h-1 w-full bg-gradient-to-r from-cyan-500/20 to-transparent rounded-full"></div>
+                </div>
+                
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
@@ -228,7 +239,7 @@ export default function ContactSection() {
                         )}
                       />
                     </div>
-
+                    
                     <FormField
                       control={form.control}
                       name="company"
@@ -245,7 +256,7 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-
+                    
                     <FormField
                       control={form.control}
                       name="email"
@@ -263,7 +274,7 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-
+                    
                     <FormField
                       control={form.control}
                       name="phone"
@@ -281,7 +292,7 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-
+                    
                     <FormField
                       control={form.control}
                       name="message"
@@ -299,7 +310,7 @@ export default function ContactSection() {
                         </FormItem>
                       )}
                     />
-
+                    
                     <Button 
                       type="submit" 
                       className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-6 rounded-md transition-all duration-300 shadow-[0_0_15px_rgba(8,145,178,0.3)] hover:shadow-[0_0_20px_rgba(8,145,178,0.5)] transform hover:translate-y-[-2px]"
@@ -316,7 +327,7 @@ export default function ContactSection() {
                         )}
                       </div>
                     </Button>
-
+                    
                     {/* Tech decoration - form validation status */}
                     <div className="mt-4 flex justify-end items-center text-xs text-cyan-500/70">
                       <div className="flex items-center">

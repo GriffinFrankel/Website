@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { Code, BrainCircuit, Server } from "lucide-react";
 
 export default function HowItWorksSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
   const steps = [
     {
       number: 1,
@@ -28,285 +30,140 @@ export default function HowItWorksSection() {
   ];
 
   const [activeStep, setActiveStep] = useState(1);
-  const [sectionInView, setSectionInView] = useState(false);
-  const [sectionFullyVisible, setSectionFullyVisible] = useState(false);
-  const [hasSeenAllSteps, setHasSeenAllSteps] = useState(false);
-  const sectionRef = useRef<HTMLElement>(null);
-  const stepsContainerRef = useRef<HTMLDivElement>(null);
-  
-  // Helper to check if we've viewed all steps
-  const checkCompletedAllSteps = (currentStep: number) => {
-    if (currentStep === steps.length) {
-      setHasSeenAllSteps(true);
-    }
-  };
+  const [hasLandedOnSection, setHasLandedOnSection] = useState(false);
+  const [stepsUnlocked, setStepsUnlocked] = useState(false);
 
-  // Scroll to step on click - only works when section is active
+  // Handle section entrance - first phase of scroll control
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setHasLandedOnSection(true);
+          // Delay enabling step scrolling to ensure user sees intro content
+          setTimeout(() => {
+            setStepsUnlocked(true);
+          }, 800);
+        }
+      });
+    }, { threshold: 0.6 });
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Scroll to specific step 
   const scrollToStep = (stepNumber: number) => {
-    if (!sectionFullyVisible) return;
-    
     const element = document.getElementById(`step-${stepNumber}`);
     if (element) {
       element.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
-  // Primary effect to control all scroll behavior
+  // Track which step is visible
   useEffect(() => {
-    let prevScrollY = window.scrollY;
-    let isScrollingAllowed = false;
-    let wheelEventCount = 0;
-    let currentStep = 1;
-    
-    // Observer to detect when section first becomes visible (entering view)
-    const enterObserver = new IntersectionObserver(
-      ([entry]) => {
+    if (!stepsUnlocked) return;
+
+    const observerOptions = {
+      root: document.getElementById('steps-container'),
+      rootMargin: "0px",
+      threshold: 0.6
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
         if (entry.isIntersecting) {
-          setSectionInView(true);
-        } else {
-          setSectionInView(false);
+          const stepId = entry.target.id;
+          const stepNumber = parseInt(stepId.split("-")[1]);
+          setActiveStep(stepNumber);
         }
-      },
-      {
-        threshold: 0.1, // Trigger when 10% of section is visible
-      }
-    );
-
-    // Observer to detect when section is fully centered (ready for internal scrolling)
-    const centerObserver = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setSectionFullyVisible(true);
-        } else {
-          setSectionFullyVisible(false);
-        }
-      },
-      {
-        rootMargin: "-30% 0px", // Trigger when section is 70% in view
-        threshold: 0.7, // Trigger when section is 70% visible
-      }
-    );
-
-    // Observer for each step to track progress
-    const stepObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const stepId = entry.target.id;
-            const stepNumber = parseInt(stepId.split("-")[1]);
-            setActiveStep(stepNumber);
-            currentStep = stepNumber;
-            checkCompletedAllSteps(stepNumber);
-          }
-        });
-      },
-      {
-        root: stepsContainerRef.current,
-        threshold: 0.6,
-      }
-    );
-
-    // Main scroll handler to control scroll behavior
-    const handleScroll = (e: Event) => {
-      // Prevent default scroll behavior when section is in view but not all steps seen
-      if (sectionInView && !hasSeenAllSteps) {
-        const currentScrollY = window.scrollY;
-        const scrollingDown = currentScrollY > prevScrollY;
-        const sectionTop = sectionRef.current?.offsetTop || 0;
-        const viewportHeight = window.innerHeight;
-        const sectionCenter = sectionTop - (viewportHeight / 2) + (sectionRef.current?.offsetHeight || 0) / 2;
-        
-        // Force to center of section when entering
-        if (!sectionFullyVisible && scrollingDown) {
-          window.scrollTo({
-            top: sectionCenter,
-            behavior: 'smooth'
-          });
-          e.preventDefault();
-          return false;
-        }
-        
-        // Lock at top of section when trying to scroll up/out too early
-        if (sectionFullyVisible && !scrollingDown && currentStep === 1) {
-          window.scrollTo({
-            top: sectionCenter,
-            behavior: 'smooth'
-          });
-          e.preventDefault();
-          return false;
-        }
-        
-        // Lock at bottom of section until all steps seen
-        if (sectionFullyVisible && scrollingDown && !hasSeenAllSteps) {
-          window.scrollTo({
-            top: sectionCenter,
-            behavior: 'smooth'
-          });
-          e.preventDefault();
-          return false;
-        }
-        
-        prevScrollY = currentScrollY;
-      }
-    };
-
-    // Wheel event handler to control step scrolling
-    const handleWheel = (e: WheelEvent) => {
-      if (sectionFullyVisible && !hasSeenAllSteps) {
-        e.preventDefault();
-        
-        // Throttle wheel events to control step transitions
-        wheelEventCount++;
-        if (wheelEventCount < 5) return;
-        wheelEventCount = 0;
-        
-        const step = stepsContainerRef.current;
-        if (!step) return;
-
-        // Logic to move between steps
-        if (e.deltaY > 0 && currentStep < steps.length) {
-          // Scrolling down, go to next step
-          const nextStep = document.getElementById(`step-${currentStep + 1}`);
-          if (nextStep) {
-            nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        } else if (e.deltaY < 0 && currentStep > 1) {
-          // Scrolling up, go to previous step
-          const prevStep = document.getElementById(`step-${currentStep - 1}`);
-          if (prevStep) {
-            prevStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }
-      }
-    };
-
-    // Touch events for mobile
-    let touchStartY = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      if (sectionFullyVisible && !hasSeenAllSteps) {
-        touchStartY = e.touches[0].clientY;
-      }
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (sectionFullyVisible && !hasSeenAllSteps) {
-        e.preventDefault();
-        
-        const touchY = e.touches[0].clientY;
-        const deltaY = touchStartY - touchY;
-        
-        // Only process significant swipes
-        if (Math.abs(deltaY) < 30) return;
-        
-        // Reset touch start to prevent multiple triggers
-        touchStartY = touchY;
-        
-        if (deltaY > 0 && currentStep < steps.length) {
-          // Swiping up, go to next step
-          const nextStep = document.getElementById(`step-${currentStep + 1}`);
-          if (nextStep) {
-            nextStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        } else if (deltaY < 0 && currentStep > 1) {
-          // Swiping down, go to previous step
-          const prevStep = document.getElementById(`step-${currentStep - 1}`);
-          if (prevStep) {
-            prevStep.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }
-        }
-      }
-    };
-
-    // Setup all event listeners and observers
-    if (sectionRef.current) {
-      enterObserver.observe(sectionRef.current);
-      centerObserver.observe(sectionRef.current);
-      
-      // Monitor each step
-      steps.forEach(step => {
-        const element = document.getElementById(`step-${step.number}`);
-        if (element) stepObserver.observe(element);
       });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Observe all step elements
+    steps.forEach(step => {
+      const element = document.getElementById(`step-${step.number}`);
+      if (element) observer.observe(element);
+    });
+
+    // Control wheel events to prevent skipping steps
+    const handleWheel = (e: WheelEvent) => {
+      if (!stepsContainerRef.current) return;
       
-      // Add event listeners for scroll control
-      window.addEventListener('scroll', handleScroll, { passive: false });
-      window.addEventListener('wheel', handleWheel, { passive: false });
-      window.addEventListener('touchstart', handleTouchStart, { passive: false });
-      window.addEventListener('touchmove', handleTouchMove, { passive: false });
+      const container = stepsContainerRef.current;
+      const currentScrollTop = container.scrollTop;
+      const containerHeight = container.clientHeight;
+      
+      // Determine target step based on scroll direction
+      let targetStep = activeStep;
+      if (e.deltaY > 0) {
+        // Scrolling down
+        targetStep = Math.min(activeStep + 1, steps.length);
+      } else if (e.deltaY < 0) {
+        // Scrolling up
+        targetStep = Math.max(activeStep - 1, 1);
+      }
+      
+      if (targetStep !== activeStep) {
+        e.preventDefault();
+        scrollToStep(targetStep);
+      }
+      
+      // Prevent scrolling past if not on the last step
+      if (activeStep < steps.length && 
+         (currentScrollTop + containerHeight >= container.scrollHeight - 10)) {
+        e.preventDefault();
+      }
+    };
+    
+    const stepsContainer = stepsContainerRef.current;
+    if (stepsContainer) {
+      stepsContainer.addEventListener('wheel', handleWheel, { passive: false });
     }
 
-    // Clean up
     return () => {
-      enterObserver.disconnect();
-      centerObserver.disconnect();
-      stepObserver.disconnect();
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
+      observer.disconnect();
+      if (stepsContainer) {
+        stepsContainer.removeEventListener('wheel', handleWheel);
+      }
     };
-  }, [steps, sectionInView, sectionFullyVisible, hasSeenAllSteps]);
+  }, [steps, activeStep, stepsUnlocked]);
 
   return (
     <section 
-      ref={sectionRef}
       id="how-it-works" 
-      className={`bg-[#0D1117] relative h-screen overflow-hidden ${sectionInView ? 'section-active' : ''} ${sectionFullyVisible ? 'section-centered' : ''} ${hasSeenAllSteps ? 'all-steps-completed' : ''}`}
+      ref={sectionRef}
+      className="bg-[#0D1117] relative h-screen overflow-hidden snap-center snap-always"
     >
-      {/* Visual indicators for scroll progress */}
-      <div className="absolute top-4 right-4 z-30 hidden md:flex gap-2 items-center">
-        <div className={`h-2 w-2 rounded-full transition-colors duration-300 ${sectionFullyVisible ? 'bg-cyan-400' : 'bg-gray-600'}`}></div>
-        <div className={`h-2 w-2 rounded-full transition-colors duration-300 ${activeStep >= 1 && sectionFullyVisible ? 'bg-cyan-400' : 'bg-gray-600'}`}></div>
-        <div className={`h-2 w-2 rounded-full transition-colors duration-300 ${activeStep >= 2 ? 'bg-cyan-400' : 'bg-gray-600'}`}></div>
-        <div className={`h-2 w-2 rounded-full transition-colors duration-300 ${activeStep >= 3 ? 'bg-cyan-400' : 'bg-gray-600'}`}></div>
-        <div className={`h-2 w-2 rounded-full transition-colors duration-300 ${hasSeenAllSteps ? 'bg-cyan-400' : 'bg-gray-600'}`}></div>
-      </div>
-
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full w-full z-10 pointer-events-none hidden md:block">
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-12 h-full">
             <div className="col-span-6 flex items-center">
               <div className="pointer-events-auto max-w-md">
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm"
-                >
+                <div className="inline-flex items-center justify-center mb-3 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-sm">
                   <span className="text-cyan-400 text-xs font-medium tracking-wider uppercase">The Process</span>
-                </motion.div>
+                </div>
 
-                <motion.h2 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 }}
-                  className="text-3xl md:text-4xl font-bold mb-6"
-                >
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   How <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Blowout Protection</span> Works
-                </motion.h2>
+                </h2>
 
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                  className="text-gray-400 text-lg mb-8"
-                >
+                <p className="text-gray-400 text-lg mb-8">
                   A seamless integration powered by machine learning and advanced algorithms
-                </motion.p>
+                </p>
 
                 {/* Step Indicators */}
-                <motion.div 
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.5, delay: 0.3 }}
-                  className="space-y-6 border-l-2 border-cyan-500/20 pl-6"
-                >
+                <div className="space-y-6 border-l-2 border-cyan-500/20 pl-6">
                   {steps.map((navStep) => (
                     <div 
                       key={navStep.number}
-                      onClick={() => scrollToStep(navStep.number)}
-                      className={`flex items-center cursor-pointer group ${!sectionFullyVisible ? 'pointer-events-none' : ''}`}
+                      onClick={() => stepsUnlocked && scrollToStep(navStep.number)}
+                      className={`flex items-center cursor-pointer group ${stepsUnlocked ? '' : 'pointer-events-none opacity-70'}`}
                     >
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
@@ -329,18 +186,19 @@ export default function HowItWorksSection() {
                       </div>
                     </div>
                   ))}
-                </motion.div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* The steps container - only fully functional when section is fully visible */}
+      {/* Scrollable content */}
       <div 
-        ref={stepsContainerRef}
         id="steps-container" 
-        className={`h-screen w-full ${sectionFullyVisible ? 'snap-y snap-mandatory overflow-y-auto' : 'overflow-hidden'} scroll-smooth transition-all duration-500`}
+        ref={stepsContainerRef}
+        className={`h-screen w-full snap-y snap-mandatory overflow-y-auto scroll-smooth 
+                   ${stepsUnlocked ? '' : 'pointer-events-none'}`}
       >
         {steps.map((step) => (
           <div 
@@ -348,7 +206,7 @@ export default function HowItWorksSection() {
             id={`step-${step.number}`}
             className="h-screen w-full snap-start flex flex-col justify-center"
           >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Aligned with navbar */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Mobile-only left side content */}
                 <div className="md:hidden mb-8">
@@ -373,7 +231,8 @@ export default function HowItWorksSection() {
                   <motion.div
                     className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl ml-0"
                     initial={{ opacity: 0, y: 50 }}
-                    animate={sectionFullyVisible && activeStep === step.number ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
                     transition={{ duration: 0.6 }}
                   >
                     <div className="flex items-start md:items-center mb-6">
@@ -398,22 +257,6 @@ export default function HowItWorksSection() {
           </div>
         ))}
       </div>
-      
-      {/* Scroll guide indicators */}
-      {sectionFullyVisible && !hasSeenAllSteps && (
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-30 flex flex-col items-center">
-          <div className="text-cyan-400 text-sm mb-2">
-            {activeStep < steps.length ? 'Scroll down to continue' : 'Continue to next section'}
-          </div>
-          <motion.div 
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-6 text-cyan-400"
-          >
-            ↓
-          </motion.div>
-        </div>
-      )}
     </section>
   );
 }

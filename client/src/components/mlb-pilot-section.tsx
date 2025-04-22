@@ -47,14 +47,14 @@ export default function MLBPilotSection() {
               </p>
               <ul className="space-y-4 mb-8">
                 {benefits.map((benefit, index) => (
-                  <li key={index} className="flex items-center gap-3">
-                    <i className="ri-check-line text-cyan-400 text-xl"></i>
+                  <li key={index} className="flex items-start">
+                    <i className="ri-check-line text-cyan-400 text-xl mt-1 mr-3"></i>
                     <span>{benefit}</span>
                   </li>
                 ))}
               </ul>
               <Button 
-                className="whitespace-nowrap inline-flex items-center justify-center bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 shadow-[0_0_15px_rgba(6,182,212,0.3)] hover:shadow-[0_0_20px_rgba(6,182,212,0.5)]"
+                className="bg-cyan-500/30 hover:bg-cyan-500/40 text-white font-semibold py-3 px-8 rounded-md transition-all duration-300 text-lg w-full sm:w-auto shadow-[0_0_15px_rgba(8,145,178,0.3)] hover:shadow-[0_0_20px_rgba(8,145,178,0.5)] border border-cyan-500/30"
               >
                 <a href="#contact">Apply for the Pilot Program</a>
               </Button>
