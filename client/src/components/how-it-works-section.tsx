@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Code, BrainCircuit, Server } from "lucide-react";
 
 export default function HowItWorksSection() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const stepsContainerRef = useRef<HTMLDivElement>(null);
   const steps = [
     {
       number: 1,
@@ -30,31 +28,9 @@ export default function HowItWorksSection() {
   ];
 
   const [activeStep, setActiveStep] = useState(1);
-  const [hasLandedOnSection, setHasLandedOnSection] = useState(false);
-  const [stepsUnlocked, setStepsUnlocked] = useState(false);
+  const [sectionInView, setSectionInView] = useState(false);
 
-  // Handle section entrance - first phase of scroll control
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          setHasLandedOnSection(true);
-          // Delay enabling step scrolling to ensure user sees intro content
-          setTimeout(() => {
-            setStepsUnlocked(true);
-          }, 800);
-        }
-      });
-    }, { threshold: 0.6 });
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Scroll to specific step 
+  // Scroll to step on click
   const scrollToStep = (stepNumber: number) => {
     const element = document.getElementById(`step-${stepNumber}`);
     if (element) {
@@ -62,10 +38,36 @@ export default function HowItWorksSection() {
     }
   };
 
-  // Track which step is visible
+  // Use an effect to detect when the entire section is in view and centered
   useEffect(() => {
-    if (!stepsUnlocked) return;
+    const sectionObserverOptions = {
+      rootMargin: "-40% 0px", // Adjust this to trigger when the section is more centered
+      threshold: [0.25, 0.5, 0.75] // Multiple thresholds for smoother transition
+    };
 
+    const sectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setSectionInView(true);
+        } else {
+          setSectionInView(false);
+        }
+      });
+    };
+
+    const sectionObserver = new IntersectionObserver(sectionObserverCallback, sectionObserverOptions);
+    
+    const section = document.getElementById('how-it-works');
+    if (section) sectionObserver.observe(section);
+
+    return () => sectionObserver.disconnect();
+  }, []);
+
+  // This effect manages the step visibility and active state
+  useEffect(() => {
+    // Only set up step observers when section is in view
+    if (!sectionInView) return;
+    
     const observerOptions = {
       root: document.getElementById('steps-container'),
       rootMargin: "0px",
@@ -84,60 +86,20 @@ export default function HowItWorksSection() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all step elements
+    // Observe all the step elements
     steps.forEach(step => {
       const element = document.getElementById(`step-${step.number}`);
       if (element) observer.observe(element);
     });
 
-    // Control wheel events to prevent skipping steps
-    const handleWheel = (e: WheelEvent) => {
-      if (!stepsContainerRef.current) return;
-      
-      const container = stepsContainerRef.current;
-      const currentScrollTop = container.scrollTop;
-      const containerHeight = container.clientHeight;
-      
-      // Determine target step based on scroll direction
-      let targetStep = activeStep;
-      if (e.deltaY > 0) {
-        // Scrolling down
-        targetStep = Math.min(activeStep + 1, steps.length);
-      } else if (e.deltaY < 0) {
-        // Scrolling up
-        targetStep = Math.max(activeStep - 1, 1);
-      }
-      
-      if (targetStep !== activeStep) {
-        e.preventDefault();
-        scrollToStep(targetStep);
-      }
-      
-      // Prevent scrolling past if not on the last step
-      if (activeStep < steps.length && 
-         (currentScrollTop + containerHeight >= container.scrollHeight - 10)) {
-        e.preventDefault();
-      }
-    };
-    
-    const stepsContainer = stepsContainerRef.current;
-    if (stepsContainer) {
-      stepsContainer.addEventListener('wheel', handleWheel, { passive: false });
-    }
-
-    return () => {
-      observer.disconnect();
-      if (stepsContainer) {
-        stepsContainer.removeEventListener('wheel', handleWheel);
-      }
-    };
-  }, [steps, activeStep, stepsUnlocked]);
+    // Clean up the observer on component unmount
+    return () => observer.disconnect();
+  }, [steps, sectionInView]);
 
   return (
     <section 
       id="how-it-works" 
-      ref={sectionRef}
-      className="bg-[#0D1117] relative h-screen overflow-hidden snap-center snap-always"
+      className={`bg-[#0D1117] relative h-screen overflow-hidden ${sectionInView ? 'section-active' : ''}`}
     >
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full w-full z-10 pointer-events-none hidden md:block">
@@ -162,8 +124,8 @@ export default function HowItWorksSection() {
                   {steps.map((navStep) => (
                     <div 
                       key={navStep.number}
-                      onClick={() => stepsUnlocked && scrollToStep(navStep.number)}
-                      className={`flex items-center cursor-pointer group ${stepsUnlocked ? '' : 'pointer-events-none opacity-70'}`}
+                      onClick={() => scrollToStep(navStep.number)}
+                      className="flex items-center cursor-pointer group"
                     >
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
@@ -193,12 +155,10 @@ export default function HowItWorksSection() {
         </div>
       </div>
 
-      {/* Scrollable content */}
+      {/* Scrollable content - only enabled when section is in view */}
       <div 
         id="steps-container" 
-        ref={stepsContainerRef}
-        className={`h-screen w-full snap-y snap-mandatory overflow-y-auto scroll-smooth 
-                   ${stepsUnlocked ? '' : 'pointer-events-none'}`}
+        className={`h-screen w-full ${sectionInView ? 'snap-y snap-mandatory overflow-y-auto' : 'overflow-hidden'} scroll-smooth transition-all duration-500`}
       >
         {steps.map((step) => (
           <div 
@@ -206,7 +166,7 @@ export default function HowItWorksSection() {
             id={`step-${step.number}`}
             className="h-screen w-full snap-start flex flex-col justify-center"
           >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Aligned with navbar */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Mobile-only left side content */}
                 <div className="md:hidden mb-8">
@@ -231,9 +191,8 @@ export default function HowItWorksSection() {
                   <motion.div
                     className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl ml-0"
                     initial={{ opacity: 0, y: 50 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.6 }}
+                    animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+                    transition={{ duration: 0.6, delay: 0.2 }}
                   >
                     <div className="flex items-start md:items-center mb-6">
                       <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
