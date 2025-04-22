@@ -71,7 +71,7 @@ export default function HowItWorksSection() {
   return (
     <section 
       id="how-it-works" 
-      className={`bg-[#0D1117] relative h-screen overflow-hidden ${sectionInView ? 'section-active' : ''}`}
+      className="bg-[#0D1117] relative h-screen overflow-hidden"
     >
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full w-full z-10 pointer-events-none hidden md:block">
