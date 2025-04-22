@@ -1,8 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Code, BrainCircuit, Server } from "lucide-react";
 
 export default function HowItWorksSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const stepsContainerRef = useRef<HTMLDivElement>(null);
   const steps = [
     {
       number: 1,
@@ -28,8 +30,31 @@ export default function HowItWorksSection() {
   ];
 
   const [activeStep, setActiveStep] = useState(1);
+  const [hasLandedOnSection, setHasLandedOnSection] = useState(false);
+  const [stepsUnlocked, setStepsUnlocked] = useState(false);
 
-  // Scroll to step on click
+  // Handle section entrance - first phase of scroll control
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setHasLandedOnSection(true);
+          // Delay enabling step scrolling to ensure user sees intro content
+          setTimeout(() => {
+            setStepsUnlocked(true);
+          }, 800);
+        }
+      });
+    }, { threshold: 0.6 });
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  // Scroll to specific step 
   const scrollToStep = (stepNumber: number) => {
     const element = document.getElementById(`step-${stepNumber}`);
     if (element) {
@@ -37,8 +62,10 @@ export default function HowItWorksSection() {
     }
   };
 
+  // Track which step is visible
   useEffect(() => {
-    // Set up intersection observer to track visible steps
+    if (!stepsUnlocked) return;
+
     const observerOptions = {
       root: document.getElementById('steps-container'),
       rootMargin: "0px",
@@ -57,18 +84,61 @@ export default function HowItWorksSection() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all the step elements
+    // Observe all step elements
     steps.forEach(step => {
       const element = document.getElementById(`step-${step.number}`);
       if (element) observer.observe(element);
     });
 
-    // Clean up the observer on component unmount
-    return () => observer.disconnect();
-  }, [steps]);
+    // Control wheel events to prevent skipping steps
+    const handleWheel = (e: WheelEvent) => {
+      if (!stepsContainerRef.current) return;
+      
+      const container = stepsContainerRef.current;
+      const currentScrollTop = container.scrollTop;
+      const containerHeight = container.clientHeight;
+      
+      // Determine target step based on scroll direction
+      let targetStep = activeStep;
+      if (e.deltaY > 0) {
+        // Scrolling down
+        targetStep = Math.min(activeStep + 1, steps.length);
+      } else if (e.deltaY < 0) {
+        // Scrolling up
+        targetStep = Math.max(activeStep - 1, 1);
+      }
+      
+      if (targetStep !== activeStep) {
+        e.preventDefault();
+        scrollToStep(targetStep);
+      }
+      
+      // Prevent scrolling past if not on the last step
+      if (activeStep < steps.length && 
+         (currentScrollTop + containerHeight >= container.scrollHeight - 10)) {
+        e.preventDefault();
+      }
+    };
+    
+    const stepsContainer = stepsContainerRef.current;
+    if (stepsContainer) {
+      stepsContainer.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      observer.disconnect();
+      if (stepsContainer) {
+        stepsContainer.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, [steps, activeStep, stepsUnlocked]);
 
   return (
-    <section id="how-it-works" className="bg-[#0D1117] relative h-screen overflow-hidden">
+    <section 
+      id="how-it-works" 
+      ref={sectionRef}
+      className="bg-[#0D1117] relative h-screen overflow-hidden snap-center snap-always"
+    >
       {/* Fixed left side content */}
       <div className="absolute top-0 left-0 h-full w-full z-10 pointer-events-none hidden md:block">
         <div className="container mx-auto h-full px-4 sm:px-6 lg:px-8">
@@ -92,8 +162,8 @@ export default function HowItWorksSection() {
                   {steps.map((navStep) => (
                     <div 
                       key={navStep.number}
-                      onClick={() => scrollToStep(navStep.number)}
-                      className="flex items-center cursor-pointer group"
+                      onClick={() => stepsUnlocked && scrollToStep(navStep.number)}
+                      className={`flex items-center cursor-pointer group ${stepsUnlocked ? '' : 'pointer-events-none opacity-70'}`}
                     >
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center mr-4 -ml-11 border transition-all duration-300 text-lg font-bold relative ${
@@ -124,14 +194,19 @@ export default function HowItWorksSection() {
       </div>
 
       {/* Scrollable content */}
-      <div id="steps-container" className="h-screen w-full snap-y snap-mandatory overflow-y-auto scroll-smooth">
+      <div 
+        id="steps-container" 
+        ref={stepsContainerRef}
+        className={`h-screen w-full snap-y snap-mandatory overflow-y-auto scroll-smooth 
+                   ${stepsUnlocked ? '' : 'pointer-events-none'}`}
+      >
         {steps.map((step) => (
           <div 
             key={step.number}
             id={`step-${step.number}`}
             className="h-screen w-full snap-start flex flex-col justify-center"
           >
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Aligned with navbar */}
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
                 {/* Mobile-only left side content */}
                 <div className="md:hidden mb-8">
