@@ -27,8 +27,9 @@ export default function HowItWorksSection() {
     }
   ];
 
+  // Default to step 1 being active and section always being visible
   const [activeStep, setActiveStep] = useState(1);
-  const [sectionInView, setSectionInView] = useState(false);
+  const [sectionInView, setSectionInView] = useState(true);
 
   // Scroll to step on click
   const scrollToStep = (stepNumber: number) => {
@@ -38,19 +39,22 @@ export default function HowItWorksSection() {
     }
   };
 
-  // Use an effect to detect when the entire section is in view and centered
+  // Initialize sectionInView as true so content is visible by default
   useEffect(() => {
+    // Default to true to ensure content is always visible
+    setSectionInView(true);
+    
+    // Optional: add observer logic to enhance scroll behavior when the section comes into view
     const sectionObserverOptions = {
-      rootMargin: "-40% 0px", // Adjust this to trigger when the section is more centered
-      threshold: [0.25, 0.5, 0.75] // Multiple thresholds for smoother transition
+      rootMargin: "-20% 0px", 
+      threshold: 0.25 
     };
 
     const sectionObserverCallback = (entries: IntersectionObserverEntry[]) => {
       entries.forEach(entry => {
+        // Always keep content visible, just enhance scroll behavior
         if (entry.isIntersecting) {
           setSectionInView(true);
-        } else {
-          setSectionInView(false);
         }
       });
     };
@@ -65,9 +69,6 @@ export default function HowItWorksSection() {
 
   // This effect manages the step visibility and active state
   useEffect(() => {
-    // Only set up step observers when section is in view
-    if (!sectionInView) return;
-    
     const observerOptions = {
       root: document.getElementById('steps-container'),
       rootMargin: "0px",
@@ -94,7 +95,7 @@ export default function HowItWorksSection() {
 
     // Clean up the observer on component unmount
     return () => observer.disconnect();
-  }, [steps, sectionInView]);
+  }, [steps]);
 
   return (
     <section 
@@ -155,10 +156,10 @@ export default function HowItWorksSection() {
         </div>
       </div>
 
-      {/* Scrollable content - only enabled when section is in view */}
+      {/* Scrollable content - always enabled with snap scrolling */}
       <div 
         id="steps-container" 
-        className={`h-screen w-full ${sectionInView ? 'snap-y snap-mandatory overflow-y-auto' : 'overflow-hidden'} scroll-smooth transition-all duration-500`}
+        className="h-screen w-full snap-y snap-mandatory overflow-y-auto scroll-smooth transition-all duration-500"
       >
         {steps.map((step) => (
           <div 
@@ -191,8 +192,8 @@ export default function HowItWorksSection() {
                   <motion.div
                     className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg max-w-xl ml-0"
                     initial={{ opacity: 0, y: 50 }}
-                    animate={sectionInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
                   >
                     <div className="flex items-start md:items-center mb-6">
                       <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
