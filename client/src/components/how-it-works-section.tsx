@@ -54,25 +54,35 @@ export default function HowItWorksSection() {
               {steps.map((step) => (
                 <motion.div
                   key={step.number}
-                  className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg"
+                  className="bg-[#111827] p-6 md:p-8 rounded-xl border border-cyan-500/20 shadow-lg group 
+                    hover:shadow-cyan-500/20 hover:shadow-xl transition-all duration-300 
+                    hover:border-cyan-400/40 hover:scale-[1.02] hover:bg-[#141d2f]"
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: "-100px" }}
                   transition={{ duration: 0.5, delay: step.number * 0.1 }}
+                  whileHover={{ 
+                    y: -5,
+                    transition: { duration: 0.2 }
+                  }}
                 >
                   <div className="flex items-start md:items-center mb-5">
-                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4">
+                    <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4 
+                      group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 group-hover:text-black 
+                      transition-all duration-300 group-hover:border-cyan-400 group-hover:scale-110">
                       {step.number}
                     </div>
-                    <h3 className="text-xl md:text-2xl font-semibold text-white">
+                    <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 
+                      group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">
                       {step.title}
                     </h3>
                   </div>
-                  <p className="text-gray-300 mb-5 md:pl-16">
+                  <p className="text-gray-300 mb-5 md:pl-16 group-hover:text-gray-200 transition-colors duration-300">
                     {step.description}
                   </p>
-                  <div className="md:ml-16 flex items-center gap-2 bg-cyan-500/5 border border-cyan-500/20 rounded-lg px-4 py-2 w-fit text-cyan-400 text-sm">
-                    {step.icon}
+                  <div className="md:ml-16 flex items-center gap-2 bg-cyan-500/5 border border-cyan-500/20 rounded-lg px-4 py-2 w-fit text-cyan-400 text-sm
+                    group-hover:bg-cyan-500/10 group-hover:border-cyan-400/30 transition-all duration-300 group-hover:text-cyan-300">
+                    <span className="transition-transform duration-300 group-hover:scale-110">{step.icon}</span>
                     <span>{step.text}</span>
                   </div>
                 </motion.div>
