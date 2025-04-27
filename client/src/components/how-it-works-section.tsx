@@ -69,7 +69,7 @@ export default function HowItWorksSection() {
                   <div className="flex items-start md:items-center mb-5">
                     <div className="w-12 h-12 flex-shrink-0 flex items-center justify-center rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 font-bold text-xl mr-4 
                       group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 group-hover:text-black 
-                      transition-all duration-300 group-hover:border-cyan-400 group-hover:scale-110">
+                      transition-all duration-300 group-hover:border-cyan-400">
                       {step.number}
                     </div>
                     <h3 className="text-xl md:text-2xl font-semibold text-white group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 
@@ -82,7 +82,7 @@ export default function HowItWorksSection() {
                   </p>
                   <div className="md:ml-16 flex items-center gap-2 bg-cyan-500/5 border border-cyan-500/20 rounded-lg px-4 py-2 w-fit text-cyan-400 text-sm
                     group-hover:bg-cyan-500/10 group-hover:border-cyan-400/30 transition-all duration-300 group-hover:text-cyan-300">
-                    <span className="transition-transform duration-300 group-hover:scale-110">{step.icon}</span>
+                    <span>{step.icon}</span>
                     <span>{step.text}</span>
                   </div>
                 </motion.div>
