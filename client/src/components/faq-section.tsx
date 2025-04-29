@@ -12,32 +12,32 @@ export default function FAQSection() {
   const faqs = [
     {
       question: "What is Blowout Protection?",
-      answer: "Blowout Protection is an AI-driven risk management service that provides fans with a 50% rebate on their ticket purchase if the game ends with a run differential of 5 or more. It's designed to enhance the fan experience and increase ticket sales for our partners through predictive analytics.",
+      answer: "Blowout Protection is an AI-driven fan satisfaction service that provides fans with a 50% rebate on their ticket purchase if the game ends in a blowout. It's designed to enhance the fan experience and increase ticket sales for our partners through predictive analytics.",
       icon: <Zap className="w-5 h-5" />
     },
     {
       question: "How does the integration process work?",
-      answer: "Integration is simple through our RESTful API. Our engineering team works directly with your developers to ensure a seamless implementation process, typically completed within 2-3 weeks. We provide comprehensive documentation, sandbox environments, and dedicated DevOps support throughout the process.",
+      answer: "Integration is simple through our API. Our engineering team works directly with your developers to ensure a seamless implementation process, typically completed within 2-3 weeks. We provide comprehensive documentation and support throughout the process.",
       icon: <Cpu className="w-5 h-5" />
     },
     {
       question: "How are rebates processed and funded?",
-      answer: "TrueTIX handles all aspects of rebate processing through our automated cloud-based system. When a game qualifies as a blowout, our algorithm automatically processes rebates and distributes secure redemption links to eligible fans. Rebates are entirely funded by TrueTIX - ticketing partners have zero financial liability.",
+      answer: "TrueTIX handles all aspects of rebate processing through our automated cloud-based system. When a game qualifies as a blowout by our pre-defined criteria, our algorithm automatically processes rebates and distributes secure redemption links to eligible fans. Rebates are entirely funded by TrueTIX - ticketing partners have zero financial liability.",
       icon: <DatabaseZap className="w-5 h-5" />
     },
     {
       question: "What percentage of MLB games end in blowouts?",
-      answer: "Based on our big data analysis from 2015-2023, approximately 16% of MLB games meet our 2025 MLB Pilot criteria for a blowout. Our machine learning pricing model accounts for this frequency to ensure sustainable operations while providing valuable protection to fans.",
+      answer: "Based on our big data analysis from thousands of historical games, approximately 16% of MLB games meet our 2025 MLB Pilot criteria for a blowout. Our pricing model accounts for this frequency to ensure sustainable operations while providing valuable protection to fans.",
       icon: <PieChart className="w-5 h-5" />
     },
     {
       question: "Can we customize the implementation for our platform?",
-      answer: "Absolutely. We work with each partner to design a modular integration that fits their unique platform architecture and user experience. This includes customizable microservices, white-labeling options, and flexible implementation approaches based on your tech stack.",
+      answer: "Absolutely. We work with each partner to design a modular integration that fits their unique platform architecture and user experience.",
       icon: <LayersIcon className="w-5 h-5" />
     },
     {
       question: "How does the revenue share model work?",
-      answer: "Partners earn up to 10% of each Blowout Protection add-on sold through their platform. Revenue is tracked in real-time through our partner dashboard and distributed on a monthly basis, creating a new data-driven income stream with no associated costs or risks. Pilot program partners may qualify for enhanced revenue share algorithms.",
+      answer: "Partners earn up to 10% of each Blowout Protection add-on sold through their platform for our 2025 MLB Pilot program. Revenue is tracked in real-time through our internal dashboard and distributed to partners on a monthly basis, creating a new data-driven revenue stream with no associated costs or risks.",
       icon: <MessageSquare className="w-5 h-5" />
     }
   ];

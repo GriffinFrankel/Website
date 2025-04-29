@@ -5,24 +5,24 @@ export default function HowItWorksSection() {
   const steps = [
     {
       number: 1,
-      title: "AI-Powered Integration",
-      description: "Our smart API connects seamlessly with your ticketing platform, offering Blowout Protection as a premium add-on during checkout.",
+      title: "Simple Integration",
+      description: "Our API connects seamlessly with your ticketing platform, offering Blowout Protection as a premium add-on during checkout.",
       icon: <Code className="w-5 h-5" />,
       text: "Intelligent API implementation"
     },
     {
       number: 2,
       title: "Fan Experience",
-      description: "Fans pay a small premium for Blowout Protection. If their game ends in a blowout by our pre-defined criteria, they receive a 50% rebate.",
+      description: "Fans pay a small add-on fee for Blowout Protection. If their game ends in a blowout by our pre-defined criteria, they receive a 50% rebate.",
       icon: <BrainCircuit className="w-5 h-5" />,
       text: "Automated fan rebates"
     },
     {
       number: 3,
-      title: "Revenue Analytics",
-      description: "Platforms earn a percentage of every Blowout Protection add-on sold, with real-time analytics to maximize your revenue stream.",
+      title: "Revenue Share",
+      description: "Platforms earn a percentage of every Blowout Protection add-on sold, creating a new revenue stream with zero finanical risk.",
       icon: <Server className="w-5 h-5" />,
-      text: "Data-driven profit center"
+      text: "Data-driven profit"
     }
   ];
 

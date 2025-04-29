@@ -42,7 +42,7 @@ export default function WhatIsSection() {
                 <h3 className="text-2xl font-bold mb-4">Our Solution</h3>
                 <p className="text-gray-300 mb-6">
                   TrueTIX Blowout Protection offers fans a <span className="text-cyan-400 font-semibold">50% rebate</span> if the game they attend is a blowout
-                  (defined as a 5+ run difference for our MLB pilot program).
+                  by our pre-defined blowout criteria.
                 </p>
                 <div className="flex gap-4 items-center">
                   <i className="ri-shield-check-line text-3xl text-cyan-400"></i>
