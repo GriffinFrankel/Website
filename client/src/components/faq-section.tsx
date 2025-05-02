@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { MessageSquare, Cpu, Zap, DatabaseZap, LayersIcon, PieChart } from "lucide-react";
+import { MessageSquare, Cpu, Zap, DatabaseZap, LayersIcon, PieChart, Target } from "lucide-react";
 
 export default function FAQSection() {
   const faqs = [
@@ -14,6 +14,11 @@ export default function FAQSection() {
       question: "What is Blowout Protection?",
       answer: "Blowout Protection is an AI-driven fan satisfaction service that provides fans with a 50% rebate on their ticket purchase if the game ends in a blowout. It's designed to enhance the fan experience and increase ticket sales for our partners through predictive analytics.",
       icon: <Zap className="w-5 h-5" />
+    },
+    {
+      question: "What is considered a blowout?",
+      answer: "For our 2025 MLB Pilot, a blowout occurs when one team leads by at least 5 runs at the end of the sixth inning and maintains that margin through the final out. If the lead ever dips below 5 runs after the sixth inning, the game is no longer qualified as a blowout.",
+      icon: <Target className="w-5 h-5" />
     },
     {
       question: "How does the integration process work?",
