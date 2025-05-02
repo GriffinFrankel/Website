@@ -94,7 +94,9 @@ export default function BenefitsSection() {
                 {benefits.map((benefit, index) => (
                   <motion.div 
                     key={index}
-                    className="relative bg-[#0a101f]/80 backdrop-blur-sm rounded-xl p-8 border border-cyan-500/10 shadow-lg transition-all duration-300 hover:translate-y-[-5px] hover:shadow-[0_10px_25px_-5px_rgba(8,145,178,0.15)] hover:border-cyan-500/30"
+                    className="relative bg-[#0a101f]/80 backdrop-blur-sm rounded-xl p-8 border border-cyan-500/10 shadow-lg 
+                      transition-all duration-300 hover:translate-y-[-5px] group
+                      hover:shadow-cyan-500/20 hover:shadow-xl hover:border-cyan-400/40 hover:bg-[#0c1425]"
                     initial={{ opacity: 0, y: 50 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
@@ -104,16 +106,20 @@ export default function BenefitsSection() {
                     }}
                   >
                     {/* Tech corner accents */}
-                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30"></div>
-                    <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30"></div>
+                    <div className="absolute top-0 left-0 w-8 h-[1px] bg-cyan-500/30 group-hover:bg-cyan-400/50 transition-colors duration-300"></div>
+                    <div className="absolute top-0 left-0 w-[1px] h-8 bg-cyan-500/30 group-hover:bg-cyan-400/50 transition-colors duration-300"></div>
+                    <div className="absolute bottom-0 right-0 w-8 h-[1px] bg-cyan-500/30 group-hover:bg-cyan-400/50 transition-colors duration-300"></div>
+                    <div className="absolute bottom-0 right-0 w-[1px] h-8 bg-cyan-500/30 group-hover:bg-cyan-400/50 transition-colors duration-300"></div>
                     
                     <div className="flex items-center mb-6">
-                      <div className="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mr-4 shadow-[0_0_15px_rgba(8,145,178,0.15)]">
+                      <div className="w-14 h-14 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mr-4 shadow-[0_0_15px_rgba(8,145,178,0.15)]
+                        group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 group-hover:text-black
+                        transition-all duration-300 group-hover:border-cyan-400">
                         {benefit.icon}
                       </div>
-                      <h3 className="text-xl font-bold">{benefit.title}</h3>
+                      <h3 className="text-xl font-bold text-white
+                        group-hover:bg-gradient-to-r group-hover:from-cyan-400 group-hover:to-blue-500 group-hover:bg-clip-text group-hover:text-transparent
+                        transition-all duration-300">{benefit.title}</h3>
                     </div>
                     <p className="text-gray-300 mb-6">
                       {benefit.description}
@@ -141,23 +147,19 @@ export default function BenefitsSection() {
             <h3 className="text-xl font-bold mb-4">Platform Performance Metrics</h3>
             <div className="w-16 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto"></div>
           </div>
-          
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
             <div className="p-4">
               <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">16%</div>
-              <p className="text-sm text-gray-300">Blowout Game Rate</p>
+              <p className="text-sm text-gray-300">MLB Blowout Game Rate</p>
             </div>
             <div className="p-4">
-              <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">+22%</div>
-              <p className="text-sm text-gray-300">Ticket Conversion</p>
+              <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">+24%</div>
+              <p className="text-sm text-gray-300">Partner Profit Per Ticket</p>
             </div>
             <div className="p-4">
-              <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">3M+</div>
-              <p className="text-sm text-gray-300">Annual Fan Reach</p>
-            </div>
-            <div className="p-4">
-              <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">$12M</div>
-              <p className="text-sm text-gray-300">Projected Revenue</p>
+              <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">Jun-25</div>
+              <p className="text-sm text-gray-300">Target Launch Date</p>
             </div>
           </div>
         </motion.div>
