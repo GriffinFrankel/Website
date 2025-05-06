@@ -46,8 +46,8 @@ export default function ContactSection() {
     {
       icon: <Mail className="w-5 h-5" />,
       title: "Email",
-      content: "partnerships@truetix.com",
-      link: "mailto:partnerships@truetix.com"
+      content: "partner@truetix.com",
+      link: "mailto:partner@truetix.com"
     },
     {
       icon: <Phone className="w-5 h-5" />,
@@ -157,7 +157,7 @@ export default function ContactSection() {
                       </div>
                     ))}
                   </div>
-                  
+
                   {/* Tech decorations */}
                   <div className="absolute bottom-4 right-4 opacity-10">
                     <svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
