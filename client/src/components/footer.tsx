@@ -102,7 +102,7 @@ export default function Footer() {
             <ul className="space-y-4 text-gray-400">
               {contactItems.map((item, index) => (
                 <li key={index} className="flex items-center">
-                  <div className="w-8 h-8 bg-cyan-500/10 rounded-full flex items-center justify-center mr-3 text-cyan-400">
+                  <div className="w-8 h-8 bg-cyan-500/10 rounded-full flex items-center justify-center mr-3 text-cyan-400 flex-shrink-0">
                     {item.icon}
                   </div>
                   {item.href ? (
