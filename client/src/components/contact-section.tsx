@@ -44,19 +44,19 @@ export default function ContactSection() {
 
   const contactInfo = [
     {
-      icon: <Mail className="w-5 h-5" />,
+      icon: <Mail className="w-5 h-5 flex-shrink-0" />,
       title: "Email",
-      content: "partner@truetix.com",
-      link: "mailto:partner@truetix.com"
+      content: "info@truetix.com",
+      link: "mailto:info@truetix.com"
     },
     {
-      icon: <Phone className="w-5 h-5" />,
+      icon: <Phone className="w-5 h-5 flex-shrink-0" />,
       title: "Phone",
       content: "+1 (855) 2-TRUETIX",
       link: "tel:+18552TRUETIX"
     },
     {
-      icon: <MapPin className="w-5 h-5" />,
+      icon: <MapPin className="w-5 h-5 flex-shrink-0" />,
       title: "Location",
       content: "New York, NY",
       link: undefined
