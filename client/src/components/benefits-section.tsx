@@ -154,7 +154,7 @@ export default function BenefitsSection() {
               <p className="text-sm text-gray-300">MLB Blowout Game Rate</p>
             </div>
             <div className="p-4">
-              <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">+24%</div>
+              <div className="text-cyan-400 text-3xl md:text-4xl font-bold mb-2">+35%</div>
               <p className="text-sm text-gray-300">Partner Profit Per Ticket</p>
             </div>
             <div className="p-4">
