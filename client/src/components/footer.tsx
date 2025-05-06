@@ -75,19 +75,6 @@ export default function Footer() {
               Revolutionizing the sports ticketing experience with innovative tech-powered protection for fans and data-driven revenue streams for platforms.
             </p>
             
-            
-            
-            <div className="flex space-x-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300">
-                <Twitter className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-cyan-500/10 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/20 transition-colors duration-300">
-                <Github className="w-5 h-5" />
-              </a>
-            </div>
           </motion.div>
           
           <motion.div variants={fadeInUp}>

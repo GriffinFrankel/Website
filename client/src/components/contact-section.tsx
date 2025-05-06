@@ -157,25 +157,7 @@ export default function ContactSection() {
                       </div>
                     ))}
                   </div>
-
-                  <div className="mt-12 pt-6 border-t border-cyan-500/10">
-                    <h4 className="font-semibold mb-4 flex items-center gap-2">
-                      <Terminal className="w-4 h-4 text-cyan-400" />
-                      <span>Connect With Us</span>
-                    </h4>
-                    <div className="flex space-x-4">
-                      <a href="#" className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/20 transition-all shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                        <Linkedin className="w-4 h-4" />
-                      </a>
-                      <a href="#" className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/20 transition-all shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                        <Twitter className="w-4 h-4" />
-                      </a>
-                      <a href="#" className="w-10 h-10 rounded-full bg-cyan-500/10 border border-cyan-500/20 flex items-center justify-center text-cyan-400 hover:bg-cyan-500/20 transition-all shadow-[0_0_15px_rgba(8,145,178,0.2)]">
-                        <Cpu className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
-
+                  
                   {/* Tech decorations */}
                   <div className="absolute bottom-4 right-4 opacity-10">
                     <svg width="160" height="80" viewBox="0 0 160 80" fill="none" xmlns="http://www.w3.org/2000/svg">
