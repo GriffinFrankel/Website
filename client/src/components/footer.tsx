@@ -14,17 +14,17 @@ export default function Footer() {
   
   const contactItems = [
     { 
-      icon: <Mail className="w-4 h-4" />, 
+      icon: <Mail className="w-4 h-4 flex-shrink-0" />, 
       text: "info@truetix.com", 
       href: "mailto:info@truetix.com" 
     },
     { 
-      icon: <Phone className="w-4 h-4" />, 
+      icon: <Phone className="w-4 h-4 flex-shrink-0" />, 
       text: "+1 (855) 2-TRUETIX", 
       href: "tel:+18552TRUETIX" 
     },
     { 
-      icon: <MapPin className="w-4 h-4" />, 
+      icon: <MapPin className="w-4 h-4 flex-shrink-0" />, 
       text: "New York, NY", 
       href: null 
     }
