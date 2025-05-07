@@ -46,14 +46,8 @@ export default function ContactSection() {
     {
       icon: <Mail className="w-5 h-5 flex-shrink-0" />,
       title: "Email",
-      content: "info@truetix.com",
-      link: "mailto:info@truetix.com"
-    },
-    {
-      icon: <Phone className="w-5 h-5 flex-shrink-0" />,
-      title: "Phone",
-      content: "+1 (855) 2-TRUETIX",
-      link: "tel:+18552TRUETIX"
+      content: "info@truetix.ai",
+      link: "mailto:info@truetix.ai"
     },
     {
       icon: <MapPin className="w-5 h-5 flex-shrink-0" />,
